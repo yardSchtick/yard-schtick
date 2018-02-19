@@ -5,7 +5,9 @@ class App extends Component {
   render() {
     return (
       <div >
-        Trenton smells like rapter urine.
+
+        <h1>Dano is a wonderful person. 
+          <br/>I may give him crap but it's truly a pleasue to  work with him</h1>
       </div>
     );
   }
