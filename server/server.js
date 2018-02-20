@@ -47,6 +47,10 @@ app.use((req, res, next) =>{
 
 const port = process.env.PORT
 
-app.listen(port, _ => {
-    console.log(`The soul of man is the fire of his heart ${port}`)
-})
+massive(process.env.CONNECTION_STRING).then(dbInstance => {
+    app.set('db', dbInstance);
+    
+    app.listen(port, _ => {
+        console.log(`The soul of man is the fire of his heart ${port}`)
+    })
+});
