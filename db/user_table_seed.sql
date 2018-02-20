@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Users (
-    id INT SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     address_street VARCHAR(180) NOT NULL,
     address_city VARCHAR(180) NOT NULL,
     address_state VARCHAR(2) NOT NULL,
