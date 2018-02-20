@@ -10,11 +10,14 @@ class App extends Component {
     return (
       <div >
 
+<<<<<<< HEAD
         <nav>
         <Link to="/MapView" className='links'>YardSchtick</Link>
         </nav>
 
         <Routes />
+=======
+>>>>>>> master
 
       </div>
     );
