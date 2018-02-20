@@ -1,22 +1,29 @@
 import axios from "axios";
 
 const initialState = {
-    user:{}
-
+    user:{},
+    sales: []
 }
 
-const DEMO ='DEMO'
 
-export function getDemo(){
+const GET_SALES = 'GET_SALES';
+
+
+
+export function getSales(){
+    const data = axios.get('/api/getAllSales').then(response => {
+        return response;
+    })
+
     return{
-        type:DEMO,
-        payload: res.data
+        type: GET_SALES,
+        payload: data
     }
 }
-export default function reducer(state = initalState, action){
+export default function reducer(state = initialState, action){
     switch(action.type){
-        case DEMO:
-            return Object.assign( {}, state, { recipeToGet: action.payload } );
+        case GET_SALES + '_FULFILLED': 
+            return Object.assign({}, state, {sales: action.payload})
         default:
             return state
     }
