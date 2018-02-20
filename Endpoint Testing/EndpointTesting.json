@@ -52,6 +52,55 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "Get Inventory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6ae0d5d-b69f-4810-9f9e-c68e0f16c69c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var res = pm.response.json()",
+							"var testInv = {",
+							"    ",
+							"}",
+							"",
+							"pm.test(\"Response is array\", function() {",
+							"    pm.expect(Array.isArray(res)).to.eql('array')",
+							"})",
+							"",
+							"pm.test(\"Got correct info\", function() {",
+							"    pm.expect(res.data[0]).to.eql(testInv)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4040/api/getInventory/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"getInventory",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
