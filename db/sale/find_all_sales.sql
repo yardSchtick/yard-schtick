@@ -1,2 +1,2 @@
 SELECT * FROM Sale
-WHERE user = $1;
+WHERE sale_user = $1;
