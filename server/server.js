@@ -40,7 +40,8 @@ app.use((req, res, next) =>{
 
 // =============END POINTS=============\\
 
-
+app.get('/api/getAllSales', ctrl.getAllSales)
+app.get('/api/getUser/:id', ctrl.getUser)
 
 
 //=====================================\\
