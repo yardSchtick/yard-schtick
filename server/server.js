@@ -24,7 +24,7 @@ app.use(session({
 app.use((req, res, next) =>{
     if(!req.session.user){
         req.session.user = {
-            user_id: 1,
+            id: 1,
             user_name: "harrison ford", 
             email: "adventureBuilder2049@gmail.com", 
             name: "adventure", 
