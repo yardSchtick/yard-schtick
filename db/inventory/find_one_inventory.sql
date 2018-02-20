@@ -1,3 +1,2 @@
 SELECT * FROM Inventory
-WHERE id = $1
-AND sale_id = $2;
+WHERE sale_id = $1;
