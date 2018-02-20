@@ -1,0 +1,2 @@
+DELETE FROM Sale
+WHERE user = $1;
