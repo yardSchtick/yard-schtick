@@ -43,6 +43,7 @@ app.use((req, res, next) =>{
 app.get('/api/getAllSales', ctrl.getAllSales)
 app.get('/api/getUser', ctrl.getUser)
 app.get('/api/getInventory/:id', ctrl.getInventory)
+app.get('/api/getUserSales', ctrl.getUserSales)
 
 app.post('/api/newSale', ctrl.newSale)
 

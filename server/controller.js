@@ -24,6 +24,14 @@ module.exports = {
         db.inventory.find_one_inventory(id).then(result => res.send(result))
     },
 
+    getUserSales: (req, res) => {
+        const db = req.app.get('db')
+
+        var { id } = req.session.user
+
+        db.sale.find_one_sale(id).then(result => res.send(result))
+    },
+
     // POSTS
 
     newSale: (req, res) => {
@@ -32,7 +40,7 @@ module.exports = {
         var {start_time, end_time, sale_desc} = req.body
         var { id } = req.session.user
 
-        db.sale.create_sale(id, start_time, end_time, sale_desc).then(result => res.send("hello"))
+        db.sale.create_sale(id, start_time, end_time, sale_desc).then(result => res.send({gift: 'hello'}))
     },
 
 
