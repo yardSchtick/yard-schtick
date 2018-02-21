@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import {connect} from 'react-redux';
 import {GETURL} from '../../Duck/redux';
+import { connect } from 'react-redux';
+import SaleHistory from './../SaleHistory/SaleHistory'
 // import Footer from './../Footer/Footer'
 
 class EditProfile extends Component {
@@ -10,7 +11,8 @@ class EditProfile extends Component {
 
         this.state = {
             person:{},
-            stuff:{}
+            sales:[],
+            saved:[]
         }
 
         this.editProfileButtonClicked = this.editProfileButtonClicked.bind(this);
@@ -25,7 +27,7 @@ class EditProfile extends Component {
         console.log("edit profile button was clicked")
     }
     getUserInfo(){
-        return axios({
+        axios({
             url:'/api/getUser/',
             method:'get'
         }).then((response) =>{
@@ -36,14 +38,19 @@ class EditProfile extends Component {
         })
     }
     getUserSales(){
-        return axios({
+        axios({
             url:'/api/getUserSales',
             method:'get'
         }).then((response) =>{
-            console.log("get user sales",response.data[0])
+            console.log("get user sales",response.data)
             this.setState({
-                stuff: response.data[0]
+                
+                    sales: response.data
+                    
+                    
+                
             })
+            
         })
     }
     componentDidMount(){
@@ -52,7 +59,16 @@ class EditProfile extends Component {
         this.props.GETURL(this.props.match.url)
     }
     render() {
-        console.log(this.state)
+        console.log("state",this.state)
+        console.log("props?",this.props)
+        let data;
+        if(this.state.sales){
+            data = this.state.sales.map((e, i) => {
+                return (
+                    <SaleHistory key={i} data={e} />
+                )
+            })
+        }
         return (
             <div>
                 <div>
@@ -61,21 +77,16 @@ class EditProfile extends Component {
                         <div> name {this.state.person.user_name}</div>
                         <div> address st {this.state.person.address_street} </div>
                         <div>
-                        <div> address city{this.state.person.address_city} </div>
-                        <div> state{this.state.person.address_state} </div>
-                        <div> zip{this.state.person.address_zip} </div>
+                            <div> address city{this.state.person.address_city} </div>
+                            <div> state{this.state.person.address_state} </div>
+                            <div> zip{this.state.person.address_zip} </div>
                         </div>
                         <button onClick={this.editProfileButtonClicked}>update profile</button>
                     </div>
                 </div>
                 <button onClick={this.saleButtonClicked}>sale button</button>
-                <div>sale history
-                    <div>
-                        <div>old date</div>
-                        <button>repost</button>
-                        <button>delete</button>
-                    </div>
-                </div>
+                {/* <SaleHistory /> */}
+                {data}
                 {/* <Footer /> */}
             </div>
         );
@@ -83,9 +94,8 @@ class EditProfile extends Component {
 }
 
 
-function mapStateToProps(state){
-    return {
-    }
+function mapStateToProps(state) { 
+    return state 
 }
+export default connect(mapStateToProps, {}, {GETURL})(EditProfile);
 
-export default connect(mapStateToProps, {GETURL})(EditProfile);
