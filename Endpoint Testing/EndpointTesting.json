@@ -12,9 +12,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e3a95de5-1c2b-400a-81e8-b66fc3cd273c",
+						"id": "81759d41-50f6-4709-82b1-41d548e68423",
 						"type": "text/javascript",
 						"exec": [
+							"var res = pm.response.json()",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
@@ -22,8 +24,6 @@
 							"pm.test(\"Response time is less than 200ms\", function () {",
 							"    pm.expect(pm.response.responseTime).to.be.below(200);",
 							"});",
-							"",
-							"var res = pm.response.json()",
 							"",
 							"pm.test('Got correct user', function() {",
 							"    pm.expect(res[0].id).to.eql(1)",
@@ -58,18 +58,27 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0f829937-b637-4bea-bb4b-7b9ffc4c7dce",
+						"id": "af7cf81f-c7aa-4bd0-bdbb-adf20ecd9a3f",
 						"type": "text/javascript",
 						"exec": [
+							"var res = pm.response.json()",
+							"var testInv = [",
+							"    {",
+							"        \"id\": 1,",
+							"        \"inv_name\": \"AK47\",",
+							"        \"inv_picture\": \"https://i.ebayimg.com/images/g/yB0AAMXQrhdTV9WO/s-l300.jpg\",",
+							"        \"inv_desc\": \"after a lot of use, I need to depart\",",
+							"        \"inv_price\": \"10.00\",",
+							"        \"sale_id\": 1",
+							"    }",
+							"]",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"var res = pm.response.json()",
-							"var testInv = [{\"id\": 2,\"inv_name\": \"Teen clothes\",\"inv_picture\": \"https://tribcmsprod.blob.core.windows.net/media/LA_Times_Portal/AdSSProduct/ProductImage/GarageSales.jpg\",\"inv_desc\": \"All teen clothes\",\"inv_price\": \"2.00\",\"sale_id\": 16},{\"id\": 3,\"inv_name\": \"Adult clothes\",\"inv_picture\": \"https://tribcmsprod.blob.core.windows.net/media/LA_Times_Portal/AdSSProduct/ProductImage/GarageSales.jpg\",\"inv_desc\": \"We have adult clothes\",\"inv_price\": \"2.00\",\"sale_id\": 16}]",
-							"",
 							"pm.test(\"Response is array\", function() {",
-							"    pm.expect(Array.isArray(res)).to.eql('array')",
+							"    pm.expect(Array.isArray(res)).to.eql(true)",
 							"})",
 							"",
 							"pm.test(\"Got correct info\", function() {",
@@ -84,7 +93,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost:4040/api/getInventory/16",
+					"raw": "localhost:4040/api/getInventory/1",
 					"host": [
 						"localhost"
 					],
@@ -92,7 +101,7 @@
 					"path": [
 						"api",
 						"getInventory",
-						"16"
+						"1"
 					]
 				},
 				"description": ""
@@ -105,37 +114,56 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "19dff8b9-b5f5-4e81-aa0d-35d88fbed9ff",
+						"id": "ea317cd7-7999-4eda-a7e1-cc3e2ab14941",
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
 							"var res = pm.response.json();",
 							"var check = [",
 							"    {",
-							"        \"id\": 7,",
+							"        \"id\": 1,",
 							"        \"sale_user\": 1,",
-							"        \"start_time\": \"09:00:00\",",
-							"        \"end_time\": \"01:00:00\",",
-							"        \"sale_desc\": \"We have lots of stuff!\"",
+							"        \"sale_name\": \"guns, ammo, and rockets\",",
+							"        \"sale_desc\": \"A garage sale with all of the guns and ammo you could need\",",
+							"        \"start_time\": \"10:00:00\",",
+							"        \"end_time\": \"12:00:00\",",
+							"        \"start_date\": \"2018-03-09T07:00:00.000Z\",",
+							"        \"end_date\": \"2018-03-10T07:00:00.000Z\",",
+							"        \"sale_img\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Yard_Sale_Northern_CA_2005.JPG/1200px-Yard_Sale_Northern_CA_2005.JPG\"",
 							"    },",
 							"    {",
-							"        \"id\": 16,",
-							"        \"sale_user\": 1,",
+							"        \"id\": 2,",
+							"        \"sale_user\": 2,",
+							"        \"sale_name\": \"Danos stuff\",",
+							"        \"sale_desc\": \"Danos crap in a garage sale\",",
 							"        \"start_time\": \"10:00:00\",",
-							"        \"end_time\": \"02:00:00\",",
-							"        \"sale_desc\": \"We have some of stuff\"",
+							"        \"end_time\": \"12:00:00\",",
+							"        \"start_date\": \"2018-03-09T07:00:00.000Z\",",
+							"        \"end_date\": \"2018-03-10T07:00:00.000Z\",",
+							"        \"sale_img\": \"http://www.duncanville.com/wp-content/uploads/2016/04/garage-sale.jpg\"",
+							"    },",
+							"    {",
+							"        \"id\": 3,",
+							"        \"sale_user\": 3,",
+							"        \"sale_name\": \"Bens stuff\",",
+							"        \"sale_desc\": \"Bens exteremly expensive funiture for free\",",
+							"        \"start_time\": \"10:00:00\",",
+							"        \"end_time\": \"12:00:00\",",
+							"        \"start_date\": \"2018-03-09T07:00:00.000Z\",",
+							"        \"end_date\": \"2018-03-10T07:00:00.000Z\",",
+							"        \"sale_img\": \"https://s3.amazonaws.com/product-images.imshopping.com/nimblebuy/lgs-events-clark-county-garage-sale-early-bird-6-3116852-regular.jpg\"",
 							"    }",
 							"]",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
 							"",
 							"pm.test('Get Correct Info', function() {",
 							"    pm.expect(res).to.eql(check)",
 							"})",
 							"",
 							"pm.test('Is an Array', function() {",
-							"    pm.expect(Array.isArray(res)).to.eql('Array')",
+							"    pm.expect(Array.isArray(res)).to.be.true",
 							"})"
 						]
 					}
@@ -166,7 +194,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c594d0cd-8144-46fc-b5e5-5f2065d3752b",
+						"id": "8f111d80-d833-4205-95d7-2a16c098b23b",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
@@ -176,8 +204,6 @@
 							"pm.test(\"Successful POST request\", function () {",
 							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
 							"});",
-							"",
-							"",
 							"",
 							"pm.test(\"Updated with correct info\", function() {",
 							"    pm.expect(pm.response.json()).to.eql({\"gift\": \"hello\"})",
@@ -196,7 +222,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"start_time\": \"06:00:00\",\n        \"end_time\": \"08:30:00\",\n        \"sale_desc\": \"hello. I'm the description and I'm here\"\n    }"
+					"raw": "{\n\t\t\"sale_name\": \"Test Sale\",\n\t\t\"start_date\": \"1991-1-1\",\n\t\t\"end_date\": \"1991-10-10\",\n        \"start_time\": \"06:00:00\",\n        \"end_time\": \"08:30:00\",\n        \"sale_img\": \"\",\n        \"sale_desc\": \"hello. I'm the description and I'm here\"\n    }"
 				},
 				"url": {
 					"raw": "localhost:4040/api/newSale",
@@ -214,7 +240,99 @@
 			"response": []
 		},
 		{
+			"name": "New Inventory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0cb8f53-db17-4cad-acce-6448fd704887",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
+							"});",
+							"",
+							"pm.test(\"Is an array\", function() {",
+							"    pm.expect(Array.isArray(pm.response.json())).to.be.true",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"inv_name\": \"one million nails\",\n\t\"inv_picture\": \"https://media1.popsugar-assets.com/files/thumbor/zymAElFZh_jj-_se__n06HGF3ko/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2018/01/03/771/n/1922153/c39a51a65a4d1330c2f210.76182461_edit_img_image_18875468_1515000433/i/Blinking-Eyeball-Nails-Instagram-Trend.jpg\", \n\t\"inv_desc\": \"There are a couple of 9 inch ones, I think\",\n\t\"inv_price\": 15.00,\n\t\"sale_id\": 1\n}"
+				},
+				"url": {
+					"raw": "localhost:4040/api/newInventory",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"newInventory"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a15b991c-2e99-4d07-928c-d97b8a1ac0c3",
+						"type": "text/javascript",
+						"exec": [
+							"var res = pm.response.json()",
+							"var check = [",
+							"    {",
+							"        \"id\": 1,",
+							"        \"address_street\": \"1700 NW 136th Ave\",",
+							"        \"address_city\": \"Hillsboro\",",
+							"        \"address_state\": \"OR\",",
+							"        \"address_zip\": \"97229\",",
+							"        \"latitude\": 40.245048,",
+							"        \"longitude\": -111.637274,",
+							"        \"user_name\": \"HARRISON FORD\",",
+							"        \"user_img\": \"https://img.memecdn.com/hd-harold_o_4085447.jpg\"",
+							"    }",
+							"]",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test('Got correct user', function() {",
+							"    pm.expect(res).to.eql(check)",
+							"})",
+							"",
+							"pm.test('Response is correctly formatted', function() {",
+							"    pm.expect(Array.isArray(res)).to.be.true",
+							"})"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -248,9 +366,25 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "60bacb25-29b3-4017-b6ea-ecb13cd5563e",
+						"id": "a7e2a5cb-cce6-4b46-b4fa-346301c842dd",
 						"type": "text/javascript",
 						"exec": [
+							"var check =[",
+							"    {",
+							"        \"id\": 6,",
+							"        \"sale_user\": 1,",
+							"        \"sale_name\": \"Test Update\",",
+							"        \"sale_desc\": \"hello. I'm still the desciption but I've been updated\",",
+							"        \"start_time\": \"06:30:00\",",
+							"        \"end_time\": \"09:30:00\",",
+							"        \"start_date\": \"2000-01-01T07:00:00.000Z\",",
+							"        \"end_date\": \"2000-10-10T06:00:00.000Z\",",
+							"        \"sale_img\": \"\"",
+							"    }",
+							"]",
+							"",
+							"var res = pm.response.json();",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
@@ -258,17 +392,6 @@
 							"pm.test(\"Successful POST request\", function () {",
 							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
 							"});",
-							"",
-							"var check =[",
-							"    {",
-							"        \"id\": 17,",
-							"        \"sale_user\": 1,",
-							"        \"start_time\": \"06:30:00\",",
-							"        \"end_time\": \"09:30:00\",",
-							"        \"sale_desc\": \"hello. I'm still the desciption but I've been updated\"",
-							"    }",
-							"];",
-							"var res = pm.response.json();",
 							"",
 							"pm.test(\"Updated with correct info\", function() {",
 							"    pm.expect(res).to.eql(check)",
@@ -287,7 +410,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"id\": 17,\n        \"start_time\": \"06:30:00\",\n        \"end_time\": \"09:30:00\",\n        \"sale_desc\": \"hello. I'm still the desciption but I've been updated\"\n    }"
+					"raw": "\n    {\n        \"id\": 6,\n\t\t\"sale_name\": \"Test Update\",\n\t\t\"start_date\": \"2000-1-1\",\n\t\t\"end_date\": \"2000-10-10\",\n        \"start_time\": \"06:30:00\",\n        \"end_time\": \"09:30:00\",\n        \"sale_desc\": \"hello. I'm still the desciption but I've been updated\",\n        \"sale_img\": \"\"\n    }"
 				},
 				"url": {
 					"raw": "localhost:4040/api/updateSale",
@@ -298,6 +421,50 @@
 					"path": [
 						"api",
 						"updateSale"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Sale",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2efb611d-a6dc-4aba-83c3-91aa6438d45f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test('Getting the gift back', function() {",
+							"    pm.expect(pm.response.json()).to.eql({\"gift\":\"hello\"})",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4040/api/deleteSale/7",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"deleteSale",
+						"7"
 					]
 				},
 				"description": ""

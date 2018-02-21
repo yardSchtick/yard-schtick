@@ -40,10 +40,18 @@ module.exports = {
     newSale: (req, res) => {
         const db = req.app.get('db')
 
-        var {start_time, end_time, sale_desc} = req.body
+        var {start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img} = req.body
         var { id } = req.session.user
 
-        db.sale.create_sale(id, start_time, end_time, sale_desc).then(result => res.send({gift: 'hello'}))
+        db.sale.create_sale(id, start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img).then(result => res.send({gift: 'hello'}))
+    },
+
+    newInventory: (req, res) => {
+        const db = req.app.get('db')
+
+        var {inv_name, inv_picture, inv_desc, inv_price, sale_id} = req.body
+
+        db.inventory.create_inventory(inv_name, inv_picture, inv_desc, inv_price, sale_id).then(result => res.send(result))
     },
 
 
@@ -51,10 +59,11 @@ module.exports = {
     updateSale: (req, res) => {
         const db = req.app.get('db')
 
-        var {start_time, end_time, sale_desc, id} = req.body
+        var {start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img} = req.body
 
-        db.sale.update_sale(start_time, end_time, sale_desc, id).then(result => res.send(result))
+        db.sale.update_sale(start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img).then(result => res.send(result))
     },
+
     updateUser: (req, res) => {
         const db = req.app.get('db')
 
@@ -64,18 +73,23 @@ module.exports = {
     },
     updateInventory: (req, res) => {
         const db= req.app.get('db')
-        const { id } = req.session.user
+        const { id } = req.body.user
         const { inv_name, inv_picture, inv_desc, inv_price } = req.body
 
-        db.inventory.update_inventory([inv_name, inv_picture, inv_desc, inv_price])
+        db.inventory.update_inventory([inv_name, inv_picture, inv_desc, inv_price, id])
         .then((data) => res.status(200).send(data[0]))
         .catch(() => res.status(500).send())
     },
 
-    // DELETE
+    //DELETE
+    deleteSale: (req, res) => {
+        const db = req.app.get('db')
+
+        db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
+    },
     deleteOneInv: (req, res) => {
         const db = req.app.get('db')
-        const { id } = req.session.user
+        const { id, sale_user } = req.body.user
 
         db.inventory.delete_one_inventory([sale_user, id])
         .then(() => res.status(200).send())

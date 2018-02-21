@@ -10,10 +10,6 @@ class SaleHistory extends Component {
         this.deleteClick = this.deleteClick.bind(this)
 
     }
-
-    componentDidMount() {
-        this.props.GETURL(this.props.match.url)
-    }
     
     repostClick(){
         console.log("repost clicked")
@@ -38,8 +34,6 @@ class SaleHistory extends Component {
     }
 }
 
-function mapStateToProps(state) { return {
-        url: state.url
-}}
+function mapStateToProps(state) { return {}}
 
 export default connect(mapStateToProps, { GETURL })(SaleHistory)
