@@ -54,7 +54,9 @@ app.post('/api/newSale', ctrl.newSale)
 
 app.put('/api/updateSale', ctrl.updateSale)
 app.put('/api/updateUser', ctrl.updateUser)
+app.put('/api/updateInventory', ctrl.updateInventory)
 
+app.delete('/api/deleteOneInv/:id', ctrl.deleteOneInv)
 
 //=====================================\\
 
