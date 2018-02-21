@@ -13,6 +13,7 @@ class Footer extends Component {
             location: '/mapview'
         }
     }
+    
     componentDidMount() {
         var leftDisplay = null
         if (this.state.location === '/SaleList') {
