@@ -29,7 +29,7 @@ export default class Routes extends Component {
               <Route component={ InventoryList } path="/InventoryList" />
               <Route component={ SaleReview } path="/SaleReview" />
               <Route component={ ThankYou } path="/ThankYou" />
-        
+
             </Switch>
             </div>
         )

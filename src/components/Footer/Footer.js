@@ -14,14 +14,16 @@ class Footer extends Component {
         }
     }
     componentDidMount() {
-        var display = null
+        var leftDisplay = null
         if (this.state.location === '/SaleList') {
-            display = <Link to='/MapView'><button>Map</button></Link>
-            this.setState({showMap: display})
+            leftDisplay = <Link to='/MapView'><button>Map</button></Link>
+            this.setState({showMap: leftDisplay})
         } else {
-            display = <Link to='/SaleList'><button>List</button></Link>
-            this.setState({showMap: display})
+            leftDisplay = <Link to='/SaleList'><button>List</button></Link>
+            this.setState({showMap: leftDisplay})
         }
+
+        var rightDisplay = null
     }
 
 
