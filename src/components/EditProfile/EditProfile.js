@@ -43,11 +43,7 @@ class EditProfile extends Component {
         }).then((response) =>{
             console.log("get user sales",response.data)
             this.setState({
-                
                     sales: response.data
-                    
-                    
-                
             })
             
         })
