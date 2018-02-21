@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import {connect} from 'react-redux';
+import {GETURL} from '../../Duck/redux';
 // import Footer from './../Footer/Footer'
 
-export default class EditProfile extends Component {
+class EditProfile extends Component {
     constructor(){
         super()
 
@@ -47,6 +49,7 @@ export default class EditProfile extends Component {
     componentDidMount(){
         this.getUserInfo()
         this.getUserSales()
+        this.props.GETURL(this.props.match.url)
     }
     render() {
         console.log(this.state)
@@ -78,3 +81,11 @@ export default class EditProfile extends Component {
         );
     }
 }
+
+
+function mapStateToProps(state){
+    return {
+    }
+}
+
+export default connect(mapStateToProps, {GETURL})(EditProfile);
