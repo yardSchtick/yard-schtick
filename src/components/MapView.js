@@ -53,6 +53,7 @@ class MapView extends Component {
       });
 
     });
+
     this.props.GETURL(this.props.match.url);
   }
   render() {
