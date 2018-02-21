@@ -10,13 +10,9 @@ class App extends Component {
   render() {
     return (
       <div >
-
-        <nav>
-        <Link to="/MapView" className='links'>YardSchtick</Link>
-        </nav>
-
         <Routes />
-        
+
+        <Footer />
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Footer from './Footer/Footer'
-
 import axios from 'axios'
+import Footer from '../components/Footer/Footer';
+import { connect } from 'react-redux';
+import {GETURL} from '../Duck/redux'
 
 class SaleList extends Component {
 constructor(){
@@ -23,6 +24,8 @@ componentWillMount(){
             .catch(function(error){
                 console.log(error);
             })
+            console.log(this.props.match.url)
+            this.props.GETURL(this.props.match.url)
         }
 
 
@@ -49,4 +52,6 @@ componentWillMount(){
         }
 }
 
-export default SaleList;
+function mapStateToProps(state) {}
+
+export default connect(mapStateToProps, {GETURL})(SaleList)
