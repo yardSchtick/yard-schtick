@@ -1,0 +1,34 @@
+.login-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/neighborhood.jpg');
+    background-size: cover;
+}
+.button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(204, 204, 204, 0.5);
+}
+
+.btn {
+    font-size: 18px;
+    background: linear-gradient(blue, rgb(2, 2, 129));
+    padding: 20px 80px;
+    color: white;
+    border-radius: 10px;
+    border-color: rgb(163, 163, 238);
+    cursor: pointer;
+    margin: 20px;
+    box-shadow: slategray 1px 2px 5px 1px;
+}
+
+.btn:active {
+    padding: 18px 78px;
+}
