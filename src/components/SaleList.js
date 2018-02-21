@@ -38,6 +38,7 @@ componentWillMount(){
                     
                      <div key={index}>
                          <p>{val.sale_name}</p>
+                         <p>{val.sale_description}</p>
                          <p>{val.start_time}</p>
                          <p>{val.end_time}</p> 
                      </div>
