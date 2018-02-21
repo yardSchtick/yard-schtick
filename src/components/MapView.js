@@ -54,7 +54,7 @@ class MapView extends Component {
       )
     })
     const style = {
-      height: '100vh',
+      height: '90vh',
       width: '100%'
     }
 

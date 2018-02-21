@@ -29,7 +29,7 @@ class Footer extends Component {
         }
 
         if(this.props.user) {
-            rightDisplay = <Link to='/AddNewSale'><button>Post</button></Link>
+            rightDisplay = <Link to='/AddNewSale'><button>Profile</button></Link>
             this.setState({buttonShow: rightDisplay})
         } else {
             rightDisplay = <Link to='/ProfileView'><button>Login</button></Link>
@@ -42,7 +42,7 @@ class Footer extends Component {
         return (
             <div className="Footer">
                 {this.state.showMap}
-                <h2>YardShtick</h2>
+                <div className="Logo"></div>
                 {this.state.buttonShow}
             </div>
         )
