@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
 import SaleHistory from './../SaleHistory/SaleHistory'
-// import Footer from './../Footer/Footer'
 
 class EditProfile extends Component {
     constructor(){
