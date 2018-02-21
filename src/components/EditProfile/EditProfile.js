@@ -55,12 +55,12 @@ export default class EditProfile extends Component {
                 <div>
                     <div>{this.state.person.user_img}</div>
                     <div>profile info
-                        <div> {this.state.person.user_name}</div>
-                        <div> {this.state.person.address_street} </div>
+                        <div> name {this.state.person.user_name}</div>
+                        <div> address st {this.state.person.address_street} </div>
                         <div>
-                        <div> {this.state.person.address_city} </div>
-                        <div> {this.state.person.address_state} </div>
-                        <div> {this.state.person.address_zip} </div>
+                        <div> address city{this.state.person.address_city} </div>
+                        <div> state{this.state.person.address_state} </div>
+                        <div> zip{this.state.person.address_zip} </div>
                         </div>
                         <button onClick={this.editProfileButtonClicked}>update profile</button>
                     </div>
