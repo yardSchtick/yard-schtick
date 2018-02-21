@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {GETURL} from '../../Duck/redux';
+import {GETURL} from '../Duck/redux';
 
 class AddNewSale extends Component {
   constructor() {
