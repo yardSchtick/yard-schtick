@@ -12,7 +12,8 @@ const GET_SALES = 'GET_SALES';
 
 export function getSales(){
     const data = axios.get('/api/getAllSales').then(response => {
-        return response;
+        console.log('response', response);
+        return response.data;
     })
 
     return{

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import {getSales} from '../Duck/redux';
-import {connect} from 'react-redux';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { getSales } from '../Duck/redux';
+import { connect } from 'react-redux';
+import pin from '../images/pin.ico'
+import axios from 'axios';
 
 
 class MapView extends Component {
@@ -12,65 +14,89 @@ class MapView extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      sales: []
     }
-    
+
     this.onMarkerClick = this.onMarkerClick.bind(this);
   }
-  onMarkerClick(props, marker, e){
+
+  getSales(){
+    const data = axios.get('/api/getAllSales').then(response => {
+        this.setState({
+          sales: response.data
+        });
+    })
+  }
+  onMarkerClick(props, marker, e) {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     })
   }
-  componentDidMount(){
+  componentDidMount() {
+    this.getSales();
 
   }
   render() {
-    const style = {
-      height : '70%',
-      width: '100%'
-    }
-    return (
-      <Map
-      google={this.props.google}
-      zoom={10}
-      style = {style}
-      initialCenter={{
-        lat: 40.2338438,
-        lng: -111.65853370000002
-      }}
-      >
-      <Marker
+    console.log(this.state.sales);
+    const markers = this.state.sales.map((e, i) => {
+      return (
+        <div key={i}>
+        <Marker
         onClick={this.onMarkerClick}
         title={'Michael House'}
+        icon={pin}
         name={'My house'}
-        position={{lat: 40.7762402, lng: -111.8739506}}
+        position={{ lat: 40.7762402, lng: -111.8739506 }}
       />
-      <Marker
-        name={'Dolores'}
-        position={{lat: 40.759703, lng: -111.428093}} />
-      <Marker />
+      </div>
+      )
+    })
+    const style = {
+      height: '100vh',
+      width: '100%'
+    }
+
+    return (
+      <Map
+        google={this.props.google}
+        zoom={10}
+        style={style}
+        initialCenter={{
+          lat: 40.2338438,
+          lng: -111.65853370000002
+        }}
+      >
+        {markers}
+        <Marker
+          onClick={this.onMarkerClick}
+          icon={pin}
+          name={'Dolores'}
+          position={{ lat: 40.759703, lng: -111.428093 }} />
+        <Marker />
         <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
+          name={'Current location'} />
         <InfoWindow
           marker={this.state.activeMarker}
-          visible={ this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
+          visible={this.state.showingInfoWindow}>
+          <div>
+            <h1>{this.state.selectedPlace.name}</h1>
+          </div>
         </InfoWindow>
       </Map>
     );
   }
 }
 
-function mapStatetoProps(state){
+function mapStatetoProps(state) {
   return {
     sales: state.sales
   }
 }
 
+var MapConnect = connect(mapStatetoProps, {getSales})(MapView)
+
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc'
-})(MapView);
+})(MapConnect);
