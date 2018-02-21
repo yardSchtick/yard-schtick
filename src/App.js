@@ -11,12 +11,10 @@ class App extends Component {
     return (
       <div >
 
-        <nav>
-        <Link to="/MapView" className='links'>YardSchtick</Link>
-        </nav>
 
         <Routes />
-        
+
+        <Footer />
       </div>
     );
   }
