@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {GETURL} from '../Duck/redux';
 
-class SaleDuration extends Component {
+class AddNewSale extends Component {
   constructor() {
     super()
 
@@ -26,6 +28,8 @@ class SaleDuration extends Component {
     if (!sale_date) {this.setState({button: false})}
     if (!sale_desc) {this.setState({button: false})}
     if (count < 0) {this.setState({button: false})}
+
+    this.props.GETURL(this.props.match.url)
   }
 
   handleDec = (e) => {
@@ -41,15 +45,16 @@ class SaleDuration extends Component {
     } else if (input === 'date') {
       this.setState({sale_date: e})
     }
+    this.setState({button: true})
   }
 
-  // buttons = () => {
-  //   if (this.state.button) {
-  //     return <Link to='/AddInventory'><button>Submit</button></Link>
-  //   } else {
-  //     return <button onClick={_=>this.setState({show: true})}>Submit</button>
-  //   }
-  // }
+  buttons = () => {
+    if (this.state.button) {
+      return <Link to='/AddInventory'><button>Submit</button></Link>
+    } else {
+      return <button onClick={_=>this.setState({show: true})}>Submit</button>
+    }
+  }
 
   showWarning = () => {
     if (this.state.show) {
@@ -77,12 +82,15 @@ class SaleDuration extends Component {
         <input placeholder="This should be a general overview of what you're selling" 
           onChange={e => this.handleDec(e.target.value)} />
         <p>Characters Left: {this.state.count}</p>
-        <Link to='/AddInventory'><button>Submit</button></Link>
-        {/* {this.buttons()}
-        {this.showWarning()} */}
+         {this.buttons()}
+        {this.showWarning()} 
       </div>
     );
   }
 }
 
-export default SaleDuration;
+function mapStateToProps(state) { return {
+  url: state.url
+}}
+
+export default connect(mapStateToProps, {GETURL})(AddNewSale);

@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import store from './Duck/store';
 
 
-
-
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>

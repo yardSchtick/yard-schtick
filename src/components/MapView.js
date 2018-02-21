@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { getSales } from '../Duck/redux';
+import { getSales, GETURL } from '../Duck/redux';
 import { connect } from 'react-redux';
 import pin from '../images/pin.ico'
 import axios from 'axios';
@@ -53,12 +53,13 @@ class MapView extends Component {
       });
 
     });
+    this.props.GETURL(this.props.match.url);
   }
   render() {
     const { open } = this.state;
     
     const style = {
-      height: '100vh',
+      height: '90vh',
       width: '100%'
     }
     const markers = this.state.sales.map((e, i) => {
@@ -102,13 +103,14 @@ class MapView extends Component {
   }
 }
 
-function mapStatetoProps(state) {
+function mapStateToProps(state) {
   return {
-    sales: state.sales
+    sales: state.sales,
+    url: state.url
   }
 }
 
-var MapConnect = connect(mapStatetoProps, { getSales })(MapView)
+var MapConnect = connect(mapStateToProps, {getSales, GETURL})(MapView)
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc'

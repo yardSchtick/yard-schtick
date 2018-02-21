@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
-
+import { connect } from 'react-redux';
+import { GETURL } from '../Duck/redux';
 
 class AddInventory extends Component {
+
+  componentDidMount() {
+    this.props.GETURL(this.props.match.url)
+  }
   render() {
     return (
       <div >
         This is the AddInventory Page
-        
+
 
       </div>
     );
   }
 }
 
-export default AddInventory;
+function mapStateToProps(state) { return {
+  url: state.url
+}}
+
+export default connect(mapStateToProps, { GETURL })(AddInventory);

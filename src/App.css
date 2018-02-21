@@ -1,5 +1,12 @@
-.App {
-  text-align: center;
+.Footer {
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  height: 54px;
 }
 
 .App-logo {
@@ -29,4 +36,11 @@
 .modal-img {
   width: 50%;
   height: auto;
+}
+.Logo {
+  background-image: url('./YardShtick.png');
+  height: 45px;
+  width: 155px;
+  background-repeat: no-repeat;
+  background-size: 155px 45px;
 }

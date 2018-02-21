@@ -17,6 +17,12 @@ app.use(session({
     saveUninitialized: true
 }))
 
+// ===========NONE AUTH REQUIRED ENDPOINTS==========\\
+
+app.get('/api/getAllSales', ctrl.getAllSales)
+app.get('/api/getInventory/:id', ctrl.getInventory)
+
+
 ///////////////////////////////////
 ////TESTING TOPLEVEL MIDDLEWARE////
 ///COMMENET OUT WHEN AUTH0 READY///
@@ -37,12 +43,11 @@ app.use((req, res, next) =>{
 
 // ===========AUTHENTICATION===========\\
 
+app.get('/api/loginDummy')
 
 // =============END POINTS=============\\
 
-app.get('/api/getAllSales', ctrl.getAllSales)
 app.get('/api/getUser', ctrl.getUser)
-app.get('/api/getInventory/:id', ctrl.getInventory)
 app.get('/api/getUserSales', ctrl.getUserSales)
 
 app.post('/api/newSale', ctrl.newSale)
