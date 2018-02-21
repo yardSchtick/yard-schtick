@@ -6,9 +6,9 @@ class ThankYou extends Component {
   render() {
     return (
       <div >
-        This is the ThankYou Page
-        
-
+        Thank You For Your Post!
+      <button>View Post</button>
+      <button>View Sales</button>
       </div>
     );
   }
