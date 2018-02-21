@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {GETURL} from '../Duck/redux';
 
 class AddNewSale extends Component {
   constructor() {
@@ -26,6 +28,8 @@ class AddNewSale extends Component {
     if (!sale_date) {this.setState({button: false})}
     if (!sale_desc) {this.setState({button: false})}
     if (count < 0) {this.setState({button: false})}
+
+    this.props.GETURL(this.props.match.url)
   }
 
   handleDec = (e) => {
@@ -85,4 +89,8 @@ class AddNewSale extends Component {
   }
 }
 
-export default AddNewSale;
+function mapStateToProps(state) { return {
+  url: state.url
+}}
+
+export default connect(mapStateToProps, {GETURL})(AddNewSale);

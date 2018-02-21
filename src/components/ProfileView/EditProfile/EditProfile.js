@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import {GETURL} from './../../../Duck/redux';
 import { connect } from 'react-redux';
 import './EditProfile.css'
 
+import SaleHistory from './../../SaleHistory/SaleHistory'
 
 class EditProfile extends Component {
     constructor(){
@@ -76,14 +78,18 @@ class EditProfile extends Component {
             console.log('gps spot',response.data.results[0].geometry.location)
             console.log("geo?", this.state)
         })
-        
     }
+    // componentDidMount(){
+    //     this.getUserInfo()
+    //     this.getUserSales()
+    //     this.props.GETURL(this.props.match.url)
+    // }
     render() {
         console.log("editprofile props", this.props,this.state)
         return (
             <div>
                 <div>name <input onChange={ this.handleNameInput }></input></div>
-                <div>profile Pic <input onChange={ this.handleImageUrl }></input><div className='editUserProfilePic'/></div>
+                <div>profile Pic <input onChange={ this.handleImageUrl }></input><div className='editUserProfilePic' style = {{backgroundImage: `url('${this.state.imageUrl}')` }}/></div>
                 <div>address <input onChange={ this.handleAddressStreet }></input></div>
                 <div>city<input onChange={ this.handleAddressCity }></input></div>
                 <div>state <input onChange={ this.handleAddressState }></input></div>
@@ -95,5 +101,9 @@ class EditProfile extends Component {
     }
 }
 
-function mapStateToProps(state) { return state }
-export default connect(mapStateToProps, {})(EditProfile);
+
+function mapStateToProps(state) { 
+    return state 
+}
+export default connect(mapStateToProps, {GETURL})(EditProfile);
+

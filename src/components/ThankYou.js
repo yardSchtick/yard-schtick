@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
-
+import { connect } from 'react-redux';
+import { GETURL } from '../Duck/redux';
 
 class ThankYou extends Component {
+
+  componentDidMount() {
+    this.props.GETURL(this.props.match.url)
+  }
+
   render() {
     return (
       <div >
@@ -14,4 +20,8 @@ class ThankYou extends Component {
   }
 }
 
-export default ThankYou;
+function mapStateToProps(state) { return {
+  url: state.url
+}}
+
+export default connect(mapStateToProps, { GETURL })(ThankYou);

@@ -7,14 +7,14 @@ module.exports = {
 
         var { id } = req.session.user
 
-        db.users.find_user(id).then(result => res.send(result))
+        db.users.find_user(id).then(result => 
+            res.send(result))
     },
 
     getAllSales: (req, res) => {
         const db = req.app.get('db')
 
         db.sale.find_all_sales().then(result => {
-            console.log('controller', result)
             res.status(200).send(result)
         })
     },
