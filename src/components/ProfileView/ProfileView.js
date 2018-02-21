@@ -79,6 +79,8 @@ class ProfileView extends Component {
 }
 
 function mapStateToProps(state) { 
-    return {}
+    return {
+        url: state.url
+    }
 }
 export default connect(mapStateToProps, {GETURL, GETUSER})(ProfileView);

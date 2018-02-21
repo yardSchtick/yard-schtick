@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Footer from '../components/Footer/Footer';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {GETURL} from '../../Duck/redux';
+import {GETURL} from '../Duck/redux';
 
 class AddNewSale extends Component {
   constructor() {
@@ -89,9 +89,8 @@ class AddNewSale extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return {
-  }
-}
+function mapStateToProps(state) { return {
+  url: state.url
+}}
 
 export default connect(mapStateToProps, {GETURL})(AddNewSale);

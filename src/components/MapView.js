@@ -91,7 +91,8 @@ class MapView extends Component {
 
 function mapStateToProps(state) {
   return {
-    sales: state.sales
+    sales: state.sales,
+    url: state.url
   }
 }
 

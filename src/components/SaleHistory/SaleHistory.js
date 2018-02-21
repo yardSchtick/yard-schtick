@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux'
+import { GETURL } from '../../Duck/redux'
 
 class SaleHistory extends Component {
     constructor(props){
@@ -38,6 +38,8 @@ class SaleHistory extends Component {
     }
 }
 
-function mapStateToProps(state) { }
+function mapStateToProps(state) { return {
+        url: state.url
+}}
 
 export default connect(mapStateToProps, { GETURL })(SaleHistory)
