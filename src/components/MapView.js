@@ -36,8 +36,7 @@ class MapView extends Component {
   }
   componentDidMount() {
     this.getSales();
-    console.log(this.props.match.url)
-    this.props.GETURL(this.props.match.url)
+    this.props.GETURL(this.props.match.url);
   }
   render() {
     console.log(this.state.sales);
@@ -90,13 +89,13 @@ class MapView extends Component {
   }
 }
 
-function mapStatetoProps(state) {
+function mapStateToProps(state) {
   return {
     sales: state.sales
   }
 }
 
-var MapConnect = connect(mapStatetoProps, {getSales, GETURL})(MapView)
+var MapConnect = connect(mapStateToProps, {getSales, GETURL})(MapView)
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc'

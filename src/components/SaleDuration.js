@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {GETURL} from '../../Duck/redux';
 
-class AddNewSale extends Component {
+class SaleDuration extends Component {
   constructor() {
     super()
 
@@ -45,16 +45,15 @@ class AddNewSale extends Component {
     } else if (input === 'date') {
       this.setState({sale_date: e})
     }
-    this.setState({button: true})
   }
 
-  buttons = () => {
-    if (this.state.button) {
-      return <Link to='/AddInventory'><button>Submit</button></Link>
-    } else {
-      return <button onClick={_=>this.setState({show: true})}>Submit</button>
-    }
-  }
+  // buttons = () => {
+  //   if (this.state.button) {
+  //     return <Link to='/AddInventory'><button>Submit</button></Link>
+  //   } else {
+  //     return <button onClick={_=>this.setState({show: true})}>Submit</button>
+  //   }
+  // }
 
   showWarning = () => {
     if (this.state.show) {
@@ -82,8 +81,9 @@ class AddNewSale extends Component {
         <input placeholder="This should be a general overview of what you're selling" 
           onChange={e => this.handleDec(e.target.value)} />
         <p>Characters Left: {this.state.count}</p>
-         {this.buttons()}
-        {this.showWarning()} 
+        <Link to='/AddInventory'><button>Submit</button></Link>
+        {/* {this.buttons()}
+        {this.showWarning()} */}
       </div>
     );
   }
@@ -94,4 +94,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {GETURL})(AddNewSale);
+export default connect(mapStateToProps, {GETURL})(SaleDuration);

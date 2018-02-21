@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import {GETURL} from '../../Duck/redux';
 import { connect } from 'react-redux';
 import SaleHistory from './../SaleHistory/SaleHistory'
 
@@ -50,6 +51,7 @@ class EditProfile extends Component {
     componentDidMount(){
         this.getUserInfo()
         this.getUserSales()
+        this.props.GETURL(this.props.match.url)
     }
     render() {
         console.log("state",this.state)
@@ -86,5 +88,9 @@ class EditProfile extends Component {
     }
 }
 
-function mapStateToProps(state) { return state }
-export default connect(mapStateToProps, {})(EditProfile);
+
+function mapStateToProps(state) { 
+    return state 
+}
+export default connect(mapStateToProps, {}, {GETURL})(EditProfile);
+
