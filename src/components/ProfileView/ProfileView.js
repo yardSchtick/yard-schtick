@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
+import {GETURL, GETUSER} from '../../Duck/redux'
 import SaleHistory from './../SaleHistory/SaleHistory'
 // import Footer from './../Footer/Footer'
 
@@ -16,7 +17,6 @@ class ProfileView extends Component {
 
         this.editProfileButtonClicked = this.editProfileButtonClicked.bind(this);
         this.saleButtonClicked = this.saleButtonClicked.bind(this);
-        this.getUserInfo = this.getUserInfo.bind(this);
         this.getUserSales = this.getUserSales.bind(this);
     }
     saleButtonClicked(){
@@ -25,17 +25,7 @@ class ProfileView extends Component {
     editProfileButtonClicked(){
         console.log("edit profile button was clicked")
     }
-    getUserInfo(){
-        axios({
-            url:'/api/getUser/',
-            method:'get'
-        }).then((response) =>{
-            console.log("i think user info works",response.data[0])
-            this.setState({
-                person: response.data[0]
-            })
-        })
-    }
+    
     getUserSales(){
         axios({
             url:'/api/getUserSales',
@@ -49,8 +39,9 @@ class ProfileView extends Component {
         })
     }
     componentDidMount(){
-        this.getUserInfo()
+        this.props.GETUSER()
         this.getUserSales()
+        this.props.GETURL(this.props.match.url)
     }
     render() {
         console.log("state",this.state)
@@ -87,5 +78,7 @@ class ProfileView extends Component {
     }
 }
 
-function mapStateToProps(state) { return state }
-export default connect(mapStateToProps, {})(ProfileView);
+function mapStateToProps(state) { 
+    return {}
+}
+export default connect(mapStateToProps, {GETURL, GETUSER})(ProfileView);

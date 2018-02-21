@@ -33,7 +33,11 @@ class Footer extends Component {
         if(this.props.user) {
             rightDisplay = <Link to='/AddNewSale'><button>Profile</button></Link>
         } else {
-            rightDisplay = <Link to='/Login'><button>Login</button></Link>
+            if (url == '/Login') {
+                rightDisplay = null
+            } else {
+                rightDisplay = <Link to='/Login'><button>Login</button></Link>
+            }
         }
 
         return (
