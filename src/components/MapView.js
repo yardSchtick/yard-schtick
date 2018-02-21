@@ -5,6 +5,7 @@ import { getSales } from '../Duck/redux';
 import { connect } from 'react-redux';
 import pin from '../images/pin.ico'
 import axios from 'axios';
+import Modal from 'react-responsive-modal';
 
 
 class MapView extends Component {
@@ -14,19 +15,29 @@ class MapView extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      sales: []
+      sales: [],
+      open: false,
+      markerInfo: {}
     }
 
     this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onOpenModal = this.onOpenModal.bind(this);
+    this.onCloseModal = this.onCloseModal.bind(this);
   }
+  onOpenModal(idx) {
+    this.setState({
+      open: true,
+      markerInfo: this.state.sales[idx]
+    });
+  };
 
-  getSales(){
-    const data = axios.get('/api/getAllSales').then(response => {
-        this.setState({
-          sales: response.data
-        });
-    })
-  }
+  onCloseModal() {
+    console.log('hit')
+    this.setState({ 
+      open: false 
+    });
+  };
+
   onMarkerClick(props, marker, e) {
     this.setState({
       selectedPlace: props,
@@ -35,55 +46,57 @@ class MapView extends Component {
     })
   }
   componentDidMount() {
-    this.getSales();
+    axios.get('/api/getAllSales').then(response => {
+      console.log(response);
+      this.setState({
+        sales: response.data
+      });
 
+    });
   }
   render() {
-    console.log(this.state.sales);
-    const markers = this.state.sales.map((e, i) => {
-      return (
-        <div key={i}>
-        <Marker
-        onClick={this.onMarkerClick}
-        title={'Michael House'}
-        icon={pin}
-        name={'My house'}
-        position={{ lat: 40.7762402, lng: -111.8739506 }}
-      />
-      </div>
-      )
-    })
+    const { open } = this.state;
+    
     const style = {
       height: '100vh',
       width: '100%'
     }
+    const markers = this.state.sales.map((e, i) => {
+      return (
+
+        <Marker key={i}
+          onClick={_ => this.onOpenModal(i)}
+          title={e.sale_desc}
+          icon={{
+            url: pin
+            // scaledSize: new google.maps.Size(64,64)
+          }}
+          name={e.sale_name}
+          position={{ lat: e.latitude, lng: e.longitude }}
+        />
+      )
+    })
 
     return (
       <Map
         google={this.props.google}
         zoom={10}
         style={style}
-        initialCenter={{
-          lat: 40.2338438,
-          lng: -111.65853370000002
-        }}
+        centerAroundCurrentLocation={true}
       >
         {markers}
-        <Marker
-          onClick={this.onMarkerClick}
-          icon={pin}
-          name={'Dolores'}
-          position={{ lat: 40.759703, lng: -111.428093 }} />
-        <Marker />
         <Marker onClick={this.onMarkerClick}
           name={'Current location'} />
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}>
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow>
+
+        <Modal open={open} onClose={this.onCloseModal} little>
+          <h1>{this.state.markerInfo.sale_name}</h1>
+          <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale'/>
+          <h2>{this.state.markerInfo.sale_desc}</h2>
+          <h3>{this.state.markerInfo.address_street}</h3>
+          <h3>{this.state.markerInfo.address_city}</h3>
+          <h3>{this.state.markerInfo.address_state}</h3>
+          <h3>{this.state.markerInfo.address_zip}</h3>
+        </Modal>
       </Map>
     );
   }
@@ -95,7 +108,7 @@ function mapStatetoProps(state) {
   }
 }
 
-var MapConnect = connect(mapStatetoProps, {getSales})(MapView)
+var MapConnect = connect(mapStatetoProps, { getSales })(MapView)
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc'
