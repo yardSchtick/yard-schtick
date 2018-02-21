@@ -37,7 +37,7 @@ class Footer extends Component {
 
 function mapStateToProps (state) {
     return {
-        url: this.state.url
+        url: state.url
     }
 }
 

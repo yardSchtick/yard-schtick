@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "39b0789a-1cae-4d43-b8fd-618427219a06",
+						"id": "e3a95de5-1c2b-400a-81e8-b66fc3cd273c",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
@@ -26,7 +26,7 @@
 							"var res = pm.response.json()",
 							"",
 							"pm.test('Got correct user', function() {",
-							"    pm.expect(res.data.id).to.eql(1)",
+							"    pm.expect(res[0].id).to.eql(1)",
 							"})",
 							""
 						]
@@ -38,15 +38,14 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost:4040/api/getUser/1",
+					"raw": "localhost:4040/api/getUser",
 					"host": [
 						"localhost"
 					],
 					"port": "4040",
 					"path": [
 						"api",
-						"getUser",
-						"1"
+						"getUser"
 					]
 				},
 				"description": ""
@@ -59,7 +58,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a6ae0d5d-b69f-4810-9f9e-c68e0f16c69c",
+						"id": "0f829937-b637-4bea-bb4b-7b9ffc4c7dce",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
@@ -67,16 +66,14 @@
 							"});",
 							"",
 							"var res = pm.response.json()",
-							"var testInv = {",
-							"    ",
-							"}",
+							"var testInv = [{\"id\": 2,\"inv_name\": \"Teen clothes\",\"inv_picture\": \"https://tribcmsprod.blob.core.windows.net/media/LA_Times_Portal/AdSSProduct/ProductImage/GarageSales.jpg\",\"inv_desc\": \"All teen clothes\",\"inv_price\": \"2.00\",\"sale_id\": 16},{\"id\": 3,\"inv_name\": \"Adult clothes\",\"inv_picture\": \"https://tribcmsprod.blob.core.windows.net/media/LA_Times_Portal/AdSSProduct/ProductImage/GarageSales.jpg\",\"inv_desc\": \"We have adult clothes\",\"inv_price\": \"2.00\",\"sale_id\": 16}]",
 							"",
 							"pm.test(\"Response is array\", function() {",
 							"    pm.expect(Array.isArray(res)).to.eql('array')",
 							"})",
 							"",
 							"pm.test(\"Got correct info\", function() {",
-							"    pm.expect(res.data[0]).to.eql(testInv)",
+							"    pm.expect(res).to.eql(testInv)",
 							"})"
 						]
 					}
@@ -87,7 +84,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost:4040/api/getInventory/1",
+					"raw": "localhost:4040/api/getInventory/16",
 					"host": [
 						"localhost"
 					],
@@ -95,7 +92,212 @@
 					"path": [
 						"api",
 						"getInventory",
-						"1"
+						"16"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Sales",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19dff8b9-b5f5-4e81-aa0d-35d88fbed9ff",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var res = pm.response.json();",
+							"var check = [",
+							"    {",
+							"        \"id\": 7,",
+							"        \"sale_user\": 1,",
+							"        \"start_time\": \"09:00:00\",",
+							"        \"end_time\": \"01:00:00\",",
+							"        \"sale_desc\": \"We have lots of stuff!\"",
+							"    },",
+							"    {",
+							"        \"id\": 16,",
+							"        \"sale_user\": 1,",
+							"        \"start_time\": \"10:00:00\",",
+							"        \"end_time\": \"02:00:00\",",
+							"        \"sale_desc\": \"We have some of stuff\"",
+							"    }",
+							"]",
+							"",
+							"pm.test('Get Correct Info', function() {",
+							"    pm.expect(res).to.eql(check)",
+							"})",
+							"",
+							"pm.test('Is an Array', function() {",
+							"    pm.expect(Array.isArray(res)).to.eql('Array')",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4040/api/getAllSales",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"getAllSales"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "New Sale",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c594d0cd-8144-46fc-b5e5-5f2065d3752b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Updated with correct info\", function() {",
+							"    pm.expect(pm.response.json()).to.eql({\"gift\": \"hello\"})",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"start_time\": \"06:00:00\",\n        \"end_time\": \"08:30:00\",\n        \"sale_desc\": \"hello. I'm the description and I'm here\"\n    }"
+				},
+				"url": {
+					"raw": "localhost:4040/api/newSale",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"newSale"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"1\",\n        \"address_street\": \"1700 NW 136th Ave\",\n        \"address_city\": \"Hillsboro\",\n        \"address_state\": \"OR\",\n        \"address_zip\": 97229,\n        \"user_img\": \"https://img.memecdn.com/hd-harold_o_4085447.jpg\",\n        \"user_name\": \"HARRISON FORD\"\n    }"
+				},
+				"url": {
+					"raw": "localhost:4040/api/updateUser",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"updateUser"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Sale",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60bacb25-29b3-4017-b6ea-ecb13cd5563e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var check =[",
+							"    {",
+							"        \"id\": 17,",
+							"        \"sale_user\": 1,",
+							"        \"start_time\": \"06:30:00\",",
+							"        \"end_time\": \"09:30:00\",",
+							"        \"sale_desc\": \"hello. I'm still the desciption but I've been updated\"",
+							"    }",
+							"];",
+							"var res = pm.response.json();",
+							"",
+							"pm.test(\"Updated with correct info\", function() {",
+							"    pm.expect(res).to.eql(check)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 17,\n        \"start_time\": \"06:30:00\",\n        \"end_time\": \"09:30:00\",\n        \"sale_desc\": \"hello. I'm still the desciption but I've been updated\"\n    }"
+				},
+				"url": {
+					"raw": "localhost:4040/api/updateSale",
+					"host": [
+						"localhost"
+					],
+					"port": "4040",
+					"path": [
+						"api",
+						"updateSale"
 					]
 				},
 				"description": ""
