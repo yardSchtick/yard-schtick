@@ -24,7 +24,7 @@ class Footer extends Component {
         var leftDisplay = null
         var rightDisplay = null
 
-        if (url != '/SaleList') {
+        if (url !== '/SaleList') {
             leftDisplay = <Link to='/SaleList'><button>List</button></Link>
         } else {
             leftDisplay = <Link to='/MapView'><button>Map</button></Link>
@@ -33,7 +33,7 @@ class Footer extends Component {
         if(this.props.user) {
             rightDisplay = <Link to='/AddNewSale'><button>Profile</button></Link>
         } else {
-            if (url == '/Login') {
+            if (url === '/Login') {
                 rightDisplay = null
             } else {
                 rightDisplay = <Link to='/Login'><button>Login</button></Link>
