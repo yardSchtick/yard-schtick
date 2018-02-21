@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL } from '../../Duck/redux'
+import { GETURL } from '../../Duck/redux';
 
 class SaleHistory extends Component {
     constructor(props){
@@ -9,10 +9,6 @@ class SaleHistory extends Component {
         this.repostClick = this.repostClick.bind(this)
         this.deleteClick = this.deleteClick.bind(this)
 
-    }
-
-    componentDidMount() {
-        this.props.GETURL(this.props.match.url)
     }
     
     repostClick(){
@@ -38,8 +34,6 @@ class SaleHistory extends Component {
     }
 }
 
-function mapStateToProps(state) { return {
-        url: state.url
-}}
+function mapStateToProps(state) { return {}}
 
 export default connect(mapStateToProps, { GETURL })(SaleHistory)
