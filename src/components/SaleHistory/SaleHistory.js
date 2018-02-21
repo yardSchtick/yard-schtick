@@ -38,6 +38,8 @@ class SaleHistory extends Component {
     }
 }
 
-function mapStateToProps(state) { }
+function mapStateToProps(state) { return {
+        url: state.url
+}}
 
 export default connect(mapStateToProps, { GETURL })(SaleHistory)

@@ -10,29 +10,41 @@ class Footer extends Component {
 
         this.state ={
             showMap: null,
-            location: '/mapview'
+            buttonShow: null
         }
     }
-    
-    componentDidMount() {
-        var leftDisplay = null
-        if (this.state.location === '/SaleList') {
-            leftDisplay = <Link to='/MapView'><button>Map</button></Link>
-            this.setState({showMap: leftDisplay})
-        } else {
-            leftDisplay = <Link to='/SaleList'><button>List</button></Link>
-            this.setState({showMap: leftDisplay})
-        }
 
-        var rightDisplay = null
+    startUp = () => {
+        
     }
-
 
     render() {
+
+        var {url} = this.props
+        var leftDisplay = null
+        var rightDisplay = null
+
+        if (url !== '/SaleList') {
+            leftDisplay = <Link to='/SaleList'><button>List</button></Link>
+        } else {
+            leftDisplay = <Link to='/MapView'><button>Map</button></Link>
+        }
+
+        if(this.props.user) {
+            rightDisplay = <Link to='/AddNewSale'><button>Profile</button></Link>
+        } else {
+            if (url === '/Login') {
+                rightDisplay = null
+            } else {
+                rightDisplay = <Link to='/Login'><button>Login</button></Link>
+            }
+        }
+
         return (
-            <div>
-                {this.state.showMap}
-                <h2>YardShtick</h2>
+            <div className="Footer">
+                {leftDisplay}
+                <div className="Logo"></div>
+                {rightDisplay}
             </div>
         )
     }
@@ -40,7 +52,8 @@ class Footer extends Component {
 
 function mapStateToProps (state) {
     return {
-        url: state.url
+        url: state.url,
+        user: state.user
     }
 }
 

@@ -54,7 +54,7 @@ class MapView extends Component {
       )
     })
     const style = {
-      height: '100vh',
+      height: '90vh',
       width: '100%'
     }
 
@@ -91,7 +91,8 @@ class MapView extends Component {
 
 function mapStateToProps(state) {
   return {
-    sales: state.sales
+    sales: state.sales,
+    url: state.url
   }
 }
 

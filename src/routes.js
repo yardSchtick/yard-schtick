@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import MapView from './components/MapView';
 import Login from './components/Login/Login';
@@ -30,6 +30,7 @@ export default class Routes extends Component {
               <Route component={ SaleReview } path="/SaleReview" />
               <Route component={ ThankYou } path="/ThankYou" />
 
+                <Redirect to='/MapView' />
             </Switch>
             </div>
         )

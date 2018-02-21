@@ -20,9 +20,8 @@ class SaleReview extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  }
-}
+function mapStateToProps(state) { return {
+  url: state.url
+}}
 
 export default connect(mapStateToProps, { GETURL })(SaleReview);
