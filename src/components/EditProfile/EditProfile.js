@@ -1,87 +1,95 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
-import SaleHistory from './../SaleHistory/SaleHistory'
-// import Footer from './../Footer/Footer'
+import './EditProfile.css'
+
 
 class EditProfile extends Component {
     constructor(){
         super()
 
         this.state = {
-            person:{},
-            sales:[],
-            saved:[]
-        }
+            nameInput:'',
+            addressStreet:'',
+            addressCity:'',
+            addressState:'',
+            addressZip:'',
+            geoLat:'',
+            geoLng:'',
+            imageUrl:''
 
-        this.editProfileButtonClicked = this.editProfileButtonClicked.bind(this);
-        this.saleButtonClicked = this.saleButtonClicked.bind(this);
-        this.getUserInfo = this.getUserInfo.bind(this);
-        this.getUserSales = this.getUserSales.bind(this);
+
+        }
+        this.handleNameInput = this.handleNameInput.bind(this)
+        this.handleAddressStreet = this.handleAddressStreet.bind(this)
+        this.handleAddressCity = this.handleAddressCity.bind(this)
+        this.handleAddressState = this.handleAddressState.bind(this)
+        this.handleAddressZip = this.handleAddressZip.bind(this)
+        this.handleGeo = this.handleGeo.bind(this)
+        this.handleImageUrl = this.handleImageUrl.bind(this)
+        this.submitButtonClicked = this.submitButtonClicked.bind(this)
+       
     }
-    saleButtonClicked(){
-        console.log("sale button was clicked")
+    submitButtonClicked(){
+        console.log("submit button was clicked")
+        this.handleGeo()
     }
-    editProfileButtonClicked(){
-        console.log("edit profile button was clicked")
-    }
-    getUserInfo(){
-        axios({
-            url:'/api/getUser/',
-            method:'get'
-        }).then((response) =>{
-            console.log("i think user info works",response.data[0])
-            this.setState({
-                person: response.data[0]
-            })
+    handleImageUrl(event){
+        this.setState({
+            imageUrl: event.target.value
         })
     }
-    getUserSales(){
-        axios({
-            url:'/api/getUserSales',
-            method:'get'
-        }).then((response) =>{
-            console.log("get user sales",response.data)
-            this.setState({
-                    sales: response.data
-            })
-            
+    handleNameInput(event){
+        this.setState({
+            nameInput: event.target.value
         })
     }
-    componentDidMount(){
-        this.getUserInfo()
-        this.getUserSales()
+    handleAddressStreet(event){
+        this.setState({
+            addressStreet: event.target.value
+        })
+    }
+    handleAddressCity(event){
+        this.setState({
+            addressCity: event.target.value
+        })
+    }
+    handleAddressState(event){
+        this.setState({
+            addressState: event.target.value
+        })
+    }
+    handleAddressZip(event){
+        this.setState({
+            addressZip: event.target.value
+        })
+    }
+    handleGeo(){
+        axios({
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.addressStreet},${this.state.addressCity},${this.state.addressState},${this.state.addressZip}&key=AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc`,
+            method: 'get',
+        }).then((response) => {
+            this.setState({
+                geoLat: response.data.results[0].geometry.location.lat,
+                geoLng: response.data.results[0].geometry.location.lng
+            })
+            console.log('gps spot',response.data.results[0].geometry.location)
+            console.log("geo?", this.state)
+        })
+        
     }
     render() {
-        console.log("state",this.state)
-        console.log("props?",this.props)
-        let data;
-        if(this.state.sales){
-            data = this.state.sales.map((e, i) => {
-                return (
-                    <SaleHistory key={i} data={e} />
-                )
-            })
-        }
+        console.log("editprofile props", this.props,this.state)
         return (
             <div>
-                <div>
-                    <div>{this.state.person.user_img}</div>
-                    <div>profile info
-                        <div> name {this.state.person.user_name}</div>
-                        <div> address st {this.state.person.address_street} </div>
-                        <div>
-                            <div> address city{this.state.person.address_city} </div>
-                            <div> state{this.state.person.address_state} </div>
-                            <div> zip{this.state.person.address_zip} </div>
-                        </div>
-                        <button onClick={this.editProfileButtonClicked}>update profile</button>
-                    </div>
-                </div>
-                <button onClick={this.saleButtonClicked}>sale button</button>
-                {/* <SaleHistory /> */}
-                {data}
-                {/* <Footer /> */}
+                <div>name <input onChange={ this.handleNameInput }></input></div>
+                <div>profile Pic <input onChange={ this.handleImageUrl }></input><div className='editUserProfilePic'/></div>
+                <div>address <input onChange={ this.handleAddressStreet }></input></div>
+                <div>city<input onChange={ this.handleAddressCity }></input></div>
+                <div>state <input onChange={ this.handleAddressState }></input></div>
+                <div>zip <input onChange={ this.handleAddressZip }></input></div>
+                <button onClick={this.submitButtonClicked}>submit</button>
+
             </div>
         );
     }
