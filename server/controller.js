@@ -71,11 +71,28 @@ module.exports = {
 
         db.users.update_user(address_street, address_city, address_state, address_zip, user_name, user_img, id).then(result => res.send(result))
     },
+    updateInventory: (req, res) => {
+        const db= req.app.get('db')
+        const { id } = req.body.user
+        const { inv_name, inv_picture, inv_desc, inv_price } = req.body
+
+        db.inventory.update_inventory([inv_name, inv_picture, inv_desc, inv_price, id])
+        .then((data) => res.status(200).send(data[0]))
+        .catch(() => res.status(500).send())
+    },
 
     //DELETE
     deleteSale: (req, res) => {
         const db = req.app.get('db')
 
         db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
+    },
+    deleteOneInv: (req, res) => {
+        const db = req.app.get('db')
+        const { id, sale_user } = req.body.user
+
+        db.inventory.delete_one_inventory([sale_user, id])
+        .then(() => res.status(200).send())
+        .catch(() => res.status(500).send())
     }
 }
