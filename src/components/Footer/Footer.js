@@ -14,10 +14,6 @@ class Footer extends Component {
         }
     }
 
-    startUp = () => {
-        
-    }
-
     render() {
 
         var {url} = this.props
@@ -31,7 +27,15 @@ class Footer extends Component {
         }
 
         if(this.props.user) {
-            rightDisplay = <Link to='/AddNewSale'><button>Profile</button></Link>
+            if (url === '/ProfileView') {
+                rightDisplay = <Link to='/AddNewSale'><button>New Sale</button></Link>
+            } else if (url === '/AddInventory') {
+                rightDisplay = <Link to='/InventoryList'><button>Back</button></Link>
+            } else if (url === '/InventoryList') {
+                rightDisplay = <Link to='/AddNewSale'><button>Back</button></Link>
+            } else {
+                rightDisplay = <Link to='/ProfileView'><button>Profile</button></Link>
+            }
         } else {
             if (url === '/Login') {
                 rightDisplay = null
