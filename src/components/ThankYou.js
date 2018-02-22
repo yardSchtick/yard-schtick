@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL } from '../Duck/redux';
+import { Link } from 'react-router-dom'
 
 class ThankYou extends Component {
 
@@ -12,9 +12,9 @@ class ThankYou extends Component {
   render() {
     return (
       <div >
-        Thank You For Your Post!
-      <button>View Post</button>
-      <button>View Sales</button>
+        <h2>Thank You For Your Post!</h2>
+      <Link to="/ViewMap"><button>View Map</button></Link>
+      <Link to="/ProfileView"><button>View Sales</button></Link>
       </div>
     );
   }

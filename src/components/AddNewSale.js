@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux';
+import { GETURL, ADDNEWSALE } from '../Duck/redux';
 
 class AddNewSale extends Component {
   constructor() {
@@ -13,29 +12,29 @@ class AddNewSale extends Component {
       end_time: null,
       start_date: null,
       end_date: null,
-      sale_desc: null,
-      count: 300,
-      button: true,
+      button: false,
       show: false,
       warning: 'Please Fillout the Form Completely'
     }
   }
 
   componentDidMount() {
-    var { start_time, end_time, start_date, sale_desc, count, end_date } = this.state
-
-    if (!start_time) { this.setState({ button: false }) }
-    if (!end_time) { this.setState({ button: false }) }
-    if (!start_date) { this.setState({ button: false }) }
-    if (!end_date) { this.setState({ button: false }) }
-    if (count < 0) { this.setState({ button: false }) }
-
     this.props.GETURL(this.props.match.url)
   }
-
-  handleDec = (e) => {
-    var num = 300 - e.split('').length
-    this.setState({ sale_desc: e, count: num })
+  
+  setButton = () => {
+    var { start_time, end_time, start_date, sale_desc, count, end_date } = this.state
+  
+    if (!start_time || start_time == '') 
+      { this.setState({ button: false }) 
+    } else if (!end_time || end_time == '') 
+      { this.setState({ button: false }) 
+    } else if (!start_date || start_date == '') 
+      { this.setState({ button: false }) 
+    } else if (!end_date || end_date == '') 
+      { this.setState({ button: false }) 
+    } else (this.setState({button: true}))
+    
   }
 
   handleChange = (e, input) => {
@@ -48,12 +47,18 @@ class AddNewSale extends Component {
     } else if (input === 'end date') {
       this.setState({ end_date: e })
     }
-    this.setState({ button: true })
+    this.setButton()
+  }
+
+  setNewSale = () => {
+    var { start_time, end_time, start_date, end_date } = this.state
+
+    this.props.ADDNEWSALE({start_time, end_time, start_date, end_date})
   }
 
   buttons = () => {
     if (this.state.button) {
-      return <Link to='/InventoryList'><button>Submit</button></Link>
+      return <Link to='/SaleDescription'><button onClick={this.setNewSale}>Submit</button></Link>
     } else {
       return <button onClick={_ => this.setState({ show: true })}>Submit</button>
     }
@@ -66,28 +71,24 @@ class AddNewSale extends Component {
     return <div></div>
   }
 
-
   render() {
 
     return (
       <div >
-        <h1>Sale Information</h1>
+        <h1>Sale Time</h1>
         <p>Start Time</p>
-        <input type='time' id='starttime' value={this.state.start_time}
-          onBlur={e => this.handleChange(e.target.value, 'start')} />
+        <input type='time' id='starttime'
+          onChange={e => this.handleChange(e.target.value, 'start')} />
         <p>End Time</p>
         <input type='time'
-          onBlur={e => this.handleChange(e.target.value, 'end')} />
+          onChange={e => this.handleChange(e.target.value, 'end')} />
         <p>Start Date</p>
         <input type='date'
-          onBlur={e => this.handleChange(e.target.value, 'start date')} />
+          onChange={e => this.handleChange(e.target.value, 'start date')} />
         <p>End Date</p>
         <input type='date'
-          onBlur={e => this.handleChange(e.target.value, 'end date')} />
-        <p>Description:</p>
-        <input placeholder="This should be a general overview of what you're selling"
-          onChange={e => this.handleDec(e.target.value)} />
-        <p>Characters Left: {this.state.count}</p>
+          onChange={e => this.handleChange(e.target.value, 'end date')} />
+        
         {this.buttons()}
         {this.showWarning()}
       </div>
@@ -95,10 +96,6 @@ class AddNewSale extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    url: state.url
-  }
-}
+function mapStateToProps(state) { return {}}
 
-export default connect(mapStateToProps, { GETURL })(AddNewSale);
+export default connect(mapStateToProps, { GETURL, ADDNEWSALE })(AddNewSale);
