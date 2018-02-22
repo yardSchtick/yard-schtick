@@ -6,8 +6,8 @@ import SaleHistory from './../SaleHistory/SaleHistory';
 import { Link } from 'react-router-dom';
 
 class ProfileView extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
 
         this.state = {
             person:{},
@@ -52,7 +52,7 @@ class ProfileView extends Component {
         if(this.state.sales){
             data = this.state.sales.map((e, i) => {
                 return (
-                    <SaleHistory key={i} data={e} />
+                    <SaleHistory key={i} data={e} reget={this.getUserSales}/>
                 )
             })
         }

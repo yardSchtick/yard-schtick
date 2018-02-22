@@ -24,7 +24,7 @@ class Footer extends Component {
             leftDisplay = <Link to='/MapView'><button>Map</button></Link>
         }
 
-        // if(this.props.user) {
+        if(this.props.user) {
             if (url === '/ProfileView') {
                 rightDisplay = <Link to='/AddNewSale'><button>New Sale</button></Link>
             } else if (url === '/AddInventory') {
@@ -38,13 +38,13 @@ class Footer extends Component {
             } else {
                 rightDisplay = <Link to='/ProfileView'><button>Profile</button></Link>
             }
-        // } else {
-        //     if (url === '/Login') {
-        //         rightDisplay = null
-        //     } else {
-        //         rightDisplay = <Link to='/Login'><button>Login</button></Link>
-        //     }
-        // }
+        } else {
+            if (url === '/Login') {
+                rightDisplay = null
+            } else {
+                rightDisplay = <Link to='/Login'><button>Login</button></Link>
+            }
+        }
 
         return (
             <div className="Footer">

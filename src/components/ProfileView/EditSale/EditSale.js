@@ -68,7 +68,9 @@ class EditSale extends Component {
             saleEndDate: event.target.value
         })
     }
-    
+   componentDidMount(){
+       
+   } 
     
     render() {
         console.log("editprofile props", this.props,this.state)
@@ -90,7 +92,9 @@ class EditSale extends Component {
 
 
 function mapStateToProps(state) { 
-    return state 
+    return {
+        user: state.user
+    }
 }
 export default connect(mapStateToProps, {})(EditSale);
 
