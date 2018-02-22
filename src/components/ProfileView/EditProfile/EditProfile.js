@@ -28,37 +28,37 @@ class EditProfile extends Component {
         this.handleGeo()
     }
     handleImageUrl(event){
-        const userImg = Object.assign({}, this.state.user,{user_img: event})
+        const userImg = Object.assign({}, this.state.user,{userImg: event})
         this.setState({
             user: userImg
         })
     }
     handleNameInput(event){
-        const userName = Object.assign({}, this.state.user,{user_name: event})
+        const userName = Object.assign({}, this.state.user,{userName: event})
         this.setState({
             user: userName
         })
     }
     handleAddressStreet(event){
-        const addressStreet = Object.assign({}, this.state.user,{address_street: event})
+        const addressStreet = Object.assign({}, this.state.user,{addressStreet: event})
         this.setState({
             user: addressStreet
         })
     }
     handleAddressCity(event){
-        const addressCity = Object.assign({}, this.state.user,{address_city: event})
+        const addressCity = Object.assign({}, this.state.user,{addressCity: event})
         this.setState({
             user: addressCity
         })
     }
     handleAddressState(event){
-        const addressState = Object.assign({}, this.state.user,{address_state: event})
+        const addressState = Object.assign({}, this.state.user,{addressState: event})
         this.setState({
             user: addressState
         })
     }
     handleAddressZip(event){
-        const addressZip = Object.assign({}, this.state.user,{address_zip: event})
+        const addressZip = Object.assign({}, this.state.user,{addressZip: event})
         this.setState({
             user: addressZip
         })
@@ -80,15 +80,14 @@ class EditProfile extends Component {
 
     updateProfile(){
         axios.put('/api/updateUser',{
-            addressStreet: this.state.user.addressStreet,
-            addressCity: this.state.user.addressCity,
-            addressState: this.state.user.addressState,
-            addressZip: this.state.user.addressZip,
-            geoLat: this.state.user.geoLat,
-            geoLng: this.state.user.geoLng,
-            userName: this.state.user.nameInput,
-            userImg: this.state.user.imageUrl,
-            id: this.props.user.user.id
+            address_street: this.state.user.addressStreet,
+            address_city: this.state.user.addressCity,
+            address_state: this.state.user.addressState,
+            address_zip: this.state.user.addressZip,
+            latitude: this.state.user.geoLat,
+            longitude: this.state.user.geoLng,
+            userName: this.state.user.userName,
+            user_img: this.state.user.userImg
         }).then((response) => {
             console.log(response)
         }).catch((error) => {

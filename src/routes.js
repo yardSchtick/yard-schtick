@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 
-import MapView from './components/MapView';
+import MapView from './components/MapView/MapView';
 import Login from './components/Login/Login';
 import CreateAccount from './components/Login/CreateAccount';
 import SaleList from './components/SaleList';

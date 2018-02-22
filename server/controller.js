@@ -67,9 +67,9 @@ module.exports = {
     updateUser: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.session.user;
-        const {addressStreet, addressCity, addressState, addressZip, geoLat, geoLng, userName, userImg} = req.body;
+        const {address_street, address_city, address_state, address_zip, latitude, longitude, userName, user_img} = req.body;
 
-        db.users.update_user(addressStreet, addressCity, addressState, addressZip, geoLat, geoLng, userName, userImg, id).then(result => res.send(result))
+        db.users.update_user(address_street, address_city, address_state, address_zip, latitude, longitude, userName, user_img, id).then(result => res.send(result))
     },
     updateInventory: (req, res) => {
         const db= req.app.get('db')
@@ -84,8 +84,25 @@ module.exports = {
     //DELETE
     deleteSale: (req, res) => {
         const db = req.app.get('db')
+        const {id} = req.params;
+        console.log(id);
+        db.inventory.delete_all_inventory([id]).then(res2=>{
+        db.sale.delete_one_sale([id]).then(result => res.send({gift: 'hello'}))
+        })
+       
+    },
+    
+    deleteOneInv: (req, res) => {
+        const db = req.app.get('db')
+        const { id, sale_user } = req.body.user
 
-        db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
+        db.inventory.delete_one_inventory([sale_user, id])
+        .then(() => res.status(200).send())
+        .catch(() => res.status(500).send())
+    },
+    deleteAllInv:(req, res) =>{
+        const db = req.app.get('db')
+       
     }
     
 }
