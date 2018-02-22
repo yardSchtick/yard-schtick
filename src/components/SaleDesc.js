@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux';
+import { GETURL, ADDDESCRIPT } from '../Duck/redux';
 
 class SaleDesc extends Component {
     constructor() {
@@ -15,6 +15,10 @@ class SaleDesc extends Component {
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
+
+        if (this.props.newSale.sale_desc) {
+            this.setState({sale_desc: this.props.newSale.sale_desc})
+        }
     }
 
     handleDec = (e) => {
@@ -29,15 +33,18 @@ class SaleDesc extends Component {
                 <p>(this part is optional)</p>
                 <p>Description:</p>
                 <input placeholder="This should be a general overview of what you're selling"
+                    value={this.state.sale_desc ? this.state.sale_desc : null}
                     onChange={e => this.handleDec(e.target.value)} />
                 <p>Characters Left: {this.state.count}</p>
                 <div className="itemPic"></div>
-                <Link to='/InventoryList'><button>Submit</button></Link>
+                <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc})}>Submit</button></Link>
             </div >
         )
     }
 }
 
-function mapStateToProps(state) { return {} }
+function mapStateToProps(state) { return {
+    newSale: state.newSale
+} }
 
-export default connect(mapStateToProps, { GETURL })(SaleDesc);
+export default connect(mapStateToProps, { GETURL, ADDDESCRIPT })(SaleDesc);

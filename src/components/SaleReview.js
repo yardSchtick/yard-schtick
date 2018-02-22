@@ -51,6 +51,7 @@ class SaleReview extends Component {
         <p>Description</p>
         <Link to="/SaleDescription"><button>{newSale.sale_desc}</button></Link>
 
+      {/* WHEN THIS SUBMITS DON'T FORGET TO EMPTY NEWSALE OBJECT */}
         <Link to="/ThankYou"><button>Looks good to me!</button></Link>
       </div>
     );
