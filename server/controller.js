@@ -66,10 +66,10 @@ module.exports = {
 
     updateUser: (req, res) => {
         const db = req.app.get('db')
+        const { id } = req.session.user;
+        const {addressStreet, addressCity, addressState, addressZip, geoLat, geoLng, userName, userImg} = req.body;
 
-        var {id, address_street, address_city, address_state, address_zip, user_img, user_name} = req.body
-
-        db.users.update_user(address_street, address_city, address_state, address_zip, user_name, user_img, id).then(result => res.send(result))
+        db.users.update_user(addressStreet, addressCity, addressState, addressZip, geoLat, geoLng, userName, userImg, id).then(result => res.send(result))
     },
     updateInventory: (req, res) => {
         const db= req.app.get('db')
@@ -84,6 +84,7 @@ module.exports = {
     //DELETE
     deleteSale: (req, res) => {
         const db = req.app.get('db')
+<<<<<<< HEAD
         const {id} = req.params;
         console.log(id);
         db.inventory.delete_all_inventory([id]).then(res2=>{
@@ -103,5 +104,10 @@ module.exports = {
     deleteAllInv:(req, res) =>{
         const db = req.app.get('db')
        
+=======
+
+        db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
+>>>>>>> master
     }
+    
 }
