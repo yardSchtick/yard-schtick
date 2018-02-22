@@ -19,32 +19,32 @@ class Footer extends Component {
         var rightDisplay = null
 
         if (url !== '/SaleList') {
-            leftDisplay = <Link to='/SaleList'><button>List</button></Link>
+            leftDisplay = <Link to='/SaleList'><button className="leftButton" id="navButton">List</button></Link>
         } else {
-            leftDisplay = <Link to='/MapView'><button>Map</button></Link>
+            leftDisplay = <Link to='/MapView'><button  className="leftButton" id="navButton">Map</button></Link>
         }
 
-        // if(this.props.user) {
+        if(this.props.user) {
             if (url === '/ProfileView') {
-                rightDisplay = <Link to='/AddNewSale'><button>New Sale</button></Link>
+                rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">New Sale</button></Link>
             } else if (url === '/AddInventory') {
-                rightDisplay = <Link to='/InventoryList'><button>Back</button></Link>
+                rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/InventoryList') {
-                rightDisplay = <Link to='/SaleDescription'><button>Back</button></Link>
+                rightDisplay = <Link to='/SaleDescription'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/SaleDescription') {
-                rightDisplay = <Link to='/AddNewSale'><button>Back</button></Link>
+                rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/SaleReview') {
-                rightDisplay = <Link to='/InventoryList'><button>Back</button></Link>
+                rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else {
-                rightDisplay = <Link to='/ProfileView'><button>Profile</button></Link>
+                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton">Profile</button></Link>
             }
-        // } else {
-        //     if (url === '/Login') {
-        //         rightDisplay = null
-        //     } else {
-        //         rightDisplay = <Link to='/Login'><button>Login</button></Link>
-        //     }
-        // }
+        } else {
+            if (url === '/Login') {
+                rightDisplay = <div className="rightButton" id="navButton"></div>
+            } else {
+                rightDisplay = <Link to='/Login'><button className="rightButton" id="navButton">Login</button></Link>
+            }
+        }
 
         return (
             <div className="Footer">
