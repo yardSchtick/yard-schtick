@@ -3,7 +3,8 @@ import axios from "axios";
 const initialState = {
     user: null,
     sales: [],
-    url: '/mapview'
+    url: '/mapview',
+    anything:"hello"
 }
 
 const DEMO = 'DEMO'

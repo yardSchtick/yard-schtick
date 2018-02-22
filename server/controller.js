@@ -87,6 +87,7 @@ module.exports = {
 
         db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
     },
+    
     deleteOneInv: (req, res) => {
         const db = req.app.get('db')
         const { id, sale_user } = req.body.user
