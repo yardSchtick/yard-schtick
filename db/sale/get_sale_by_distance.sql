@@ -39,15 +39,4 @@ where
         )
     ) < 25 and not users.id = $3
 ORDER BY
-    (
-        6371 *
-        acos(
-            cos( radians( 40.359227 ) ) *
-            cos( radians( latitude ) ) *
-            cos(
-                radians( longitude ) - radians( -111.70471 )
-            ) +
-            sin(radians(40.359227)) *
-            sin(radians(latitude))
-        )
-    )
+    distance
