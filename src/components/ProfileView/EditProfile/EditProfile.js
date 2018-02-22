@@ -2,25 +2,15 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {GETURL} from './../../../Duck/redux';
 import { connect } from 'react-redux';
-import './EditProfile.css'
-
-import SaleHistory from './../../SaleHistory/SaleHistory'
+import './EditProfile.css';
+// import SaleHistory from './../../SaleHistory/SaleHistory';
 
 class EditProfile extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props);
 
         this.state = {
-            nameInput:'',
-            addressStreet:'',
-            addressCity:'',
-            addressState:'',
-            addressZip:'',
-            geoLat:'',
-            geoLng:'',
-            imageUrl:''
-
-
+            user: props.user
         }
         this.handleNameInput = this.handleNameInput.bind(this)
         this.handleAddressStreet = this.handleAddressStreet.bind(this)
@@ -30,45 +20,52 @@ class EditProfile extends Component {
         this.handleGeo = this.handleGeo.bind(this)
         this.handleImageUrl = this.handleImageUrl.bind(this)
         this.submitButtonClicked = this.submitButtonClicked.bind(this)
-       
+        this.updateProfile = this.updateProfile.bind(this)
     }
+
     submitButtonClicked(){
         console.log("submit button was clicked")
         this.handleGeo()
     }
     handleImageUrl(event){
+        const userImg = Object.assign({}, this.state.user,{user_img: event})
         this.setState({
-            imageUrl: event.target.value
+            user: userImg
         })
     }
     handleNameInput(event){
+        const userName = Object.assign({}, this.state.user,{user_name: event})
         this.setState({
-            nameInput: event.target.value
+            user: userName
         })
     }
     handleAddressStreet(event){
+        const addressStreet = Object.assign({}, this.state.user,{address_street: event})
         this.setState({
-            addressStreet: event.target.value
+            user: addressStreet
         })
     }
     handleAddressCity(event){
+        const addressCity = Object.assign({}, this.state.user,{address_city: event})
         this.setState({
-            addressCity: event.target.value
+            user: addressCity
         })
     }
     handleAddressState(event){
+        const addressState = Object.assign({}, this.state.user,{address_state: event})
         this.setState({
-            addressState: event.target.value
+            user: addressState
         })
     }
     handleAddressZip(event){
+        const addressZip = Object.assign({}, this.state.user,{address_zip: event})
         this.setState({
-            addressZip: event.target.value
+            user: addressZip
         })
     }
     handleGeo(){
         axios({
-            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.addressStreet},${this.state.addressCity},${this.state.addressState},${this.state.addressZip}&key=AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc`,
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.user.addressStreet},${this.state.user.addressCity},${this.state.user.addressState},${this.state.user.addressZip}&key=${process.env.API_KEY}`,
             method: 'get',
         }).then((response) => {
             this.setState({
@@ -79,6 +76,26 @@ class EditProfile extends Component {
             console.log("geo?", this.state)
         })
     }
+
+
+    updateProfile(){
+        axios.put('/api/updateUser',{
+            addressStreet: this.state.user.addressStreet,
+            addressCity: this.state.user.addressCity,
+            addressState: this.state.user.addressState,
+            addressZip: this.state.user.addressZip,
+            geoLat: this.state.user.geoLat,
+            geoLng: this.state.user.geoLng,
+            userName: this.state.user.nameInput,
+            userImg: this.state.user.imageUrl,
+            id: this.props.user.user.id
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
     // componentDidMount(){
     //     this.getUserInfo()
     //     this.getUserSales()
@@ -89,12 +106,12 @@ class EditProfile extends Component {
         return (
             <div>
                 <div>name <input onChange={ this.handleNameInput }></input></div>
-                <div>profile Pic <input onChange={ this.handleImageUrl }></input><div className='editUserProfilePic' style = {{backgroundImage: `url('${this.state.imageUrl}')` }}/></div>
-                <div>address <input onChange={ this.handleAddressStreet }></input></div>
-                <div>city<input onChange={ this.handleAddressCity }></input></div>
-                <div>state <input onChange={ this.handleAddressState }></input></div>
-                <div>zip <input onChange={ this.handleAddressZip }></input></div>
-                <button onClick={this.submitButtonClicked}>submit</button>
+                <div>profile Pic <input onChange={(e) => this.handleImageUrl(e.target.value) }></input><div className='editUserProfilePic' style = {{backgroundImage: `url('${this.state.imageUrl}')` }}/></div>
+                <div>address <input onChange={(e) => this.handleAddressStreet(e.target.value) }></input></div>
+                <div>city<input onChange={(e) =>  this.handleAddressCity(e.target.value) }></input></div>
+                <div>state <input onChange={(e) =>  this.handleAddressState(e.target.value) }></input></div>
+                <div>zip <input onChange={(e) =>  this.handleAddressZip(e.target.value) }></input></div>
+                <button onClick={() => this.submitButtonClicked}>submit</button>
 
             </div>
         );
@@ -103,7 +120,9 @@ class EditProfile extends Component {
 
 
 function mapStateToProps(state) { 
-    return state 
+    return {
+        user: state.user
+    }
 }
 export default connect(mapStateToProps, {GETURL})(EditProfile);
 
