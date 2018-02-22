@@ -84,8 +84,12 @@ module.exports = {
     //DELETE
     deleteSale: (req, res) => {
         const db = req.app.get('db')
-
-        db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
+        const {id} = req.params;
+        console.log(id);
+        db.inventory.delete_all_inventory([id]).then(res2=>{
+        db.sale.delete_one_sale([id]).then(result => res.send({gift: 'hello'}))
+        })
+       
     },
     
     deleteOneInv: (req, res) => {
@@ -95,5 +99,9 @@ module.exports = {
         db.inventory.delete_one_inventory([sale_user, id])
         .then(() => res.status(200).send())
         .catch(() => res.status(500).send())
+    },
+    deleteAllInv:(req, res) =>{
+        const db = req.app.get('db')
+       
     }
 }
