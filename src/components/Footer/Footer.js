@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import ListButton from './ListButton'
-import MapButton from './MapButton'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -12,10 +10,6 @@ class Footer extends Component {
             showMap: null,
             buttonShow: null
         }
-    }
-
-    startUp = () => {
-        
     }
 
     render() {
@@ -31,7 +25,19 @@ class Footer extends Component {
         }
 
         if(this.props.user) {
-            rightDisplay = <Link to='/AddNewSale'><button>Profile</button></Link>
+            if (url === '/ProfileView') {
+                rightDisplay = <Link to='/AddNewSale'><button>New Sale</button></Link>
+            } else if (url === '/AddInventory') {
+                rightDisplay = <Link to='/InventoryList'><button>Back</button></Link>
+            } else if (url === '/InventoryList') {
+                rightDisplay = <Link to='/SaleDescription'><button>Back</button></Link>
+            } else if (url === '/SaleDescription') {
+                rightDisplay = <Link to='/AddNewSale'><button>Back</button></Link>
+            } else if (url === '/SaleReview') {
+                rightDisplay = <Link to='/InventoryList'><button>Back</button></Link>
+            } else {
+                rightDisplay = <Link to='/ProfileView'><button>Profile</button></Link>
+            }
         } else {
             if (url === '/Login') {
                 rightDisplay = null

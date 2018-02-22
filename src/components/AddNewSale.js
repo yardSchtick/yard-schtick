@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {GETURL} from '../Duck/redux';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { GETURL, ADDNEWSALE } from '../Duck/redux';
 
 class AddNewSale extends Component {
   constructor() {
@@ -11,48 +10,57 @@ class AddNewSale extends Component {
     this.state = {
       start_time: null,
       end_time: null,
-      sale_date: null,
-      sale_desc: null,
-      count: 300,
-      button: true,
+      start_date: null,
+      end_date: null,
+      button: false,
       show: false,
       warning: 'Please Fillout the Form Completely'
     }
   }
 
   componentDidMount() {
-    var {start_time,end_time,sale_date,sale_desc,count} = this.state
-
-    if (!start_time) {this.setState({button: false})}
-    if (!end_time) {this.setState({button: false})}
-    if (!sale_date) {this.setState({button: false})}
-    if (!sale_desc) {this.setState({button: false})}
-    if (count < 0) {this.setState({button: false})}
-
     this.props.GETURL(this.props.match.url)
   }
-
-  handleDec = (e) => {
-    var num = 300 - e.split('').length
-    this.setState({ sale_desc: e, count: num })
+  
+  setButton = () => {
+    var { start_time, end_time, start_date, sale_desc, count, end_date } = this.state
+  
+    if (!start_time || start_time == '') 
+      { this.setState({ button: false }) 
+    } else if (!end_time || end_time == '') 
+      { this.setState({ button: false }) 
+    } else if (!start_date || start_date == '') 
+      { this.setState({ button: false }) 
+    } else if (!end_date || end_date == '') 
+      { this.setState({ button: false }) 
+    } else (this.setState({button: true}))
+    
   }
 
   handleChange = (e, input) => {
     if (input === 'start') {
-      this.setState({start_time: e})
+      this.setState({ start_time: e })
     } else if (input === 'end') {
-      this.setState({end_time: e})
-    } else if (input === 'date') {
-      this.setState({sale_date: e})
+      this.setState({ end_time: e })
+    } else if (input === 'start date') {
+      this.setState({ start_date: e })
+    } else if (input === 'end date') {
+      this.setState({ end_date: e })
     }
-    this.setState({button: true})
+    this.setButton()
+  }
+
+  setNewSale = () => {
+    var { start_time, end_time, start_date, end_date } = this.state
+
+    this.props.ADDNEWSALE({start_time, end_time, start_date, end_date})
   }
 
   buttons = () => {
     if (this.state.button) {
-      return <Link to='/AddInventory'><button>Submit</button></Link>
+      return <Link to='/SaleDescription'><button onClick={this.setNewSale}>Submit</button></Link>
     } else {
-      return <button onClick={_=>this.setState({show: true})}>Submit</button>
+      return <button onClick={_ => this.setState({ show: true })}>Submit</button>
     }
   }
 
@@ -63,34 +71,31 @@ class AddNewSale extends Component {
     return <div></div>
   }
 
-
   render() {
 
     return (
-      <div >  
-        <h1>Sale Information</h1>
+      <div >
+        <h1>Sale Time</h1>
         <p>Start Time</p>
-        <input type='time' id='starttime' 
-          onBlur={e=>this.handleChange(e.target.value, 'start')}/>
-        <p>End Time</p> 
-        <input type='time' 
-          onBlur={e=>this.handleChange(e.target.value, 'end')}/>        
-        <p>Date</p>
+        <input type='time' id='starttime'
+          onChange={e => this.handleChange(e.target.value, 'start')} />
+        <p>End Time</p>
+        <input type='time'
+          onChange={e => this.handleChange(e.target.value, 'end')} />
+        <p>Start Date</p>
         <input type='date'
-          onBlur={e=>this.handleChange(e.target.value, 'date')}/>        
-        <p>Description:</p>
-        <input placeholder="This should be a general overview of what you're selling" 
-          onChange={e => this.handleDec(e.target.value)} />
-        <p>Characters Left: {this.state.count}</p>
-         {this.buttons()}
-        {this.showWarning()} 
+          onChange={e => this.handleChange(e.target.value, 'start date')} />
+        <p>End Date</p>
+        <input type='date'
+          onChange={e => this.handleChange(e.target.value, 'end date')} />
+        
+        {this.buttons()}
+        {this.showWarning()}
       </div>
     );
   }
 }
 
-function mapStateToProps(state) { return {
-  url: state.url
-}}
+function mapStateToProps(state) { return {}}
 
-export default connect(mapStateToProps, {GETURL})(AddNewSale);
+export default connect(mapStateToProps, { GETURL, ADDNEWSALE })(AddNewSale);

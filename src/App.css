@@ -9,6 +9,13 @@
   height: 54px;
 }
 
+.itemPic {
+  height: 150px;
+  width: 150px;
+  border: 1px solid grey;
+  box-shadow: 1px 1px 1px grey
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
