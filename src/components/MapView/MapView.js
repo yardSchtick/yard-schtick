@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { getSales, GETURL } from '../Duck/redux';
+import { GETURL } from '../../Duck/redux';
 import { connect } from 'react-redux';
-import pin from '../images/pin.ico'
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
-
+import './MapView.css';
+import bluePin from '../../images/pushpin-blue.png'
+import greenPin from '../../images/pushpin-green.png'
 
 class MapView extends Component {
   constructor(props) {
@@ -17,13 +17,17 @@ class MapView extends Component {
       selectedPlace: {},
       sales: [],
       open: false,
-      markerInfo: {}
+      markerInfo: {},
+      lat: null,
+      lng: null
     }
 
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
   }
+
+
   onOpenModal(idx) {
     this.setState({
       open: true,
@@ -33,8 +37,8 @@ class MapView extends Component {
 
   onCloseModal() {
     console.log('hit')
-    this.setState({ 
-      open: false 
+    this.setState({
+      open: false
     });
   };
 
@@ -45,9 +49,11 @@ class MapView extends Component {
       showingInfoWindow: true
     })
   }
+  componentWillMount() {
+    
+  }
   componentDidMount() {
     axios.get('/api/getAllSales').then(response => {
-      console.log(response);
       this.setState({
         sales: response.data
       });
@@ -58,7 +64,7 @@ class MapView extends Component {
   }
   render() {
     const { open } = this.state;
-    
+
     const style = {
       height: '90vh',
       width: '100%'
@@ -67,11 +73,12 @@ class MapView extends Component {
       return (
 
         <Marker key={i}
+          google={this.props.google}
           onClick={_ => this.onOpenModal(i)}
           title={e.sale_desc}
           icon={{
-            url: pin
-            // scaledSize: new google.maps.Size(64,64)
+            url: greenPin,
+            scaledSize: new this.props.google.maps.Size(40, 40)
           }}
           name={e.sale_name}
           position={{ lat: e.latitude, lng: e.longitude }}
@@ -88,11 +95,17 @@ class MapView extends Component {
       >
         {markers}
         <Marker onClick={this.onMarkerClick}
-          name={'Current location'} />
+        google={this.props.google}
+          name={'Current location'} 
+          /* icon={{
+            url: bluePin,
+            scaledSize: new this.props.google.maps.Size(40, 40)
+          }} */
+          />
 
         <Modal open={open} onClose={this.onCloseModal} little>
           <h1>{this.state.markerInfo.sale_name}</h1>
-          <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale'/>
+          <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale' />
           <h2>{this.state.markerInfo.sale_desc}</h2>
           <h3>{this.state.markerInfo.address_street}</h3>
           <h3>{this.state.markerInfo.address_city}</h3>
@@ -101,6 +114,15 @@ class MapView extends Component {
         </Modal>
       </Map>
     );
+  }
+  componentDidUpdate(){
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      })
+    })
+    console.log(this.state);
   }
 }
 
@@ -111,8 +133,8 @@ function mapStateToProps(state) {
   }
 }
 
-var MapConnect = connect(mapStateToProps, {getSales, GETURL})(MapView)
+var MapConnect = connect(mapStateToProps, { GETURL })(MapView)
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCtb8eSgekxRgxSDay7RzJW09YEsTmBOmc'
+  apiKey: process.env.API_KEY
 })(MapConnect);
