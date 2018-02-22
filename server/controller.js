@@ -84,7 +84,6 @@ module.exports = {
     //DELETE
     deleteSale: (req, res) => {
         const db = req.app.get('db')
-<<<<<<< HEAD
         const {id} = req.params;
         console.log(id);
         db.inventory.delete_all_inventory([id]).then(res2=>{
@@ -104,10 +103,6 @@ module.exports = {
     deleteAllInv:(req, res) =>{
         const db = req.app.get('db')
        
-=======
-
-        db.sale.delete_one_sale(req.params.id).then(result => res.send({gift: 'hello'}))
->>>>>>> master
     }
     
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL } from '../../Duck/redux';
+import { GETURL, EDITSALE } from '../../Duck/redux';
+import {Link} from 'react-router-dom'
 import axios from "axios"
 
 class SaleHistory extends Component {
@@ -10,7 +11,7 @@ class SaleHistory extends Component {
         this.editSaleClick = this.editSaleClick.bind(this)
         this.deleteClick = this.deleteClick.bind(this)
         this.deleteSale = this.deleteSale.bind(this)
-        this.deleteInv = this.deleteInv.bind(this)
+        this.editSale = this.editSale.bind(this)
 
     }
     
@@ -32,14 +33,8 @@ class SaleHistory extends Component {
             this.props.reget()
         })
     }
-    deleteInv(){
-        axios({
-            url:'',
-            method:'delete'
-        }).then((resopnse) =>{
-            console.log("delete inv worked")
-            this.deleteSale()
-        })
+    editSale(){
+        
     }
     render() {
         console.log('sale history check me',this.props.data)
@@ -49,7 +44,9 @@ class SaleHistory extends Component {
                     <div>
                         <div>{this.props.data.sale_name}</div>
                         <div>old date{this.props.data.end_date}</div>
-                        <button onClick={this.editSaleClick}>Edit Sale</button>
+                        <Link to ="/AddNewSale" >
+                        <button onClick={ ()=>this.props.EDITSALE(this.props.data)}>Edit Sale</button>
+                        </Link>
                         <button onClick={this.deleteClick}>delete</button>
                     </div>
                 </div>
@@ -60,4 +57,4 @@ class SaleHistory extends Component {
 
 function mapStateToProps(state) { return {}}
 
-export default connect(mapStateToProps, { GETURL })(SaleHistory)
+export default connect(mapStateToProps, { GETURL, EDITSALE })(SaleHistory)

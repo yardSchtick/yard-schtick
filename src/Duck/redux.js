@@ -12,6 +12,7 @@ const GET_URL = 'GET_URL'
 const GET_USER = 'GET_USER';
 const ADD_NEW_SALE = 'ADD_NEW_SALE'
 const ADD_DESCRIPT = "ADD_DESCRIPT"
+const EDIT_SALE = "EDIT_SALE"
 
 // export function getDemo(){
 //     return{
@@ -54,7 +55,12 @@ export function ADDDESCRIPT(obj) {
         payload: obj
     }
 }
-
+export function EDITSALE(pop){
+    return {
+        type: EDIT_SALE,
+        payload: pop
+    }
+}
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case DEMO:
@@ -68,6 +74,9 @@ export default function reducer(state = initialState, action) {
         case ADD_DESCRIPT:
             var tempObj = Object.assign({}, state.newSale, {sale_desc: action.payload.sale_desc}, {sale_img: action.payload.sale_img})
             return Object.assign({}, state, {newSale: tempObj})
+        case EDIT_SALE:
+            console.log(action.payload)
+            return Object.assign({}, state, {newSale: action.payload})
         default:
             return state
     }
