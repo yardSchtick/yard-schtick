@@ -38,11 +38,13 @@ class ProfileView extends Component {
             
         })
     }
+
     componentDidMount(){
         this.props.GETUSER()
         this.getUserSales()
         this.props.GETURL(this.props.match.url)
     }
+    
     render() {
         console.log("state",this.state)
         console.log("props?",this.props)
