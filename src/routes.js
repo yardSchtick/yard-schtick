@@ -32,8 +32,8 @@ export default class Routes extends Component {
               <Route component={ InventoryList } path="/InventoryList" />
               <Route component={ SaleReview } path="/SaleReview" />
               <Route component={ ThankYou } path="/ThankYou" />
-              <Route component={ EditProfile } path="/EditProfile" />
               <Route component={ SaleDesc } path='/SaleDescription' />
+              <Route component={EditProfile} path="/EditProfile" />
               <Route component={ EditSale } path = "/EditSale" />
 
                 <Redirect to='/MapView' />
