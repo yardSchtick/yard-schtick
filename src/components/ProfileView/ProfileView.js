@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
-import {GETURL, GETUSER} from '../../Duck/redux'
-import SaleHistory from './../SaleHistory/SaleHistory'
-// import Footer from './../Footer/Footer'
+import {GETURL, GETUSER} from '../../Duck/redux';
+import SaleHistory from './../SaleHistory/SaleHistory';
+import { Link } from 'react-router-dom';
 
 class ProfileView extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
 
         this.state = {
             person:{},
@@ -38,38 +38,48 @@ class ProfileView extends Component {
             
         })
     }
+
     componentDidMount(){
         this.props.GETUSER()
         this.getUserSales()
         this.props.GETURL(this.props.match.url)
     }
+    
     render() {
         console.log("state",this.state)
-        console.log("props?",this.props)
+        console.log("props?",this.props.user)
         let data;
         if(this.state.sales){
             data = this.state.sales.map((e, i) => {
                 return (
-                    <SaleHistory key={i} data={e} />
+                    <SaleHistory key={i} data={e} reget={this.getUserSales}/>
                 )
             })
         }
         return (
             <div>
                 <div>
-                    <div>{this.state.person.user_img}</div>
+                    <div>{!this.props.user ? '' : this.props.user.user_img}</div>
                     <div>profile info
-                        <div> name {this.state.person.user_name}</div>
-                        <div> address st {this.state.person.address_street} </div>
+                        <div> name {!this.props.user ? '' : this.props.user.user_name}</div>
+                        <div> address st {!this.props.user ? '' : this.props.user.address_street} </div>
                         <div>
-                            <div> address city{this.state.person.address_city} </div>
-                            <div> state{this.state.person.address_state} </div>
-                            <div> zip{this.state.person.address_zip} </div>
+                            <div> address city{!this.props.user ? '' : this.props.user.address_city} </div>
+                            <div> state{!this.props.user ? '' : this.props.user.address_state} </div>
+                            <div> zip{!this.props.user ? '' : this.props.user.address_zip} </div>
                         </div>
-                        <button onClick={this.editProfileButtonClicked}>update profile</button>
+                        <button onClick={this.editProfileButtonClicked}>
+                            <Link to = '/EditProfile' style={{ textDecoration: 'none', color: '#000000' }}>
+                                update profile
+                            </Link>
+                        </button>
                     </div>
                 </div>
-                <button onClick={this.saleButtonClicked}>sale button</button>
+                <button onClick={this.saleButtonClicked}>
+                    <Link to = '/AddNewSale' style={{ textDecoration: 'none', color: '#000000' }}>
+                        sale button
+                    </Link>
+                </button>
                 {/* <SaleHistory /> */}
                 {data}
                 {/* <Footer /> */}
@@ -80,7 +90,8 @@ class ProfileView extends Component {
 
 function mapStateToProps(state) { 
     return {
-        url: state.url
+        url: state.url,
+        user: state.user
     }
 }
 export default connect(mapStateToProps, {GETURL, GETUSER})(ProfileView);

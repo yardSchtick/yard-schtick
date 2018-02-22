@@ -1,6 +1,6 @@
 UPDATE Sale
-SET sale_name = $1, sale_desc = $2, start_time = $3, end_time = $4, start_date = $5, end_date = $6, sale_img = $7 
-WHERE id = $8;
+SET start_time = $1, end_time = $2, sale_desc = $3, sale_name = $5, start_date = $6, end_date = $7, sale_img = $8
+WHERE id = $4;
 
 select * from sale
 where id=$8

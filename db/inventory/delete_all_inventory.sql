@@ -1,2 +1,2 @@
 DELETE FROM Inventory
-WHERE sale_user = $1;
+WHERE sale_id = $1;

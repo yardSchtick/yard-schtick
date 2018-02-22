@@ -51,11 +51,14 @@ app.get('/api/getUser', ctrl.getUser)
 app.get('/api/getUserSales', ctrl.getUserSales)
 
 app.post('/api/newSale', ctrl.newSale)
+app.post('/api/newInventory', ctrl.newInventory)
 
 app.put('/api/updateSale', ctrl.updateSale)
 app.put('/api/updateUser', ctrl.updateUser)
+app.put('/api/updateInventory', ctrl.updateInventory)
 
-
+app.delete('/api/deleteSale/:id', ctrl.deleteSale)
+app.delete('/api/')
 //=====================================\\
 
 const port = process.env.PORT
