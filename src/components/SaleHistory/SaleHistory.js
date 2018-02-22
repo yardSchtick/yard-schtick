@@ -23,7 +23,7 @@ class SaleHistory extends Component {
             <div>
                 <div>sale history
                     <div>
-                        <div></div>
+                        <div>{this.props.data.sale_name}</div>
                         <div>old date{this.props.data.end_date}</div>
                         <button onClick={this.repostClick}>repost</button>
                         <button onClick={this.deleteClick}>delete</button>
