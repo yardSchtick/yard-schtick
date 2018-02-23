@@ -36,7 +36,6 @@ class MapView extends Component {
   };
 
   onCloseModal() {
-    console.log('hit')
     this.setState({
       open: false
     });
@@ -66,7 +65,7 @@ class MapView extends Component {
     const { open } = this.state;
 
     const style = {
-      height: '90vh',
+      height: '91.5vh',
       width: '100%'
     }
     const markers = this.state.sales.map((e, i) => {
@@ -122,7 +121,6 @@ class MapView extends Component {
         lng: position.coords.longitude
       })
     })
-    console.log(this.state);
   }
 }
 
