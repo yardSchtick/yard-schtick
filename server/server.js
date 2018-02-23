@@ -35,13 +35,13 @@ passport.use(new Auth0Strategy({
     domain: AUTH_DOMAIN,
     clientID: AUTH_CLIENT_ID,
     clientSecret: AUTH_CLIENT_SECRET,
-    callbackURL: AUTH_CALLBACK,
+    callbackURL: AUTH_CALLBACK_URL,
     scope: 'openid profile'
 }, function (accessToken, refreshToken, extraParams, profile, done) {
     console.log(profile);
     let { name, email, picture, user_id } = profile;
     const db = app.get('db');
-    db.users.find_user([id]).then(function (user) {
+    db.users.find_user([user_id]).then(function (user) {
         if (!user[0]) {
             db.create_user([
                 address_street,
