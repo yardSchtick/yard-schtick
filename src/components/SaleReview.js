@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux';
-import { Link } from 'react-router-dom'
+import { GETURL, CLEARSALE } from '../Duck/redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 class SaleReview extends Component {
   constructor() {
@@ -16,9 +17,32 @@ class SaleReview extends Component {
   componentDidMount() {
     this.props.GETURL(this.props.match.url)
     this.formatDate()
+    this.formatTime()
 
-    var tempStr = this.props.newSale.start_time.split('').splice(0,5).join('') + ' - ' + this.props.newSale.end_time.split('').splice(0,5).join('')
-    this.setState({time: tempStr})
+    console.log(this.props.newSale)
+  }
+
+  formatTime = () => {
+    var one = this.convertMilitary(this.props.newSale.start_time)
+    var two = this.convertMilitary(this.props.newSale.end_time)
+
+    this.setState({ time: one + ' - ' + two })
+  }
+
+  convertMilitary = (time) => {
+    var tempTime = time.split(':').splice(0, 2);
+
+    if (+tempTime[0] < 12) {
+      if (+tempTime[0] === 0) {
+        tempTime[0] = 12
+      }
+      tempTime[0] = +tempTime[0]
+      return tempTime.join(':') + ' AM'
+    }
+    if (+tempTime[0] !== 12) {
+      tempTime[0] = +tempTime[0] - 12
+    }
+    return tempTime.join(':') + ' PM'
   }
 
   formatDate = () => {
@@ -27,14 +51,27 @@ class SaleReview extends Component {
     var tempDate = this.props.newSale.start_date.split('-').reverse()
     tempArr1[0] = tempDate[1]
     tempArr1[1] = tempDate[0]
-    tempArr1[2] = tempDate [2]
+    tempArr1[2] = tempDate[2]
     tempDate = this.props.newSale.end_date.split('-').reverse()
     tempArr2[0] = tempDate[1]
     tempArr2[1] = tempDate[0]
-    tempArr2[2] = tempDate [2]
+    tempArr2[2] = tempDate[2]
     var finalArr = tempArr1.join('/') + ' - ' + tempArr2.join('/')
-    this.setState({date: finalArr})
+    this.setState({ date: finalArr })
   }
+
+  submitSale = () => {
+    if (this.props.newSale.id === '') {
+      axios.post('/api/newSale',this.props.newSale).then(res => {
+        this.props.CLEARSALE()
+      })
+    } else {
+      axios.put('/api/updateSale',this.props.newSale).then(res => {
+        this.props.CLEARSALE()
+      })
+    }
+  }
+
   render() {
     var { user, newSale } = this.props
 
@@ -51,8 +88,7 @@ class SaleReview extends Component {
         <p>Description</p>
         <Link to="/SaleDescription"><button>{newSale.sale_desc}</button></Link>
 
-      {/* WHEN THIS SUBMITS DON'T FORGET TO EMPTY NEWSALE OBJECT */}
-        <Link to="/ThankYou"><button>Looks good to me!</button></Link>
+        <Link to="/ThankYou"><button onClick={this.submitSale}>Looks good to me!</button></Link>
       </div>
     );
   }
@@ -65,4 +101,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { GETURL })(SaleReview);
+export default connect(mapStateToProps, { GETURL, CLEARSALE })(SaleReview);
