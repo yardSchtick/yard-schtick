@@ -1,4 +1,4 @@
--- $1 = user latitude, $2 = user longitude, $3 = user.id
+-- $1 = user latitude, $2 = user longitude, $3 distance in miles
 
 SELECT
     sale.id,
@@ -37,6 +37,6 @@ where
             sin(radians(40.359227)) *
             sin(radians(latitude))
         )
-    ) < 25 and not users.id = $3
+    ) < $3
 ORDER BY
     distance
