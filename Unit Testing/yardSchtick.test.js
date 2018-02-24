@@ -42,3 +42,46 @@ describe('Reformatting a Dates', () => {
 
 })
 
+describe('Counting Characters in String', () => {
+    test('Correct output',() => {
+        expect(fns.countTrack('Hello', 100)).toBe(95)
+    })
+
+    test("Correct output", () => {
+        expect(fns.countTrack('Where are you?', 100)).toBe(86)
+    })
+
+    test("Correct output", () => {
+        expect(fns.countTrack('16',100)).toBe(98)
+    })
+
+    test("Correct output", () => {
+        expect(fns.countTrack(16,100)).toBe(98)
+    })
+    
+    test("Correct output type", () => {
+        expect(typeof fns.countTrack('16',100)).toBe('number')
+    })
+
+    test('Correct output type', () => {
+        expect(typeof fns.countTrack(16,199)).toBe('number')
+    })
+})
+
+describe('Formating Time', () => {
+    test('Correct output', () => {
+        expect(fns.formatTime('12:00:00', '1:00:00')).toBe('12:00 - 1:00')
+    })
+
+    test('Correct output', () => {
+        expect(fns.formatTime('12:00', '1:00')).toBe('12:00 - 1:00')
+    })
+
+    test('Correct output', () => {
+        expect(fns.formatTime('ABCDEFG', 'HI')).toBe('ABCDE - HI')
+    })
+
+    test('Correct output type', () => {
+        expect(typeof fns.formatTime('12:00:00', '1:00:00')).toBe('string')
+    })
+})
