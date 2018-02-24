@@ -24,7 +24,7 @@ module.exports = {
 
         var {id} = req.params
 
-        db.inventory.find_one_inventory(id).then(result => res.send(result))
+        db.inventory.find_one_inventory([id]).then(result => res.send(result))
     },
 
     getUserSales: (req, res) => {
@@ -32,7 +32,16 @@ module.exports = {
 
         var { id } = req.session.user
 
-        db.sale.find_one_sale(id).then(result => res.send(result))
+        db.sale.find_one_sale([id]).then(result => res.send(result))
+    },
+
+    getDistance: (req, res) => {
+        const db = req.app.get('db');
+        const {longitude, latitude, distance} = req.query
+
+        db.sale.get_sale_by_distance([latitude, longitude, distance]).then(response => {
+            res.status(200).send(response);
+        })
     },
 
     // POSTS

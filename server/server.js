@@ -49,6 +49,7 @@ app.get('/api/loginDummy')
 
 app.get('/api/getUser', ctrl.getUser)
 app.get('/api/getUserSales', ctrl.getUserSales)
+app.get('/api/distance', ctrl.getDistance)
 
 app.post('/api/newSale', ctrl.newSale)
 app.post('/api/newInventory', ctrl.newInventory)
@@ -61,12 +62,12 @@ app.delete('/api/deleteSale/:id', ctrl.deleteSale)
 app.delete('/api/')
 //=====================================\\
 
-const port = process.env.PORT
+const server_port = process.env.SERVER_PORT
 
 massive(process.env.CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance);
     
-    app.listen(port, _ => {
-        console.log(`The soul of man is the fire of his heart ${port}`)
+    app.listen(server_port, _ => {
+        console.log(`The soul of man is the fire of his heart ${server_port}`)
     })
 });

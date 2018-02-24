@@ -7,6 +7,7 @@ import Modal from 'react-responsive-modal';
 import './MapView.css';
 import bluePin from '../../images/pushpin-blue.png'
 import greenPin from '../../images/pushpin-green.png'
+import SearchBar from '../Search/SearchBar';
 
 class MapView extends Component {
   constructor(props) {
@@ -21,12 +22,9 @@ class MapView extends Component {
       lat: null,
       lng: null
     }
-
-    this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
   }
-
 
   onOpenModal(idx) {
     this.setState({
@@ -36,29 +34,19 @@ class MapView extends Component {
   };
 
   onCloseModal() {
-    console.log('hit')
     this.setState({
       open: false
     });
   };
 
-  onMarkerClick(props, marker, e) {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    })
-  }
-  componentWillMount() {
-    
-  }
   componentDidMount() {
-    axios.get('/api/getAllSales').then(response => {
+    navigator.geolocation.getCurrentPosition(position => {
       this.setState({
-        sales: response.data
-      });
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      })
+    })
 
-    });
 
     this.props.GETURL(this.props.match.url);
   }
@@ -76,10 +64,10 @@ class MapView extends Component {
           google={this.props.google}
           onClick={_ => this.onOpenModal(i)}
           title={e.sale_desc}
-          icon={{
+           icon={{
             url: greenPin,
             scaledSize: new this.props.google.maps.Size(40, 40)
-          }}
+          }} 
           name={e.sale_name}
           position={{ lat: e.latitude, lng: e.longitude }}
         />
@@ -87,43 +75,38 @@ class MapView extends Component {
     })
 
     return (
-      <Map
-        google={this.props.google}
-        zoom={10}
-        style={style}
-        centerAroundCurrentLocation={true}
-      >
-        {markers}
-        <Marker onClick={this.onMarkerClick}
-        google={this.props.google}
-          name={'Current location'} 
-          /* icon={{
-            url: bluePin,
-            scaledSize: new this.props.google.maps.Size(40, 40)
-          }} */
-          />
+      <div>
 
-        <Modal open={open} onClose={this.onCloseModal} little>
-          <h1>{this.state.markerInfo.sale_name}</h1>
-          <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale' />
-          <h2>{this.state.markerInfo.sale_desc}</h2>
-          <h3>{this.state.markerInfo.address_street}</h3>
-          <h3>{this.state.markerInfo.address_city}</h3>
-          <h3>{this.state.markerInfo.address_state}</h3>
-          <h3>{this.state.markerInfo.address_zip}</h3>
-        </Modal>
-      </Map>
+        <Map
+          google={this.props.google}
+          zoom={10}
+          style={style}
+          centerAroundCurrentLocation={true}
+        >
+        {this.state.lat ?
+          <SearchBar longitude={this.state.lng}
+            latitude={this.state.lat}
+          /> : ''
+        }
+          {markers}
+          <Marker 
+          name={'current Location'} 
+          position={{ lat: this.state.lat, lng: this.state.lng}}/>
+
+          <Modal open={open} onClose={this.onCloseModal} little>
+            <h1>{this.state.markerInfo.sale_name}</h1>
+            <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale' />
+            <h2>{this.state.markerInfo.sale_desc}</h2>
+            <h3>{this.state.markerInfo.address_street}</h3>
+            <h3>{this.state.markerInfo.address_city}</h3>
+            <h3>{this.state.markerInfo.address_state}</h3>
+            <h3>{this.state.markerInfo.address_zip}</h3>
+          </Modal>
+        </Map>
+      </div>
     );
   }
-  componentDidUpdate(){
-    navigator.geolocation.getCurrentPosition(position => {
-      this.setState({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      })
-    })
-    console.log(this.state);
-  }
+
 }
 
 function mapStateToProps(state) {
