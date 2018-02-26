@@ -4,14 +4,14 @@ import Slider from 'react-rangeslider'
 import '../../../node_modules/react-rangeslider/lib/index.css'
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {getSales} from '../../Duck/redux';
+import {getSales, changeDistance} from '../../Duck/redux';
 
 
 class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: 50,
+            value: 20,
             sales: []
 
         }
@@ -21,7 +21,7 @@ class SearchBar extends Component {
       };
     
     handleChange = value => {
-       
+       this.props.changeDistance(value);
         this.setState({
           value: value
         })
@@ -31,6 +31,10 @@ class SearchBar extends Component {
         this.props.getSales(this.props.longitude, this.props.latitude, this.state.value);
       };
     componentDidMount(){
+        console.log(this.props.distance)
+        this.setState({
+            value: this.props.distance
+        })
          
       };
 
@@ -43,13 +47,13 @@ class SearchBar extends Component {
                      <Slider
                         min={0}
                         max={100}
-                        value={this.state.value}
+                        value={this.props.distance}
                         onChangeStart={this.handleChangeStart}
                         onChange={this.handleChange}
                         onChangeComplete={this.handleChangeComplete}
                         className='slider'
                     /> 
-                    <p className='p'>Distance: {this.state.value}</p>
+                    <p className='p'>DISTANCE: {this.props.distance} miles</p>
 
                 </div>
 
@@ -64,4 +68,5 @@ function mapStateToProps(state){
         distance: state.distance
     }
 }
-export default connect(mapStateToProps, {getSales})(SearchBar);
+
+export default connect(mapStateToProps, {getSales, changeDistance})(SearchBar);
