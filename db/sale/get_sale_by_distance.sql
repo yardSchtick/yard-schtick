@@ -20,7 +20,9 @@ SELECT
     end_time,
     start_date,
     end_date,
-    sale_img
+    sale_img,
+    latitude,
+    longitude
 FROM
     users
 JOIN 
@@ -29,12 +31,12 @@ where
     (
         6371 *
         acos(
-            cos( radians( 40.359227 ) ) *
+            cos( radians( $1 ) ) *
             cos( radians( latitude ) ) *
             cos(
-                radians( longitude ) - radians( -111.70471 )
+                radians( longitude ) - radians( $2 )
             ) +
-            sin(radians(40.359227)) *
+            sin(radians($1)) *
             sin(radians(latitude))
         )
     ) < $3
