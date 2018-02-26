@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { GETURL } from '../../Duck/redux';
+import { GETURL, getSales } from '../../Duck/redux';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
@@ -29,7 +29,7 @@ class MapView extends Component {
   onOpenModal(idx) {
     this.setState({
       open: true,
-      markerInfo: this.state.sales[idx]
+      markerInfo: this.props.sales[idx]
     });
   };
 
@@ -44,10 +44,8 @@ class MapView extends Component {
       this.setState({
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      })
+      }, _ => this.props.getSales(this.state.lng, this.state.lat, 20))
     })
-
-
     this.props.GETURL(this.props.match.url);
   }
   render() {
@@ -57,7 +55,8 @@ class MapView extends Component {
       height: '91.5vh',
       width: '100%'
     }
-    const markers = this.state.sales.map((e, i) => {
+    console.log(this.props.sales);
+    const markers = this.props.sales.map((e, i) => {
       return (
 
         <Marker key={i}
@@ -116,7 +115,7 @@ function mapStateToProps(state) {
   }
 }
 
-var MapConnect = connect(mapStateToProps, { GETURL })(MapView)
+var MapConnect = connect(mapStateToProps, { GETURL, getSales })(MapView)
 
 export default GoogleApiWrapper({
   apiKey: process.env.API_KEY

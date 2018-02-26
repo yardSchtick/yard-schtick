@@ -8,6 +8,7 @@ class SaleDesc extends Component {
         super()
 
         this.state = {
+            sale_name: null,
             sale_desc: null,
             count: 300,
         }
@@ -15,9 +16,9 @@ class SaleDesc extends Component {
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
-
-        if (this.props.newSale.sale_desc) {
-            this.setState({sale_desc: this.props.newSale.sale_desc})
+console.log(this.props.newSale)
+        if (this.props.newSale) {
+            this.setState({sale_desc: this.props.newSale.sale_desc, sale_name: this.props.newSale.sale_name})
         }
     }
 
@@ -26,18 +27,30 @@ class SaleDesc extends Component {
         this.setState({ sale_desc: e, count: num })
     }
 
+    handleName = (e) => {
+        this.setState({sale_name: e})
+    }
+
     render() {
         return (
             <div>
                 <h2>Sale Description</h2>
                 <p>(this part is optional)</p>
+
+                <p>Sale Title</p>
+                <input
+                    value={this.state.sale_name ? this.state.sale_name : ''}
+                    onChange={e => this.handleName(e.target.value)} />
+                    
                 <p>Description:</p>
-                <input placeholder="This should be a general overview of what you're selling"
-                    value={this.state.sale_desc ? this.state.sale_desc : null}
+                <input 
+                    placeholder="This should be a general overview of what you're selling"
+                    value={this.state.sale_desc ? this.state.sale_desc : ''}
                     onChange={e => this.handleDec(e.target.value)} />
                 <p>Characters Left: {this.state.count}</p>
+
                 <div className="itemPic"></div>
-                <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc})}>Submit</button></Link>
+                <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
             </div >
         )
     }
