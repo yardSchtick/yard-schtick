@@ -95,7 +95,6 @@ module.exports = {
     deleteSale: (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params;
-        console.log(id);
         db.inventory.delete_all_inventory([id]).then(res2=>{
         db.sale.delete_one_sale([id]).then(result => res.send({gift: 'hello'}))
         })

@@ -18,15 +18,15 @@ class AddNewSale extends Component {
 
   componentDidMount() {
     this.props.GETURL(this.props.match.url)
-
+    
     if (this.props.newSale) {
       var {newSale} = this.props
 
       this.setState({
         start_time: newSale.start_time,
         end_time: newSale.end_time,
-        start_date: newSale.start_date,
-        end_date: newSale.end_date
+        start_date: newSale.start_date.substring(0,10),
+        end_date: newSale.end_date.substring(0,10)
       },
     _=>{
       this.setButton()
@@ -67,18 +67,22 @@ class AddNewSale extends Component {
     return (
       <div >
         <h1>Sale Time</h1>
+
         <p>Start Time</p>
         <input type='time'
           value={this.state.start_time ? this.state.start_time : ''}
           onChange={e => this.handleChange(e.target.value, 'start')} />
+
         <p>End Time</p>
         <input type='time'
           value={this.state.end_time ? this.state.end_time : ''}
           onChange={e => this.handleChange(e.target.value, 'end')} />
+
         <p>Start Date</p>
         <input type='date'
           value={this.state.start_date ? this.state.start_date : ''}
           onChange={e => this.handleChange(e.target.value, 'start date')} />
+
         <p>End Date</p>
         <input type='date'
           value={this.state.end_date ? this.state.end_date : ''}        
