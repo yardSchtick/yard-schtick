@@ -31,7 +31,6 @@ class SearchBar extends Component {
         this.props.getSales(this.props.longitude, this.props.latitude, this.state.value);
       };
     componentDidMount(){
-        console.log(this.props.distance)
         this.setState({
             value: this.props.distance
         })

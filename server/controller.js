@@ -38,7 +38,6 @@ module.exports = {
     getDistance: (req, res) => {
         const db = req.app.get('db');
         const {longitude, latitude, distance} = req.query
-        console.log(longitude, latitude, distance);
 
         db.sale.get_sale_by_distance([latitude, longitude, distance]).then(response => {
             res.status(200).send(response);

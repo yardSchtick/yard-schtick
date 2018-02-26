@@ -78,12 +78,16 @@ class SaleReview extends Component {
       <div >
         <Link to="/SaleDescription"><button className="itemPic"></button></Link>
         <h2>Review</h2>
+
         <p>Address</p>
         <Link to="/ProfileView"><button>{user.address_street}<br/>{user.address_city},{user.address_state} {user.address_zip}</button></Link>
+
         <p>Time</p>
         <Link to="/AddNewSale"><button>{this.state.time}</button></Link>
+
         <p>Date</p>
         <Link to="/AddNewSale"><button>{this.state.date}</button></Link>
+        
         <p>Description</p>
         <Link to="/SaleDescription"><button>{newSale.sale_desc}</button></Link>
 

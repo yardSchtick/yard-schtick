@@ -107,8 +107,8 @@ export default function reducer(state = initialState, action) {
             var tempObj = Object.assign({}, state.newSale, action.payload)
             return Object.assign({}, state, { newSale: tempObj })
         case ADD_DESCRIPT:
-            var tempObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img }, { sale_name: action.payload.sale_name })
-            return Object.assign({}, state, { newSale: tempObj })
+            var descObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img }, { sale_name: action.payload.sale_name })
+            return Object.assign({}, state, { newSale: descObj })
         case EDIT_SALE:
             return Object.assign({}, state, { newSale: action.payload })
         case CLEAR_SALE:
