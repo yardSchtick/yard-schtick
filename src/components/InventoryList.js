@@ -9,15 +9,15 @@ import { Link } from 'react-router-dom';
 
 class InventoryList extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             inventory: null
         }
     }
 
     componentWillMount() {
-        axios.get('/api/getInventory/1')
+        axios.get(`/api/getInventory/${ this.props.user ? this.props.user.id :null}`)
             .then((response) => {
                 this.setState(
                     { inventory: response.data }
@@ -54,13 +54,16 @@ class InventoryList extends Component {
         return (
             <div>
                 {InventoryCard}
-                <Link to="/SaleReview"> <button>submit</button> </Link>
+                <Link to='/AddInventory'><button> Add an Item</button></Link>
+                <Link to="/SaleReview"> <button>Submit</button> </Link>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) { }
+function mapStateToProps(state) {return {
+    user: state.user
+} }
 
 export default connect(mapStateToProps, { GETURL })(InventoryList)
 
