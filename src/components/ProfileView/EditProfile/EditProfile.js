@@ -19,9 +19,13 @@ class EditProfile extends Component {
         this.handleAddressZip = this.handleAddressZip.bind(this)
         this.handleGeo = this.handleGeo.bind(this)
         this.handleImageUrl = this.handleImageUrl.bind(this)
-        this.submitButtonClicked = this.submitButtonClicked.bind(this)
+        this.submitButtonClicked = this.submitButtonClicked.bind(this) 
         this.updateProfile = this.updateProfile.bind(this)
     }
+
+    // componentDidMount(
+
+    // )
 
     submitButtonClicked(){
         console.log("submit button was clicked")

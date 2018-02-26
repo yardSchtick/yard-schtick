@@ -39,17 +39,13 @@ passport.use(new Auth0Strategy({
     scope: 'openid profile'
 }, function (accessToken, refreshToken, extraParams, profile, done) {
     console.log(profile);
-    let { name, email, picture, user_id } = profile;
+    let {displayName, picture} = profile;
     const db = app.get('db');
-    db.users.find_user([user_id]).then(function (user) {
-        if (!user[0]) {
-            db.create_user([
-                address_street,
-                address_city,
-                address_state,
-                address_zip,
-                user_name,
-                user_img
+    db.users.create_auth_user([displayName, picture]).then(function(user){
+        if(!user[0]){
+            db.create_auth_users([
+                displayName,
+                picture,
             ]).then(user => {
                 return done(null, user[0].id)
             })
@@ -101,23 +97,23 @@ app.get('/api/getInventory/:id', ctrl.getInventory)
 ////TESTING TOPLEVEL MIDDLEWARE////
 ///COMMENET OUT WHEN AUTH0 READY///
 ///////////////////////////////////
-app.use((req, res, next) =>{
-    if(!req.session.user){
-        req.session.user = {
-            id: 1,
-            user_name: "harrison ford", 
-            email: "adventureBuilder2049@gmail.com", 
-            name: "adventure", 
-            profile_picture : "http://www.placekitten.com/200/250",
-            auth_id: "adsgfhaoibjmoi5wrhgiuaosfngiuasdhg;ioarhdgv;ou"
-        }
-    }
-    next();
-})
+// app.use((req, res, next) =>{
+//     if(!req.session.user){
+//         req.session.user = {
+//             id: 1,
+//             user_name: "harrison ford", 
+//             email: "adventureBuilder2049@gmail.com", 
+//             name: "adventure", 
+//             profile_picture : "http://www.placekitten.com/200/250",
+//             auth_id: "adsgfhaoibjmoi5wrhgiuaosfngiuasdhg;ioarhdgv;ou"
+//         }
+//     }
+//     next();
+// })
 
 // ===========AUTHENTICATION===========\\
 
-app.get('/api/loginDummy')
+// app.get('/api/loginDummy')
 
 // =============END POINTS=============\\
 
@@ -135,12 +131,12 @@ app.delete('/api/deleteSale/:id', ctrl.deleteSale)
 app.delete('/api/')
 //=====================================\\
 
-const port = process.env.PORT
+const SERVER_PORT = process.env.SERVER_PORT
 
 massive(process.env.CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance);
     
-    app.listen(port, _ => {
-        console.log(`The soul of man is the fire of his heart ${port}`)
+    app.listen(SERVER_PORT, _ => {
+        console.log(`The soul of man is the fire of his heart ${SERVER_PORT}`)
     })
 });
