@@ -22,6 +22,8 @@ const GET_USER = 'GET_USER';
 const ADD_NEW_SALE = 'ADD_NEW_SALE'
 const ADD_DESCRIPT = "ADD_DESCRIPT"
 const EDIT_SALE = "EDIT_SALE"
+const GET_SALES = 'GET_SALES'
+
 const CLEAR_SALE = "CLEAR_SALE"
 
 // export function getDemo(){
@@ -31,10 +33,14 @@ const CLEAR_SALE = "CLEAR_SALE"
 //     }
 // }
 
-export function getSales() {
+export function getSales(longitude, latitude, distance) {
+    const data = axios.get(`/api/distance?longitude=${longitude}&latitude=${latitude}&distance=${distance}`)
+    .then(res => {
+        return res.data
+    })
     return {
-        type: "Dan is a butt",
-        payload: 'Dan is what he eats'
+        type: GET_SALES,
+        payload: data
     }
 }
 
@@ -80,6 +86,12 @@ export function CLEARSALE() {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        // case GET_LAT:
+        //     return Object.assign({}, state, {lat: action.payload})
+        // case GET_LNG:
+        //     return Object.assign({}, state, {lng: action.payload})
+        case GET_SALES + '_FULFILLED':
+            return Object.assign({}, state, {sales: action.payload});
         case DEMO:
             return Object.assign({}, state, { recipeToGet: action.payload });
         case GET_URL:
