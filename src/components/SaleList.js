@@ -1,42 +1,35 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux'
+import { GETURL, getSales } from '../Duck/redux';
+import Search from './Search/SearchBar';
 
 class SaleList extends Component {
 
     constructor() {
         super()
         this.state = {
-            sale: null
+            lat: null,
+            lng: null
         }
     }
 
     componentWillMount() {
-        axios.get('/api/getAllSales')
-            .then((response) => {
-                this.setState(
-                    { sale: response.data }
-                )
-            }
-            )
-            .catch(function (error) {
-                console.log(error);
-            })
-        console.log(this.props.match.url)
-        this.props.GETURL(this.props.match.url)
+        navigator.geolocation.getCurrentPosition(position => {
+            this.setState({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            }, _ => this.props.getSales(this.state.lng, this.state.lat, this.props.distance))
+          })
+          this.props.GETURL(this.props.match.url);
     }
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
     }
 
-    render() {
-        console.log(this.state.sale)
-
-        if (this.state.sale) {
-            var saleCard = this.state.sale.map((val, index) => (
+    render() {  
+            var saleCard = this.props.sales.map((val, index) => (
 
                 <div key={index}>
                     <p>{val.sale_name}</p>
@@ -45,16 +38,24 @@ class SaleList extends Component {
                     <p>{val.end_time}</p>
                 </div>
             ))
-        }
+    
 
         return (
             <div>
+                <Search 
+                latitude={this.state.lat}
+                longitude={this.state.lng}/>
                 {saleCard}
             </div>
         )
     }
 }
 
-function mapStateToProps(state) { }
+function mapStateToProps(state) {
+    return {
+        sales: state.sales,
+        distance: state.distance
+    }
+ }
 
-export default connect(mapStateToProps, { GETURL })(SaleList)
+export default connect(mapStateToProps, { GETURL, getSales })(SaleList)
