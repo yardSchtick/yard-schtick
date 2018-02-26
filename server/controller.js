@@ -83,10 +83,10 @@ module.exports = {
     },
     updateInventory: (req, res) => {
         const db= req.app.get('db')
-        const { id } = req.body.user
-        const { inv_name, inv_picture, inv_desc, inv_price } = req.body
+        // const { sale_id } = req.session.user
+        const { inv_name, inv_picture, inv_desc, inv_price, sale_id } = req.body
 
-        db.inventory.update_inventory([inv_name, inv_picture, inv_desc, inv_price, id])
+        db.inventory.update_inventory([inv_name, inv_picture, inv_desc, inv_price, sale_id])
         .then((data) => res.status(200).send(data[0]))
         .catch(() => res.status(500).send())
     },
