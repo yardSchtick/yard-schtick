@@ -5,10 +5,14 @@ const initialState = {
     sales: [],
     url: '/mapview',
     newSale: {
+        id: undefined,
         start_time: '',
         end_time: '',
         start_date: '',
         end_date: '',
+        sale_img: '',
+        sale_name: '',
+        sale_desc: ''
     }
 }
 
@@ -18,6 +22,7 @@ const GET_USER = 'GET_USER';
 const ADD_NEW_SALE = 'ADD_NEW_SALE'
 const ADD_DESCRIPT = "ADD_DESCRIPT"
 const EDIT_SALE = "EDIT_SALE"
+const CLEAR_SALE = "CLEAR_SALE"
 
 // export function getDemo(){
 //     return{
@@ -66,6 +71,13 @@ export function EDITSALE(pop) {
         payload: pop
     }
 }
+
+export function CLEARSALE() {
+    return {
+        type: CLEAR_SALE
+    }
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case DEMO:
@@ -75,12 +87,26 @@ export default function reducer(state = initialState, action) {
         case GET_USER + '_FULFILLED':
             return Object.assign({}, state, { user: action.payload.data[0] })
         case ADD_NEW_SALE:
-            return Object.assign({}, state, { newSale: action.payload })
+            var tempObj = Object.assign({}, state.newSale, action.payload)
+            return Object.assign({}, state, { newSale: tempObj })
         case ADD_DESCRIPT:
-            var tempObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img })
+            var tempObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img }, { sale_name: action.payload.sale_name })
             return Object.assign({}, state, { newSale: tempObj })
         case EDIT_SALE:
             return Object.assign({}, state, { newSale: action.payload })
+        case CLEAR_SALE:
+            return Object.assign({}, state, {
+                newSale: {
+                    id: undefined,
+                    start_time: '',
+                    end_time: '',
+                    start_date: '',
+                    end_date: '',
+                    sale_img: '',
+                    sale_name: '',
+                    sale_desc: ''
+                }
+            })
         default:
             return state
     }
