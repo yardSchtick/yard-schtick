@@ -5,7 +5,7 @@ const initialState = {
     sales: [],
     url: '/mapview',
     newSale: {
-        id: '',
+        id: undefined,
         start_time: '',
         end_time: '',
         start_date: '',
@@ -87,19 +87,26 @@ export default function reducer(state = initialState, action) {
         case GET_USER + '_FULFILLED':
             return Object.assign({}, state, { user: action.payload.data[0] })
         case ADD_NEW_SALE:
-            return Object.assign({}, state, { newSale: action.payload })
+            var tempObj = Object.assign({}, state.newSale, action.payload)
+            return Object.assign({}, state, { newSale: tempObj })
         case ADD_DESCRIPT:
             var tempObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img }, { sale_name: action.payload.sale_name })
             return Object.assign({}, state, { newSale: tempObj })
         case EDIT_SALE:
             return Object.assign({}, state, { newSale: action.payload })
         case CLEAR_SALE:
-            return Object.assign({}, state, { newSale: {
-                start_time: '',
-                end_time: '',
-                start_date: '',
-                end_date: '',
-            }})
+            return Object.assign({}, state, {
+                newSale: {
+                    id: undefined,
+                    start_time: '',
+                    end_time: '',
+                    start_date: '',
+                    end_date: '',
+                    sale_img: '',
+                    sale_name: '',
+                    sale_desc: ''
+                }
+            })
         default:
             return state
     }

@@ -19,7 +19,6 @@ class SaleReview extends Component {
     this.formatDate()
     this.formatTime()
 
-    console.log(this.props.newSale)
   }
 
   formatTime = () => {
@@ -61,7 +60,7 @@ class SaleReview extends Component {
   }
 
   submitSale = () => {
-    if (this.props.newSale.id === '') {
+    if (!this.props.newSale.id) {
       axios.post('/api/newSale',this.props.newSale).then(res => {
         this.props.CLEARSALE()
       })

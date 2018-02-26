@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { CLEARSALE } from '../../Duck/redux'
 
 class Footer extends Component {
     constructor() {
@@ -36,7 +37,7 @@ class Footer extends Component {
             } else if (url === '/SaleReview') {
                 rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else {
-                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton">Profile</button></Link>
+                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton" onClick={this.props.CLEARSALE}>Profile</button></Link>
             }
         } else {
             if (url === '/Login') {
@@ -63,4 +64,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps, {})(Footer)
+export default connect(mapStateToProps, {CLEARSALE})(Footer)
