@@ -13,7 +13,8 @@ const initialState = {
         sale_img: '',
         sale_name: '',
         sale_desc: ''
-    }
+    },
+    distance: 20
 }
 
 const DEMO = 'DEMO'
@@ -23,7 +24,7 @@ const ADD_NEW_SALE = 'ADD_NEW_SALE'
 const ADD_DESCRIPT = "ADD_DESCRIPT"
 const EDIT_SALE = "EDIT_SALE"
 const GET_SALES = 'GET_SALES'
-
+const CHANGE_DISTANCE = 'CHANGE_DISTANCE'
 const CLEAR_SALE = "CLEAR_SALE"
 
 // export function getDemo(){
@@ -33,6 +34,12 @@ const CLEAR_SALE = "CLEAR_SALE"
 //     }
 // }
 
+export function changeDistance(val){
+    return {
+        type: CHANGE_DISTANCE,
+        payload: val   
+    }
+}
 export function getSales(longitude, latitude, distance) {
     const data = axios.get(`/api/distance?longitude=${longitude}&latitude=${latitude}&distance=${distance}`)
     .then(res => {
@@ -86,10 +93,8 @@ export function CLEARSALE() {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        // case GET_LAT:
-        //     return Object.assign({}, state, {lat: action.payload})
-        // case GET_LNG:
-        //     return Object.assign({}, state, {lng: action.payload})
+        case CHANGE_DISTANCE:
+            return Object.assign({}, state, {distance: action.payload})
         case GET_SALES + '_FULFILLED':
             return Object.assign({}, state, {sales: action.payload});
         case DEMO:
