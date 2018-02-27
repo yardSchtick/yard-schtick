@@ -4,8 +4,8 @@ module.exports = {
 
     getUser: (req, res) => {
         const db = req.app.get('db')
-
-        var { id } = req.session.user
+        console.log(`CHECK ME:`, req.body)
+        const { id } = req.body
 
         db.users.find_user(id).then(result => 
             res.send(result))
@@ -22,7 +22,7 @@ module.exports = {
     getInventory: (req, res) => {
         const db = req.app.get('db')
 
-        var {id} = req.params
+        const {id} = req.params
 
         db.inventory.find_one_inventory([id]).then(result => res.send(result))
     },
@@ -30,7 +30,7 @@ module.exports = {
     getUserSales: (req, res) => {
         const db = req.app.get('db')
 
-        var { id } = req.session.user
+        const { id } = req.body
 
         db.sale.find_one_sale([id]).then(result => res.send(result))
     },
@@ -49,8 +49,8 @@ module.exports = {
     newSale: (req, res) => {
         const db = req.app.get('db')
 
-        var {start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img} = req.body
-        var { id } = req.session.user
+        const {start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img} = req.body
+        const { id } = req.session.user
 
         db.sale.create_sale(id, start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img).then(result => res.send({gift: 'hello'}))
     },
@@ -58,7 +58,7 @@ module.exports = {
     newInventory: (req, res) => {
         const db = req.app.get('db')
 
-        var {inv_name, inv_picture, inv_desc, inv_price, sale_id} = req.body
+        const {inv_name, inv_picture, inv_desc, inv_price, sale_id} = req.body
 
         db.inventory.create_inventory(inv_name, inv_picture, inv_desc, inv_price, sale_id).then(result => res.send(result))
     },
@@ -68,7 +68,7 @@ module.exports = {
     updateSale: (req, res) => {
         const db = req.app.get('db')
 
-        var {start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img} = req.body
+        const {start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img} = req.body
 
         db.sale.update_sale(start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img).then(result => res.send(result))
     },
