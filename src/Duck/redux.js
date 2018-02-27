@@ -26,6 +26,8 @@ const EDIT_SALE = "EDIT_SALE"
 const GET_SALES = 'GET_SALES'
 const CHANGE_DISTANCE = 'CHANGE_DISTANCE'
 const CLEAR_SALE = "CLEAR_SALE"
+const SET_USER = "SET_USER"
+const SET_SALE = "SET_SALE"
 
 // export function getDemo(){
 //     return{
@@ -91,6 +93,20 @@ export function CLEARSALE() {
     }
 }
 
+export function SETUSER(user) {
+    return {
+        type: SET_USER,
+        payload: user
+    }
+}
+
+export function SETSALE(sale) {
+    return {
+        type: SET_SALE,
+        payload: sale
+    }
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case CHANGE_DISTANCE:
@@ -111,6 +127,10 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { newSale: descObj })
         case EDIT_SALE:
             return Object.assign({}, state, { newSale: action.payload })
+        case SET_USER:
+            return Object.assign({}, state, {user: action.payload})
+        case SET_SALE:
+            return Object.assign({}, state, {sales: action.payload})
         case CLEAR_SALE:
             return Object.assign({}, state, {
                 newSale: {
