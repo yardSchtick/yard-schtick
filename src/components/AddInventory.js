@@ -43,10 +43,11 @@ class AddInventory extends Component {
         inv_picture: null, 
         inv_desc:this.state.inv_desc, 
         inv_price:this.state.inv_price,
-        sale_id: this.props.user.id
+        sale_id: this.props.newSale.id
       }
     }).then ((response) =>{
       console.log(response)
+      this.props.history.push('/InventoryList')
     }).catch(( error ) => {
       console.log(error)
     })
@@ -68,7 +69,7 @@ class AddInventory extends Component {
         <p>Price</p>
         <input type="number" placeholder={this.state.inv_price}
           onBlur={e=>this.handleInput(e.target.value,'price')}/>        
-        <Link to="/InventoryList"><button onClick={this.addItem}>Add Item</button></Link>
+        <button onClick={this.addItem}>Add Item</button>
       </div>
     );
   }
@@ -76,7 +77,8 @@ class AddInventory extends Component {
 
 function mapStateToProps(state) { return {
   url: state.url,
-  user: state.user
+  user: state.user,
+  newSale: state.newSale
 }}
 
 export default connect(mapStateToProps, { GETURL })(AddInventory);
