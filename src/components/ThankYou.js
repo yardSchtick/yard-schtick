@@ -13,8 +13,8 @@ class ThankYou extends Component {
     return (
       <div >
         <h2>Thank You For Your Post!</h2>
-      <Link to="/ViewMap"><button>View Map</button></Link>
-      <Link to="/ProfileView"><button>View Sales</button></Link>
+      <Link to="/ViewMap"><button>View Sales</button></Link>
+      <Link to="/ProfileView"><button>View Profile</button></Link>
       </div>
     );
   }

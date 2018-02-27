@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { CLEARSALE } from '../../Duck/redux'
 
 class Footer extends Component {
     constructor() {
         super()
 
-        this.state ={
+        this.state = {
             showMap: null,
             buttonShow: null
         }
@@ -14,17 +15,19 @@ class Footer extends Component {
 
     render() {
 
-        var {url} = this.props
+        var { url } = this.props
         var leftDisplay = null
         var rightDisplay = null
 
-        if (url !== '/SaleList') {
+        if (url !== '/SaleList' && url !== '/MapView') {
+            leftDisplay = <Link to='/MapView'><button className="leftButton" id="navButton">Map</button></Link>
+        } else if (url !== '/SaleList') {
             leftDisplay = <Link to='/SaleList'><button className="leftButton" id="navButton">List</button></Link>
         } else {
-            leftDisplay = <Link to='/MapView'><button  className="leftButton" id="navButton">Map</button></Link>
+            leftDisplay = <Link to='/MapView'><button className="leftButton" id="navButton">Map</button></Link>
         }
 
-        if(this.props.user) {
+        if (this.props.user) {
             if (url === '/ProfileView') {
                 rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">New Sale</button></Link>
             } else if (url === '/AddInventory') {
@@ -36,7 +39,7 @@ class Footer extends Component {
             } else if (url === '/SaleReview') {
                 rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else {
-                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton">Profile</button></Link>
+                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton" onClick={this.props.CLEARSALE}>Profile</button></Link>
             }
         } else {
             if (url === '/Login') {
@@ -56,11 +59,11 @@ class Footer extends Component {
     }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
         url: state.url,
         user: state.user
     }
 }
 
-export default connect(mapStateToProps, {})(Footer)
+export default connect(mapStateToProps, { CLEARSALE })(Footer)

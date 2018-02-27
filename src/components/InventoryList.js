@@ -9,15 +9,24 @@ import { Link } from 'react-router-dom';
 
 class InventoryList extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             inventory: null
         }
+        this.removeInv = this.removeInv.bind(this)
+        this.getInv = this.getInv.bind(this)
     }
-
-    componentWillMount() {
-        axios.get('/api/getInventory/1')
+    removeInv(){
+        axios({
+            url:'/api/deleteOneInv/',
+            method:'delete',
+        }).then((response) =>{
+            console.log('one inv item removed')
+        })
+    }
+    getInv(){
+        axios.get(`/api/getInventory/${ this.props.newSale ? this.props.newSale.id :null}`)
             .then((response) => {
                 this.setState(
                     { inventory: response.data }
@@ -28,11 +37,14 @@ class InventoryList extends Component {
                 console.log(error);
             })
         console.log(this.props.match.url)
-        this.props.GETURL(this.props.match.url)
+    }
+    componentWillMount() {
+        this.getInv()
     }
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
+        
     }
 
     render() {
@@ -46,7 +58,7 @@ class InventoryList extends Component {
                     {/* <img src={val.inv_picture}/> */}
                     <p>{val.inv_desc}</p>
                     <p>{val.inv_price}</p>
-                   
+                    <button onClick={this.removeInv}>Remove</button>
                 </div>
             ))
         }
@@ -54,13 +66,17 @@ class InventoryList extends Component {
         return (
             <div>
                 {InventoryCard}
-                <Link to="/SaleReview"> <button>submit</button> </Link>
+                <Link to='/AddInventory'><button> Add an Item</button></Link>
+                <Link to="/SaleReview"> <button>Submit</button> </Link>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) { }
+function mapStateToProps(state) {return {
+    user: state.user,
+    newSale: state.newSale
+} }
 
 export default connect(mapStateToProps, { GETURL })(InventoryList)
 

@@ -1,66 +1,53 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
-import {GETURL, GETUSER} from '../../Duck/redux';
+import { GETURL, GETUSER } from '../../Duck/redux';
 import SaleHistory from './../SaleHistory/SaleHistory';
 import { Link } from 'react-router-dom';
 import './ProfileView.css'
 
 class ProfileView extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
-            person:{},
-            sales:[],
-            saved:[]
+            person: {},
+            sales: [],
+            saved: []
         }
-
-        this.editProfileButtonClicked = this.editProfileButtonClicked.bind(this);
-        this.saleButtonClicked = this.saleButtonClicked.bind(this);
         this.getUserSales = this.getUserSales.bind(this);
     }
-    saleButtonClicked(){
-        console.log("sale button was clicked")
-    }
-    editProfileButtonClicked(){
-        console.log("edit profile button was clicked")
-    }
-    
-    getUserSales(){
-        axios({
-            url:'/api/getUserSales',
-            method:'get'
-        }).then((response) =>{
-            console.log("get user sales",response.data)
-            this.setState({
-                    sales: response.data
-            })
-            
-        })
-    }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.GETUSER()
         this.getUserSales()
         this.props.GETURL(this.props.match.url)
     }
-    
+
+    componentWillReceiveProps() {
+        this.getUserSales()
+    }
+
+    getUserSales() {
+        axios.get('/api/getUserSales').then(response => {
+            this.setState({ sales: response.data })
+        })
+    }
+
     render() {
-        console.log("state",this.state,this.props)
-        console.log("props?",)
         let data;
-        if(this.state.sales){
+        if (this.state.sales) {
             data = this.state.sales.map((e, i) => {
                 return (
-                    <SaleHistory key={i} data={e} reget={this.getUserSales}/>
+                    <SaleHistory key={i} data={e} reget={this.getUserSales} />
                 )
             })
         }
+
         return (
             <div>
                 <div>
-                    <div className = "userPic" style = {{backgroundImage: `url('${!this.props.user ? '' : this.props.user.user_img}')` }}></div>
+                    <div className="userPic" style={{ backgroundImage: `url('${!this.props.user ? '' : this.props.user.user_img}')` }}></div>
                     <div>profile info
                         <div> name {!this.props.user ? '' : this.props.user.user_name}</div>
                         <div> address st {!this.props.user ? '' : this.props.user.address_street} </div>
@@ -69,30 +56,23 @@ class ProfileView extends Component {
                             <div> state{!this.props.user ? '' : this.props.user.address_state} </div>
                             <div> zip{!this.props.user ? '' : this.props.user.address_zip} </div>
                         </div>
-                        <button onClick={this.editProfileButtonClicked}>
-                            <Link to = '/EditProfile' style={{ textDecoration: 'none', color: '#000000' }}>
-                                update profile
-                            </Link>
-                        </button>
+
+                        <Link to='/EditProfile'><button> update profile</button> </Link>
                     </div>
                 </div>
-                <button onClick={this.saleButtonClicked}>
-                    <Link to = '/AddNewSale' style={{ textDecoration: 'none', color: '#000000' }}>
-                        sale button
-                    </Link>
-                </button>
-                {/* <SaleHistory /> */}
+                <br/>
+                <br/>                
                 {data}
-                {/* <Footer /> */}
             </div>
         );
     }
 }
 
-function mapStateToProps(state) { 
+function mapStateToProps(state) {
     return {
         url: state.url,
-        user: state.user
+        user: state.user,
+        sales: state.sales
     }
 }
-export default connect(mapStateToProps, {GETURL, GETUSER})(ProfileView);
+export default connect(mapStateToProps, { GETURL, GETUSER })(ProfileView);

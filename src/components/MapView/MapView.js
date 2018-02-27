@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { GETURL } from '../../Duck/redux';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { GETURL, getSales } from '../../Duck/redux';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Modal from 'react-responsive-modal';
 import './MapView.css';
 import bluePin from '../../images/pushpin-blue.png'
@@ -29,7 +28,7 @@ class MapView extends Component {
   onOpenModal(idx) {
     this.setState({
       open: true,
-      markerInfo: this.state.sales[idx]
+      markerInfo: this.props.sales[idx]
     });
   };
 
@@ -40,14 +39,13 @@ class MapView extends Component {
   };
 
   componentDidMount() {
+
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      })
+      }, _ => this.props.getSales(this.state.lng, this.state.lat, this.props.distance))
     })
-
-
     this.props.GETURL(this.props.match.url);
   }
   render() {
@@ -57,17 +55,17 @@ class MapView extends Component {
       height: '91.5vh',
       width: '100%'
     }
-    const markers = this.state.sales.map((e, i) => {
+    const markers = this.props.sales.map((e, i) => {
       return (
 
         <Marker key={i}
           google={this.props.google}
           onClick={_ => this.onOpenModal(i)}
           title={e.sale_desc}
-           icon={{
+           /* icon={{
             url: greenPin,
             scaledSize: new this.props.google.maps.Size(40, 40)
-          }} 
+          }}  */
           name={e.sale_name}
           position={{ lat: e.latitude, lng: e.longitude }}
         />
@@ -112,11 +110,12 @@ class MapView extends Component {
 function mapStateToProps(state) {
   return {
     sales: state.sales,
-    url: state.url
+    url: state.url,
+    distance: state.distance
   }
 }
 
-var MapConnect = connect(mapStateToProps, { GETURL })(MapView)
+var MapConnect = connect(mapStateToProps, { GETURL, getSales })(MapView)
 
 export default GoogleApiWrapper({
   apiKey: process.env.API_KEY
