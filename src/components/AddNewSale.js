@@ -35,7 +35,7 @@ class AddNewSale extends Component {
 }
 
   setButton = () => {
-    var { start_time, end_time, start_date, sale_desc, count, end_date } = this.state
+    var { start_time, end_time, start_date, end_date } = this.state
   
     if (!start_time || start_time === '') 
       { this.setState({ button: false }) 

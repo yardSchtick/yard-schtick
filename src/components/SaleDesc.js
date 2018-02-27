@@ -16,7 +16,6 @@ class SaleDesc extends Component {
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
-console.log(this.props.newSale)
         if (this.props.newSale) {
             this.setState({sale_desc: this.props.newSale.sale_desc, sale_name: this.props.newSale.sale_name})
         }
