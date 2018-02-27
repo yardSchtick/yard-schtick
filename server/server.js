@@ -59,7 +59,7 @@ app.put('/api/updateUser', ctrl.updateUser)
 app.put('/api/updateInventory', ctrl.updateInventory)
 
 app.delete('/api/deleteSale/:id', ctrl.deleteSale)
-app.delete('/api/')
+app.delete('/api/deleteOneInv', ctrl.deleteOneInv)
 //=====================================\\
 
 const server_port = process.env.SERVER_PORT
