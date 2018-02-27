@@ -4,7 +4,12 @@ const initialState = {
     user: null,
     sales: [],
     url: '/mapview',
-    newSale: null
+    newSale: {
+        start_time: '',
+        end_time: '',
+        start_date: '',
+        end_date: '',
+    }
 }
 
 const DEMO = 'DEMO'
@@ -55,7 +60,7 @@ export function ADDDESCRIPT(obj) {
         payload: obj
     }
 }
-export function EDITSALE(pop){
+export function EDITSALE(pop) {
     return {
         type: EDIT_SALE,
         payload: pop
@@ -68,15 +73,14 @@ export default function reducer(state = initialState, action) {
         case GET_URL:
             return Object.assign({}, state, { url: action.payload })
         case GET_USER + '_FULFILLED':
-            return Object.assign({}, state, {user: action.payload.data[0]})
+            return Object.assign({}, state, { user: action.payload.data[0] })
         case ADD_NEW_SALE:
-            return Object.assign({}, state, {newSale: action.payload})
+            return Object.assign({}, state, { newSale: action.payload })
         case ADD_DESCRIPT:
-            var tempObj = Object.assign({}, state.newSale, {sale_desc: action.payload.sale_desc}, {sale_img: action.payload.sale_img})
-            return Object.assign({}, state, {newSale: tempObj})
+            var tempObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img })
+            return Object.assign({}, state, { newSale: tempObj })
         case EDIT_SALE:
-            console.log(action.payload)
-            return Object.assign({}, state, {newSale: action.payload})
+            return Object.assign({}, state, { newSale: action.payload })
         default:
             return state
     }

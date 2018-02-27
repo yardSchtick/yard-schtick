@@ -23,10 +23,6 @@ class EditProfile extends Component {
         this.updateProfile = this.updateProfile.bind(this)
     }
 
-    // componentDidMount(
-
-    // )
-
     submitButtonClicked(){
         console.log("submit button was clicked")
         this.handleGeo()

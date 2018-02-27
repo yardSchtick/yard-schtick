@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {GETURL, GETUSER} from '../../Duck/redux';
 import SaleHistory from './../SaleHistory/SaleHistory';
 import { Link } from 'react-router-dom';
+import './ProfileView.css'
 
 class ProfileView extends Component {
     constructor(props){
@@ -46,8 +47,8 @@ class ProfileView extends Component {
     }
     
     render() {
-        console.log("state",this.state)
-        console.log("props?",this.props.user)
+        console.log("state",this.state,this.props)
+        console.log("props?",)
         let data;
         if(this.state.sales){
             data = this.state.sales.map((e, i) => {
@@ -59,7 +60,7 @@ class ProfileView extends Component {
         return (
             <div>
                 <div>
-                    <div>{!this.props.user ? '' : this.props.user.user_img}</div>
+                    <div className = "userPic" style = {{backgroundImage: `url('${!this.props.user ? '' : this.props.user.user_img}')` }}></div>
                     <div>profile info
                         <div> name {!this.props.user ? '' : this.props.user.user_name}</div>
                         <div> address st {!this.props.user ? '' : this.props.user.address_street} </div>

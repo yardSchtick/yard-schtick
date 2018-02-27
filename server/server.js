@@ -39,13 +39,14 @@ passport.use(new Auth0Strategy({
     scope: 'openid profile'
 }, function (accessToken, refreshToken, extraParams, profile, done) {
     console.log(profile);
-    let {displayName, picture} = profile;
+    let {displayName, user_id, picture} = profile;
     const db = app.get('db');
-    db.users.create_auth_user([displayName, picture]).then(function(user){
+    db.users.find_user([user_id]).then(function(user){
         if(!user[0]){
-            db.create_auth_users([
-                displayName,
-                picture,
+            db.users.create_user([
+                displayName, 
+                user_id,
+                picture
             ]).then(user => {
                 return done(null, user[0].id)
             })
@@ -61,7 +62,8 @@ passport.serializeUser((id, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-    app.get('db').find_session_user([id])
+    console.log(id)
+    app.get('db').users.find_session_user([id])
         .then(function (user) {
             return done(null, user[0])
         })
@@ -87,7 +89,7 @@ app.get('auth/logout', function (req, res) {
     res.redirect('/')
 })
 
-// ===========NONE AUTH REQUIRED ENDPOINTS==========\\
+// ===========NO AUTH REQUIRED ENDPOINTS==========\\
 
 app.get('/api/getAllSales', ctrl.getAllSales)
 app.get('/api/getInventory/:id', ctrl.getInventory)
@@ -119,6 +121,7 @@ app.get('/api/getInventory/:id', ctrl.getInventory)
 
 app.get('/api/getUser', ctrl.getUser)
 app.get('/api/getUserSales', ctrl.getUserSales)
+app.get('/api/distance', ctrl.getDistance)
 
 app.post('/api/newSale', ctrl.newSale)
 app.post('/api/newInventory', ctrl.newInventory)

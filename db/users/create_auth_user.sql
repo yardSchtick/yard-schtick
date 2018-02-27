@@ -1,3 +1,3 @@
-INSERT INTO Users (display_name, user_img)
-VALUES ($1, $2)
+INSERT INTO Users (displayName, user_id, picture)
+VALUES ($1, $2, $3)
 RETURNING *;
