@@ -29,7 +29,7 @@ class Footer extends Component {
 
         if (this.props.user) {
             if (url === '/ProfileView') {
-                rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">New Sale</button></Link>
+                rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">Add Sale</button></Link>
             } else if (url === '/AddInventory') {
                 rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/InventoryList') {

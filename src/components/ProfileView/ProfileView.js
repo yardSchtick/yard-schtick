@@ -3,19 +3,21 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import { GETURL, GETUSER } from '../../Duck/redux';
 import SaleHistory from './../SaleHistory/SaleHistory';
-import { Link } from 'react-router-dom';
-import './ProfileView.css'
+import { Link } from 'react-router-dom'
+import EditProfile from './EditProfile'
+import UserInfo from './UserInfo'
 
 class ProfileView extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = {
-            person: {},
             sales: [],
-            saved: []
+            saved: [],
+            edit: false
         }
         this.getUserSales = this.getUserSales.bind(this);
+        this.toggleEditShow = this.toggleEditShow.bind(this)
     }
 
     componentDidMount() {
@@ -26,6 +28,7 @@ class ProfileView extends Component {
 
     componentWillReceiveProps() {
         this.getUserSales()
+        this.props.GETUSER()
     }
 
     getUserSales() {
@@ -34,9 +37,17 @@ class ProfileView extends Component {
         })
     }
 
+    toggleEditShow () {
+        this.setState({edit: !this.state.edit})
+    }
+
     render() {
         console.log(this.props)
         let data;
+        let show = <UserInfo 
+                        user={this.props.user}
+                        toggleEditShow={this.toggleEditShow}/>
+
         if (this.state.sales) {
             data = this.state.sales.map((e, i) => {
                 return (
@@ -45,25 +56,26 @@ class ProfileView extends Component {
             })
         }
 
+        if(this.state.edit) {
+            show = <EditProfile
+                        user={this.props.user}
+                        toggleEditShow={this.toggleEditShow}/>      
+        }
+
         return (
             <div>
-                <div>
-                    <div className="userPic" style={{ backgroundImage: `url('${!this.props.user ? '' : this.props.user.user_img}')` }}></div>
-                    <div>profile info
-                        <div> name {!this.props.user ? '' : this.props.user.user_name}</div>
-                        <div> address st {!this.props.user ? '' : this.props.user.address_street} </div>
-                        <div>
-                            <div> address city{!this.props.user ? '' : this.props.user.address_city} </div>
-                            <div> state{!this.props.user ? '' : this.props.user.address_state} </div>
-                            <div> zip{!this.props.user ? '' : this.props.user.address_zip} </div>
-                        </div>
+                {show}
 
-                        <Link to='/EditProfile'><button> update profile</button> </Link>
+                <div className="profileButtonContainer">
+                    <Link to='/AddNewSale'><button id="profileAddSaleButton">Add Sale</button></Link>
+                </div>
+
+                <div className="saleDisplay">
+                    <h1 id="userName">Sale History</h1>
+                    <div className="dataDisplay">
+                        {data}
                     </div>
                 </div>
-                <br/>
-                <br/>                
-                {data}
             </div>
         );
     }
