@@ -19,7 +19,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
-// app.use(userMiddleware.checkForSession);
+
 
 // ========== AUTH0 ===============================\\
 const {
@@ -49,14 +49,12 @@ passport.use(new Auth0Strategy({
                 picture,
                 user_id
             ]).then(user => {
-                // req.session.user = user[0].id;
-                // console.log(req.session);
+
                 return done(null, user[0].id)
             })
         }
         else {
-            // req.session.user = user[0].id;
-            // console.log('sessions', req.session);
+
             return done(null, user[0].id)
         }
     })
@@ -73,8 +71,7 @@ passport.serializeUser((id, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-    console.log(id)
-    app.get('db').users.find_session_user([id])
+   app.get('db').users.find_session_user([id])
         .then(function (user) {
             return done(null, user[0])
         })
@@ -137,7 +134,7 @@ app.put('/api/updateUser', ctrl.updateUser)
 app.put('/api/updateInventory', ctrl.updateInventory)
 
 app.delete('/api/deleteSale/:id', ctrl.deleteSale)
-app.delete('/api/deleteOneInv', ctrl.deleteOneInv)
+app.delete('/api/deleteOneInv/:id', ctrl.deleteOneInv)
 //=====================================\\
 
 const SERVER_PORT = process.env.SERVER_PORT

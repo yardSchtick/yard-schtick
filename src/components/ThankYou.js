@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux';
+import { GETURL, CLEARSALE } from '../Duck/redux';
 import { Link } from 'react-router-dom'
 
 class ThankYou extends Component {
@@ -31,4 +31,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { GETURL })(ThankYou);
+export default connect(mapStateToProps, { GETURL, CLEARSALE })(ThankYou);

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { GETURL } from '../../Duck/redux'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -20,12 +19,14 @@ class Login extends Component {
       <div>
         <div className="loginBanner"></div>
         <div className="loginBannerFade"></div>
-      <div id='loginContainer'>
-        <a href={process.env.REACT_APP_LOGIN}>
-          <button id="loginButton">Login</button>
-        </a>
-        <Link to='/CreateAccount'><button id="accountButton">Create Account</button></Link>
-      </div>
+        <div id='loginContainer'>
+          <a href={process.env.REACT_APP_LOGIN}>
+            <button id="loginButton">Login</button>
+          </a>
+          <a href={process.env.REACT_APP_LOGIN}>
+            <button id="accountButton">Create Account</button>
+          </a>
+        </div>
       </div>
     );
   }

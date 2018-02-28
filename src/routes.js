@@ -3,7 +3,6 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 
 import MapView from './components/MapView/MapView';
 import Login from './components/Login/Login';
-import CreateAccount from './components/Login/CreateAccount';
 import SaleList from './components/SaleList';
 import ProfileView from './components/ProfileView/ProfileView';
 import AddNewSale from './components/AddNewSale';
@@ -24,7 +23,6 @@ export default class Routes extends Component {
         
               <Route component={ MapView } exact path="/MapView" />
               <Route component={ Login } path="/Login"/>
-              <Route component={ CreateAccount } path="/CreateAccount" />
               <Route component={ SaleList } path="/SaleList" />
               <Route component={ ProfileView } path="/ProfileView" />
               <Route component={ AddNewSale } path="/AddNewSale" />
