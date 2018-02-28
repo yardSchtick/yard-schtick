@@ -3,12 +3,7 @@ module.exports = {
     // GETS
 
     getUser: (req, res) => {
-        const db = req.app.get('db')
-        console.log(`CHECK ME:`, req.body)
-        const { id } = req.body
-
-        db.users.find_user(id).then(result => 
-            res.send(result))
+       res.send(req.user)
     },
 
     getAllSales: (req, res) => {
@@ -49,10 +44,10 @@ module.exports = {
     newSale: (req, res) => {
         const db = req.app.get('db')
 
-        const {start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img} = req.body
-        const { id } = req.session.user
+        const {newSale, user_id} = req.body
+        const {start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img} = newSale
 
-        db.sale.create_sale(id, start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img).then(result => res.send({gift: 'hello'}))
+        db.sale.create_sale([user_id, start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img]).then(result => res.send({gift: 'hello'}))
     },
 
     newInventory: (req, res) => {
@@ -74,11 +69,10 @@ module.exports = {
     },
 
     updateUser: (req, res) => {
-        const db = req.app.get('db')
-        const { id } = req.session.user;
-        const {address_street, address_city, address_state, address_zip, user_name, user_img} = req.body;
+        const db = req.app.get('db')        
+        const {id, address_street, address_city, address_state, address_zip, user_name, user_img} = req.body;
 
-        db.users.update_user(address_street, address_city, address_state, address_zip, user_name, user_img, id).then(result => res.send(result))
+        db.users.update_user([address_street, address_city, address_state, address_zip, user_name, user_img, id]).then(result => res.send(result))
     },
     updateInventory: (req, res) => {
         const db= req.app.get('db')

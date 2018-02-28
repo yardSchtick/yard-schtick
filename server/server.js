@@ -8,6 +8,7 @@ const express = require('express')
     , Auth0Strategy = require('passport-auth0');
 
 const ctrl = require('./controller.js')
+const userMiddleware = require('./userMiddleware');
 
 const app = new express()
 app.use(bodyParser.json())
@@ -18,6 +19,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
+// app.use(userMiddleware.checkForSession);
 
 // ========== AUTH0 ===============================\\
 const {
@@ -38,23 +40,32 @@ passport.use(new Auth0Strategy({
     callbackURL: AUTH_CALLBACK_URL,
     scope: 'openid profile'
 }, function (accessToken, refreshToken, extraParams, profile, done) {
-    console.log(profile);
     let {displayName, user_id, picture} = profile;
     const db = app.get('db');
     db.users.find_user([user_id]).then(function(user){
         if(!user[0]){
             db.users.create_user([
                 displayName, 
-                user_id,
-                picture
+                picture,
+                user_id
             ]).then(user => {
+                // req.session.user = user[0].id;
+                // console.log(req.session);
                 return done(null, user[0].id)
             })
         }
         else {
+            // req.session.user = user[0].id;
+            // console.log('sessions', req.session);
             return done(null, user[0].id)
         }
     })
+}))
+
+app.get('/auth', passport.authenticate('auth0'))
+app.get('/auth/callback', passport.authenticate('auth0', {
+    successRedirect: process.env.SUCCESSREDIRECT,
+    failureRedirect: process.env.FAILUREREDIRECT
 }))
 
 passport.serializeUser((id, done) => {
@@ -69,11 +80,6 @@ passport.deserializeUser((id, done) => {
         })
 })
 
-app.get('/auth', passport.authenticate('auth0'))
-app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: process.env.SUCCESSREDIRECT,
-    failureRedirect: process.env.FAILUREREDIRECT
-}))
 
 app.get('/auth/me', (req, res) => {
     if (!req.user) {
