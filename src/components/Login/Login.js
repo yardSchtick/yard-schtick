@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { GETURL } from '../../Duck/redux'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -23,7 +22,9 @@ class Login extends Component {
           <a href={process.env.REACT_APP_LOGIN}>
             <button className="btn">Login</button>
           </a>
-          <Link to='/CreateAccount'><button className="btn">Create Account</button></Link>
+          <a href={process.env.REACT_APP_LOGIN}>
+            <button className="btn">Create Account</button>
+          </a>
         </div>
       </div>
     );
