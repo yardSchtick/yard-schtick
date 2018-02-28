@@ -13,6 +13,7 @@ import SaleReview from './components/SaleReview';
 import ThankYou from './components/ThankYou'
 import SaleDesc from './components/SaleDesc'
 import EditSale from './components/ProfileView/EditSale/EditSale'
+import Uploader from './components/Uploader'
 
 
 export default class Routes extends Component {
