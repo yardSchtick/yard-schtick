@@ -191,6 +191,12 @@ h2 {
   height: 60px;
   font-size: 20px;
 }
+#createAcctBtn {
+  margin-top: 20px;
+  width: 220px;
+  height: 60px;
+  font-size: 20px;
+}
 
 #accountButton {
   width: 325px;
