@@ -21,8 +21,8 @@ SELECT
     start_date,
     end_date,
     sale_img,
-    latitude,
-    longitude
+    address_street,
+    address_city
 FROM
     users
 JOIN 

@@ -17,35 +17,70 @@ class SaleList extends Component {
     componentWillMount() {
         navigator.geolocation.getCurrentPosition(position => {
             this.setState({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
             }, _ => this.props.getSales(this.state.lng, this.state.lat, this.props.distance))
-          })
-          this.props.GETURL(this.props.match.url);
+        })
+        this.props.GETURL(this.props.match.url);
     }
 
-    componentDidMount() {
-        this.props.GETURL(this.props.match.url)
+    formatTime = (start, end) => {
+        var one = this.convertMilitary(start)
+        var two = this.convertMilitary(end)
+
+        return one + ' - ' + two
     }
 
-    render() {  
-            var saleCard = this.props.sales.map((val, index) => (
+    convertMilitary = (time) => {
+        var tempTime = time.split(':').splice(0, 2);
 
-                <div key={index}>
-                    <p>{val.sale_name}</p>
-                    <p>{val.sale_description}</p>
-                    <p>{val.start_time}</p>
-                    <p>{val.end_time}</p>
+        if (+tempTime[0] < 12) {
+            if (+tempTime[0] === 0) {
+                tempTime[0] = 12
+            }
+            tempTime[0] = +tempTime[0]
+            return tempTime.join(':') + ' AM'
+        }
+        if (+tempTime[0] !== 12) {
+            tempTime[0] = +tempTime[0] - 12
+        }
+        return tempTime.join(':') + ' PM'
+    }
+
+    formatDescrip = (descrip) => {
+        if (descrip.split('').length > 50) {
+            return descrip.substring(0,55) + '...'
+        } else {
+            return descrip
+        }
+    }
+
+    render() {
+        var saleCard = this.props.sales.map((val, index) => {
+            let time = this.formatTime(val.start_time, val.end_time)
+            let descrip = this.formatDescrip(val.sale_desc)
+
+            return (<div key={index} className="saleCard">
+                <img className="saleCardImage" src={val.sale_img} />
+                <div className="saleCardContent">
+                    <div className="saleCardFirstLine">
+                        <p>{val.address_street} {val.address_city}</p>
+                        <p className="saleCardTime">{time}</p>
+                    </div>
+                    <p className="saleCardTime">{descrip}</p>
                 </div>
-            ))
-    
+            </div>)
+        })
+
 
         return (
             <div>
-                <Search 
-                latitude={this.state.lat}
-                longitude={this.state.lng}/>
-                {saleCard}
+                <Search
+                    latitude={this.state.lat}
+                    longitude={this.state.lng} />
+                <div className="listView">
+                    {saleCard}
+                </div>
             </div>
         )
     }
@@ -56,6 +91,6 @@ function mapStateToProps(state) {
         sales: state.sales,
         distance: state.distance
     }
- }
+}
 
 export default connect(mapStateToProps, { GETURL, getSales })(SaleList)
