@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL, CLEARSALE } from '../Duck/redux';
+import { GETURL, CLEARSALE, currentSale } from '../Duck/redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 
@@ -64,11 +64,12 @@ class SaleReview extends Component {
       axios.post('/api/newSale',{
         newSale: this.props.newSale,
         user_id: this.props.user.id}).then(res => {
-        this.props.CLEARSALE()
+        this.props.currentSale(res.data[0])
+        console.log('res', res);
       })
     } else {
       axios.put('/api/updateSale',this.props.newSale).then(res => {
-        this.props.CLEARSALE()
+        // this.props.CLEARSALE()
       })
     }
   }
@@ -106,4 +107,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { GETURL, CLEARSALE })(SaleReview);
+export default connect(mapStateToProps, { GETURL, CLEARSALE, currentSale })(SaleReview);

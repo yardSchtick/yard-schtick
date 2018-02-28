@@ -35,7 +35,6 @@ class ProfileView extends Component {
     }
 
     render() {
-        console.log(this.props)
         let data;
         if (this.state.sales) {
             data = this.state.sales.map((e, i) => {
