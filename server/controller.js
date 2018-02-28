@@ -7,7 +7,7 @@ module.exports = {
 
         var { id } = req.session.user
 
-        db.users.find_user(id).then(result => 
+        db.users.find_user(17).then(result => 
             res.send(result))
     },
 
@@ -74,9 +74,10 @@ module.exports = {
     },
 
     updateUser: (req, res) => {
+        
         const db = req.app.get('db')
-        const { id } = req.session.user;
-        const {address_street, address_city, address_state, address_zip, user_name, user_img} = req.body;
+
+        const {address_street, address_city, address_state, address_zip, user_name, user_img, id} = req.body;
 
         db.users.update_user(address_street, address_city, address_state, address_zip, user_name, user_img, id).then(result => res.send(result))
     },

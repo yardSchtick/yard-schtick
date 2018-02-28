@@ -73,7 +73,6 @@ class EditSale extends Component {
    } 
     
     render() {
-        console.log("editprofile props", this.props,this.state)
         return (
             <div>
                 <div>sale name <input onChange={ this.handleSaleName }></input></div>

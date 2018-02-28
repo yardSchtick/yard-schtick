@@ -1,3 +1,9 @@
+a {
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+}
+
 .Footer {
   width: 100%;
   background: #236e96;
@@ -19,14 +25,29 @@
 
 button {
   border: none;
+  background: #236e96;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px grey;
+}
+
+input {
+  border: none;
+  width: 100%;
+  font-weight: 700;
+  font-size: 15px;
+  color: grey;
+  border-bottom: 1px solid grey
 }
 
 .leftButton{
   border-right: 1px solid white;
+  border-radius: 0;
 }
 
 .rightButton{
-  border-left: 1px solid white
+  border-left: 1px solid white;
+  border-radius: 0;
 }
 
 #navButton {
@@ -45,4 +66,121 @@ button {
   background-repeat: no-repeat;
   background-size: 155px 45px;
   border-radius: 10px;
+}
+
+.profileDisplay {
+  margin: 20px;
+  display: flex;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 15px;
+}
+
+.editAddressDiv {
+  display: flex;
+}
+
+.userAddress {
+  margin-bottom: 25px;
+}
+
+.saleDisplay {
+  display: flex;
+  flex-direction: column;
+  margin: 75px 15px 0 15px;
+}
+
+.dataDisplay {
+  margin: 0 10px 10px 10px;
+  max-height: 450px;
+  overflow-y: scroll;
+}
+
+.saleInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.saleInfoButtons {
+  display: flex;
+}
+
+.profileButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px 0;
+}
+
+#profileAddSaleButton {
+  height: 50px;
+  width: 275px;
+  font-size: 17px;
+}
+
+#userName {
+  font-size: 20px;
+}
+
+#updateProfileButton {
+  background: transparent;
+  color: #236e96;
+  padding: 0;
+  box-shadow: none;
+  text-align: left
+}
+
+#itemButton {
+  height: 35px;
+  width: 80px;
+  margin: 0 0 0 10px;
+  font-size: 17px;
+}
+
+h2 {
+  font-size: 15px;
+}
+
+#item {
+  color: grey;
+  font-size: 17px;
+}
+
+.userPic{
+  min-height: 150px;
+  min-width: 150px;
+  border: 1px solid black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  width: 100vw;
+  margin-top: 125px;
+}
+
+#loginButton {
+  width: 325px;
+  height: 60px;
+  font-size: 20px;
+}
+
+#accountButton {
+  width: 325px;
+  height: 60px;
+  font-size: 20px;
+  margin-top: 15px;  
+  background: lightgrey;
+  color: black;
 }
