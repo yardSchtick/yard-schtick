@@ -1,3 +1,9 @@
+h1 {
+  font-size: 2em;
+  line-height: 2em;
+  margin: 0.5em;
+}
+
 a {
   display: flex;
   justify-content: space-around;
@@ -31,13 +37,18 @@ button {
   box-shadow: 1px 1px 1px grey;
 }
 
+label {
+  margin: 5px 10px;
+}
+
 input {
-  border: none;
-  width: 100%;
+  width: 95%;
   font-weight: 700;
   font-size: 15px;
   color: grey;
-  border-bottom: 1px solid grey
+  padding: 10px;
+  border: 1px solid lightgray;
+  margin-bottom: 10px;
 }
 
 .leftButton{
@@ -425,4 +436,25 @@ h2 {
 
 .saleCardTime {
   font-size: 12px;
+}
+
+.timeDate input {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.glyphicon-time, .glyphicon-calendar {
+  color: #236e96;
+}
+
+#submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#submitSaleBtn {
+  margin: 20px;
+  padding: 20px;
+  width: 220px;
+  height: 60px;
 }

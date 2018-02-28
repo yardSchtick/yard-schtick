@@ -67,42 +67,28 @@ class AddNewSale extends Component {
 
     return (
       <div >
-        <h1 className="title">Sale Time</h1>
+        <h1>Sale Time</h1>
+        <div className="timeDate">
+          <label>Start Time: <span class="glyphicon glyphicon-time" /></label>
+          <input type='time'
+            value={this.state.start_time ? this.state.start_time : ''}
+            onChange={e => this.handleChange(e.target.value, 'start')} /><br />
 
-        <div className="inputContainer">
-          <div className="inputIndividualContainer">
-            <p>Start Time:</p>
-            <input type='time'
-              id="smallInput"
-              value={this.state.start_time ? this.state.start_time : ''}
-              onChange={e => this.handleChange(e.target.value, 'start')} />
-          </div>
+          <label>End Time: <span class="glyphicon glyphicon-time" /></label>
+          <input type='time'
+            value={this.state.end_time ? this.state.end_time : ''}
+            onChange={e => this.handleChange(e.target.value, 'end')} />
 
-          <div className="inputIndividualContainer">
-            <p>End Time:</p>
-            <input type='time'
-              id="smallInput"
-              value={this.state.end_time ? this.state.end_time : ''}
-              onChange={e => this.handleChange(e.target.value, 'end')} />
-          </div>
+          <label>Start Date: <span class="glyphicon glyphicon-calendar" /></label>
+          <input type='date'
+            value={this.state.start_date ? this.state.start_date : ''}
+            onChange={e => this.handleChange(e.target.value, 'start date')} />
 
-          <div className="inputIndividualContainer">
-            <p>Start Date:</p>
-            <input type='date'
-              id="smallInput"
-              value={this.state.start_date ? this.state.start_date : ''}
-              onChange={e => this.handleChange(e.target.value, 'start date')} />
-          </div>
-          
-          <div className="inputIndividualContainer">
-            <p>End Date:</p>
-            <input type='date'
-              id="smallInput"
-              value={this.state.end_date ? this.state.end_date : ''}
-              onChange={e => this.handleChange(e.target.value, 'end date')} />
-          </div>
+          <label>End Date <span class="glyphicon glyphicon-calendar" /></label>
+          <input type='date'
+            value={this.state.end_date ? this.state.end_date : ''}
+            onChange={e => this.handleChange(e.target.value, 'end date')} />
         </div>
-        
         <AddNewSaleButton
           button={this.state.button}
           show={this.state.show}
