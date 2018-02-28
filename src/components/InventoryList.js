@@ -67,7 +67,7 @@ class InventoryList extends Component {
             <div>
                 {InventoryCard}
                 <Link to='/AddInventory'><button> Add an Item</button></Link>
-                <Link to="/SaleReview"> <button>Submit</button> </Link>
+                <Link to="/ProfileView"> <button>Finished Adding Items</button> </Link>
             </div>
         )
     }

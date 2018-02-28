@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {GETURL } from '../../Duck/redux'
-import {connect} from 'react-redux'
+import { GETURL } from '../../Duck/redux'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import '../../assets/neighborhood.jpg';
 
@@ -18,17 +18,19 @@ class Login extends Component {
   render() {
     return (
       <div id='loginContainer'>
-          <Link to='/ProfileView'><button id="loginButton">Login</button></Link>
-          <Link to='/CreateAccount'><button id="accountButton">Create Account</button></Link>
+        <a href={process.env.REACT_APP_LOGIN}>
+          <button id="loginButton">Login</button>
+        </a>
+        <Link to='/CreateAccount'><button id="accountButton">Create Account</button></Link>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) { 
+function mapStateToProps(state) {
   return {
-      url: state.url
+    url: state.url
   }
 }
 
-export default connect(mapStateToProps, {GETURL})(Login);
+export default connect(mapStateToProps, { GETURL })(Login);

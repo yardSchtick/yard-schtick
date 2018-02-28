@@ -61,7 +61,9 @@ class SaleReview extends Component {
 
   submitSale = () => {
     if (!this.props.newSale.id) {
-      axios.post('/api/newSale',this.props.newSale).then(res => {
+      axios.post('/api/newSale',{
+        newSale: this.props.newSale,
+        user_id: this.props.user.id}).then(res => {
         this.props.CLEARSALE()
       })
     } else {

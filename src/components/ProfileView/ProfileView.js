@@ -42,6 +42,7 @@ class ProfileView extends Component {
     }
 
     render() {
+        console.log(this.props)
         let data;
         let show = <UserInfo 
                         user={this.props.user}
