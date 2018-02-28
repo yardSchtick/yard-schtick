@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const initialState = {
-    user: null,
+    user: 
+    null,
     // {
     //     address_city:"Hillsboro",
     //     address_state:"OR",

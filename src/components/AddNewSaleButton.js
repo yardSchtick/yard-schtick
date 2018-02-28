@@ -28,9 +28,9 @@ class AddNewSaleButton extends Component {
 
     buttons = () => {
         if (this.props.button) {
-            return <Link to='/SaleDescription'><button onClick={this.setNewSale}>Submit</button></Link>
+            return <div className="profileButtonContainer"><Link to='/SaleDescription'><button id="profileAddSaleButton" onClick={this.setNewSale}>Submit</button></Link></div>
         } else {
-            return <button onClick={_ => this.setState({ show: true })}>Submit</button>
+            return <div className="profileButtonContainer"><button id="profileAddSaleButton" onClick={_ => this.setState({ show: true })}>Submit</button></div>
         }
     }
 

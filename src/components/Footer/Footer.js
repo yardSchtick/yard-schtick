@@ -33,11 +33,11 @@ class Footer extends Component {
             } else if (url === '/AddInventory') {
                 rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/InventoryList') {
-                rightDisplay = <Link to='/SaleDescription'><button className="rightButton" id="navButton">Back</button></Link>
+                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/SaleDescription') {
                 rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/SaleReview') {
-                rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
+                rightDisplay = <Link to='/SaleDescription'><button className="rightButton" id="navButton">Back</button></Link>
             } else {
                 rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton" onClick={this.props.CLEARSALE}>Profile</button></Link>
             }

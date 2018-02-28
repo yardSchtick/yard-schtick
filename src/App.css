@@ -200,3 +200,229 @@ h2 {
   background: lightgrey;
   color: black;
 }
+
+#smallInput {
+  text-align: center;
+  border: 1px solid lightgray;
+  width: 125px;  
+}
+
+#largeInput {
+  text-align: center;
+  border: 1px solid lightgray;
+  width: 225px;  
+}
+
+.title {
+  margin: 25px 15px 0 15px;
+  font-size: 20px;
+}
+
+.inputContainer {
+  margin: 25px 15px 0 15px
+}
+
+.inputIndividualContainer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.descriptionContainer {
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.desciptionReview {
+  margin-top: 10px;
+  padding: 0;
+}
+
+#descriptionInput {
+  margin-top: 5px;
+  border: 1px solid lightgray;
+  height: 50px;
+  width: 100%;
+  color: grey;
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.subtitle {
+  color: grey;
+  margin: 5px 25px;
+  font-size: 12px;
+}
+
+.characters {
+  margin: 5px 0;
+  color: grey;  
+  font-size: 12px;
+}
+
+#pictureContainer {
+  align-items: baseline;
+}
+
+.reviewBannerSideFade {
+  position: absolute;
+  top: 0;
+  height: 150px;
+  width: 100%;
+  background: linear-gradient(right, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
+}
+
+.reviewBannerBottomFade {
+  position: absolute;
+  top: 0;
+  height: 150px;
+  width: 100%;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.25),white)
+}
+
+.reviewBanner {
+  background-image: url('./assets/yard-sale.jpg');
+  height: 150px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 150%;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.reviewTitle {
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  font-size: 20px;
+}
+
+.clearButton {
+  background: white;
+  border-radius: 0;
+  color: black;
+  box-shadow: none;
+  border-bottom: 1px solid lightgrey;
+}
+
+
+.search-div {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  background: whitesmoke;
+  padding-bottom: 5px;
+}
+
+.search-main {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.sliderButton {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+.search{
+  background-image: url('./assets/search.png');
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-position: center;
+  width: 35px;
+  height: 35px;
+  margin-left: 15px;
+}
+.slider{
+  width: 90%;
+  /* background-color: #236e96 */
+}
+
+.rangeslider__fill{
+  background-color: #236e96 !important;
+  margin-bottom: 0 !important;
+}
+.rangeslider-horizontal .rangeslider__handle:after {
+  background-color: white !important;
+  box-shadow: none !important;
+}
+.p {
+  margin: 0;
+  font-size: 15px;    
+} 
+
+.listView {
+  height: 80.5vh;
+  width: 100%;
+   margin: 72px 0;
+}
+
+.thankYouContainer {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#thankYouTitle {
+  color:rgb(0, 187, 0);
+  margin-bottom: 35px;
+}
+
+.thankYouButton {
+  width: 100px;
+  height: 45px;
+}
+
+.thankYouInner {
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+  margin-top: 100px;
+}
+
+#thankYouSubtitle {
+  text-align: center;
+  margin: 15px;
+}
+
+.saleCard {
+  position: relative;
+}
+
+.saleCardImage {
+  width: 100%;
+  height: 135px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.saleCardContent {
+  position: absolute;
+  bottom: 1px;
+  background: linear-gradient(rgba(0, 0, 0, 0.25),rgba(0, 0, 0, .75));
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid lightgrey;
+  color: lightgrey;
+}
+
+.saleCardFirstLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  margin-bottom: 3px;
+}
+
+.saleCardTime {
+  font-size: 12px;
+}
