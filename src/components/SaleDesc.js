@@ -32,7 +32,7 @@ class SaleDesc extends Component {
     }
 
     render() {
-        console.log(this.props.newSale.id)
+        console.log(this.props)
         return (
             <div>
                 <h2>Sale Description</h2>
@@ -52,8 +52,7 @@ class SaleDesc extends Component {
 
                 <Uploader/>
                 <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
-                <div className="itemPic"></div>
-                <Link to='/SaleReview'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
+                
             </div >
         )
     }
