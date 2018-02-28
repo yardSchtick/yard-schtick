@@ -36,7 +36,7 @@ class Uploader extends Component {
         // Once all the files are uploaded 
         axios.all(uploaders).then(() => {
           alert('image was uploaded')
-        
+          {this.props.ADDDESCRIPT({sale_img: this.state.sale_img})}
         });
       }
 
