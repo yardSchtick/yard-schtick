@@ -28,16 +28,16 @@ class AddNewSaleButton extends Component {
 
     buttons = () => {
         if (this.props.button) {
-            return <Link to='/SaleDescription'><button onClick={this.setNewSale}>Submit</button></Link>
+            return <Link to='/SaleDescription'><button id="submitSaleBtn" onClick={this.setNewSale}>Submit</button></Link>
         } else {
-            return <button onClick={_ => this.setState({ show: true })}>Submit</button>
+            return <button id="submitSaleBtn" onClick={_ => this.setState({ show: true })}>Submit</button>
         }
     }
 
     render() {
 
         return (
-            <div>
+            <div id="submitButton">
                 {this.buttons()}
                 {this.showWarning()}
             </div>
