@@ -45,7 +45,8 @@ class SaleDesc extends Component {
                             value={this.state.sale_name ? this.state.sale_name : ''}
                             onChange={e => this.handleName(e.target.value)} />
                     </div>
-
+                
+            </div >
                     <div className="inputIndividualContainer descriptionContainer">
                         <p>Description:</p>
                         <textarea
@@ -65,7 +66,7 @@ class SaleDesc extends Component {
                     <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name })}>Submit</button></Link>
                     </div>
                 </div>
-            </div>
+            
         )
     }
 }
