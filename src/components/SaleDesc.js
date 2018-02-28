@@ -34,8 +34,8 @@ class SaleDesc extends Component {
     render() {
         return (
             <div>
-                <h1 className="title">Sale Description</h1>
-                <h2 className="subtitle">(this part is optional)</h2>
+                <h1 className="saleDescH1">Sale Description</h1>
+                <p className="subtitle">(this part is optional)</p>
 
                 <div className="inputContainer">
                     <div className="inputIndividualContainer">
