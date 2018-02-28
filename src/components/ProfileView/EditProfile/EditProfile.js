@@ -10,16 +10,23 @@ class EditProfile extends Component {
         super(props)
 
         this.state = {
-            name: props.user.user_name,
-            street: props.user.address_street,
-            city: props.user.address_city,
-            state: props.user.address_state,
-            zip: props.user.address_zip
+            name: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: ''
         }
     }
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
+        this.setState({
+            name : this.props.user.user_name,
+            street : this.props.user.address_street,
+            city : this.props.user.address_city,
+            state : this.props.user.address_state,
+            zip : this.props.user.address_zip
+        })
     }
 
     handleChange = (input, type) => {
@@ -53,7 +60,8 @@ class EditProfile extends Component {
             address_city: city,
             address_state: state,
             address_zip: zip,
-            user_img: this.props.user.user_img
+            user_img: this.props.user.user_img,
+            id: this.props.user.id
         }
 
         axios.put('/api/updateUser', tempUser).then(res => {
@@ -67,12 +75,12 @@ class EditProfile extends Component {
         return (
             <div>
                 <h1>name </h1>
-                <input value={name} 
+                <input value={this.props.user.user_name} 
                     onChange={e => this.handleChange(e.target.value, 'name')}
                     maxlength='25'></input>
 
                 <h1>profile Pic</h1>
-                <div className="itemPic"></div>
+                <div className="itemPic" style={{ backgroundImage: `url('${!this.props.user ? '' : this.props.user.user_img}')` }}></div>
 
                 <h1>address</h1>
                 <input value={street} 
