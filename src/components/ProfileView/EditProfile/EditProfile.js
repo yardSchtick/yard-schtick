@@ -16,7 +16,6 @@ class EditProfile extends Component {
             state: '',
             zip: ''
         }
-        this.getAddress=this.getAddress.bind(this)
     }
 
     componentDidMount() {
@@ -29,18 +28,7 @@ class EditProfile extends Component {
             zip : this.props.user.address_zip
         })
     }
-    getAddress(){
-        axios({
-            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.street},${this.state.city},${this.state.state},${this.state.zip}&key=${process.env.API_KEY}`,
-            method: 'get',
-        }).then((response) => {
-            this.setState({
-                results: response.data
-            })
-            console.log('you got it',response.data.results)
-            console.log('gps spot',response.data.results[0].geometry.location)
-        })
-    }
+    
     handleChange = (input, type) => {
         switch (type) {
             case 'name':
@@ -64,7 +52,6 @@ class EditProfile extends Component {
     }
 
     submitChange = () => {
-        this.getAddress
         var {name, street, city, state, zip} = this.state
 
         var tempUser = {
