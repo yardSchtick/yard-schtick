@@ -14,7 +14,6 @@ import ThankYou from './components/ThankYou'
 import EditProfile from './components/ProfileView/EditProfile/EditProfile'
 import SaleDesc from './components/SaleDesc'
 import EditSale from './components/ProfileView/EditSale/EditSale'
-import Uploader from './components/Uploader'
 
 
 export default class Routes extends Component {
