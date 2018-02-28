@@ -33,6 +33,7 @@ class ProfileView extends Component {
 
     getUserSales() {
         axios.get('/api/getUserSales').then(response => {
+            // console.log("this guy",response)
             this.setState({ sales: response.data })
         })
     }

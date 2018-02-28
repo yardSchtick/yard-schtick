@@ -1,3 +1,4 @@
+const axios = require('axios')
 module.exports = {
 
     // GETS
@@ -38,8 +39,18 @@ module.exports = {
             res.status(200).send(response);
         })
     },
-
-    // POSTS
+    getGeo: (req, res)=>{
+        const db = req.app.get('db');
+        axios({
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.geo}&key=${process.env.API_KEY}`,
+            method: 'get',
+        }).then((response) => {
+            res.status(200).send(response.data.results[0].geometry.location)
+        }).catch((error) =>{
+            console.log(error)
+        })
+    },
+     // POSTS
 
     newSale: (req, res) => {
         const db = req.app.get('db')
@@ -70,9 +81,9 @@ module.exports = {
 
     updateUser: (req, res) => {
         const db = req.app.get('db')        
-        const {id, address_street, address_city, address_state, address_zip, user_name, user_img} = req.body;
+        const {id, address_street, address_city, address_state, address_zip, user_name, user_img, latitude, longitude} = req.body;
 
-        db.users.update_user([address_street, address_city, address_state, address_zip, user_name, user_img, id]).then(result => res.send(result))
+        db.users.update_user([address_street, address_city, address_state, address_zip, user_name, user_img, id, latitude, longitude]).then(result => res.send(result))
     },
     updateInventory: (req, res) => {
         const db= req.app.get('db')
