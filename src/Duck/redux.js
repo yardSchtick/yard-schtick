@@ -2,6 +2,19 @@ import axios from "axios";
 
 const initialState = {
     user: null,
+    // {
+    //     address_city:"Hillsboro",
+    //     address_state:"OR",
+    //     address_street:"1700 NW 138th Ave",
+    //     address_zip:"97229",
+    //     auth_id:null,
+    //     id:1,
+    //     latitude:5,
+    //     longitude:42.54,
+    //     user_id:null,
+    //     user_img:"https://img.memecdn.com/hd-harold_o_4085447.jpg",
+    //     user_name:"Robert Baratheon"
+    // },
     sales: [],
     url: '/mapview',
     newSale: {
@@ -14,7 +27,8 @@ const initialState = {
         sale_name: '',
         sale_desc: ''
     },
-    distance: 20
+    distance: 20,
+    inventory: {}
 }
 
 const DEMO = 'DEMO'
@@ -28,25 +42,40 @@ const CHANGE_DISTANCE = 'CHANGE_DISTANCE'
 const CLEAR_SALE = "CLEAR_SALE"
 const SET_USER = "SET_USER"
 const SET_SALE = "SET_SALE"
+const CURRENT_SALE = 'CURRENT_SALE';
+const GET_ONE_INVENTORY = 'GET_ONE_INVENTORY'
+const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
 
-// export function getDemo(){
-//     return{
-//         type:DEMO,
-//         payload: res.data
-//     }
-// }
-
-export function changeDistance(val){
+export function clearInventory() {
+    return {
+        type: CLEAR_INVENTORY,
+        payload: {}
+    }
+}
+export function getOneInventory(inv) {
+    console.log(inv);
+    return {
+        type: GET_ONE_INVENTORY,
+        payload: inv
+    }
+}
+export function currentSale(sale) {
+    return {
+        type: CURRENT_SALE,
+        payload: sale
+    }
+}
+export function changeDistance(val) {
     return {
         type: CHANGE_DISTANCE,
-        payload: val   
+        payload: val
     }
 }
 export function getSales(longitude, latitude, distance) {
     const data = axios.get(`/api/distance?longitude=${longitude}&latitude=${latitude}&distance=${distance}`)
-    .then(res => {
-        return res.data
-    })
+        .then(res => {
+            return res.data
+        })
     return {
         type: GET_SALES,
         payload: data
@@ -61,7 +90,7 @@ export function GETURL(url) {
 }
 
 export function GETUSER() {
-    
+
     return {
         type: GET_USER,
         payload: axios.get('/auth/me').then()
@@ -110,10 +139,16 @@ export function SETSALE(sale) {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case CLEAR_INVENTORY:
+            return Object.assign({}, state, { inventory: action.payload})
+        case GET_ONE_INVENTORY:
+            return Object.assign({}, state, { inventory: action.payload });
+        case CURRENT_SALE:
+            return Object.assign({}, state, { newSale: action.payload })
         case CHANGE_DISTANCE:
-            return Object.assign({}, state, {distance: action.payload})
+            return Object.assign({}, state, { distance: action.payload })
         case GET_SALES + '_FULFILLED':
-            return Object.assign({}, state, {sales: action.payload});
+            return Object.assign({}, state, { sales: action.payload });
         case DEMO:
             return Object.assign({}, state, { recipeToGet: action.payload });
         case GET_URL:
@@ -129,9 +164,9 @@ export default function reducer(state = initialState, action) {
         case EDIT_SALE:
             return Object.assign({}, state, { newSale: action.payload })
         case SET_USER:
-            return Object.assign({}, state, {user: action.payload})
+            return Object.assign({}, state, { user: action.payload })
         case SET_SALE:
-            return Object.assign({}, state, {sales: action.payload})
+            return Object.assign({}, state, { sales: action.payload })
         case CLEAR_SALE:
             return Object.assign({}, state, {
                 newSale: {
