@@ -17,11 +17,15 @@ class Login extends Component {
 
   render() {
     return (
+      <div>
+        <div className="loginBanner"></div>
+        <div className="loginBannerFade"></div>
       <div id='loginContainer'>
         <a href={process.env.REACT_APP_LOGIN}>
           <button id="loginButton">Login</button>
         </a>
         <Link to='/CreateAccount'><button id="accountButton">Create Account</button></Link>
+      </div>
       </div>
     );
   }

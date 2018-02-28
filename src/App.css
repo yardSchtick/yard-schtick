@@ -167,7 +167,23 @@ h2 {
   justify-content: space-between;
   align-content: center;
   width: 100vw;
-  margin-top: 125px;
+  margin-top: 65px;
+}
+
+.loginBanner {
+  background-image: url('./assets/neighborhood.jpg');
+  height: 150px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 150%;
+}
+
+.loginBannerFade {
+  position: absolute;
+  top: 0;
+  height: 150px;
+  width: 100%;
+  background: linear-gradient(transparent,white)
 }
 
 #loginButton {

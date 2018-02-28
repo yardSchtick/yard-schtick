@@ -3,16 +3,7 @@ module.exports = {
     // GETS
 
     getUser: (req, res) => {
-<<<<<<< HEAD
-        const db = req.app.get('db')
-
-        var { id } = req.session.user
-
-        db.users.find_user(17).then(result => 
-            res.send(result))
-=======
        res.send(req.user)
->>>>>>> master
     },
 
     getAllSales: (req, res) => {
@@ -78,15 +69,8 @@ module.exports = {
     },
 
     updateUser: (req, res) => {
-<<<<<<< HEAD
-        
-        const db = req.app.get('db')
-
-        const {address_street, address_city, address_state, address_zip, user_name, user_img, id} = req.body;
-=======
         const db = req.app.get('db')        
         const {id, address_street, address_city, address_state, address_zip, user_name, user_img} = req.body;
->>>>>>> master
 
         db.users.update_user([address_street, address_city, address_state, address_zip, user_name, user_img, id]).then(result => res.send(result))
     },
