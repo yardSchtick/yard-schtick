@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { GETURL } from '../../Duck/redux'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import './Login.css';
 import '../../assets/neighborhood.jpg';
 
 class Login extends Component {
@@ -18,12 +16,16 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-container">
-        <div className='button-container'>
+      <div>
+        <div className="loginBanner"></div>
+        <div className="loginBannerFade"></div>
+        <div id='loginContainer'>
           <a href={process.env.REACT_APP_LOGIN}>
-            <button className="btn">Login</button>
+            <button id="loginButton">Login</button>
           </a>
-          <Link to='/CreateAccount'><button className="btn">Create Account</button></Link>
+          <a href={process.env.REACT_APP_LOGIN}>
+            <button id="createAcctBtn">Create Account</button>
+          </a>
         </div>
       </div>
     );

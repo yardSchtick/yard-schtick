@@ -47,7 +47,7 @@ module.exports = {
         const {newSale, user_id} = req.body
         const {start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img} = newSale
 
-        db.sale.create_sale([user_id, start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img]).then(result => res.send({gift: 'hello'}))
+        db.sale.create_sale([user_id, start_time, end_time, sale_desc, sale_name, start_date, end_date, sale_img]).then(result => res.send(result))
     },
 
     newInventory: (req, res) => {
@@ -95,9 +95,9 @@ module.exports = {
     
     deleteOneInv: (req, res) => {
         const db = req.app.get('db')
-        const { id, sale_user } = req.body.user
+        const {id} = req.params
 
-        db.inventory.delete_one_inventory([sale_user, id])
+        db.inventory.delete_one_inventory([id])
         .then(() => res.status(200).send())
         .catch(() => res.status(500).send())
     },

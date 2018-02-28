@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
-import { GETURL } from '../Duck/redux';
+import { GETURL, CLEARSALE, getOneInventory } from '../Duck/redux';
 import { Link } from 'react-router-dom';
 
 
@@ -17,12 +17,12 @@ class InventoryList extends Component {
         this.removeInv = this.removeInv.bind(this)
         this.getInv = this.getInv.bind(this)
     }
-    removeInv(){
+    removeInv(id){
         axios({
-            url:'/api/deleteOneInv/',
+            url:`/api/deleteOneInv/${id}`,
             method:'delete',
         }).then((response) =>{
-            console.log('one inv item removed')
+            this.getInv();
         })
     }
     getInv(){
@@ -48,8 +48,7 @@ class InventoryList extends Component {
     }
 
     render() {
-        console.log(this.state.inventory)
-
+        
         if (this.state.inventory) {
             var InventoryCard = this.state.inventory.map((val, index) => (
 
@@ -58,7 +57,8 @@ class InventoryList extends Component {
                     {/* <img src={val.inv_picture}/> */}
                     <p>{val.inv_desc}</p>
                     <p>{val.inv_price}</p>
-                    <button onClick={this.removeInv}>Remove</button>
+                    <Link to='/AddInventory'><button onClick={() => this.props.getOneInventory(val)}>Edit</button></Link>
+                    <button onClick={() => this.removeInv(val.id)}>Remove</button>
                 </div>
             ))
         }
@@ -67,7 +67,7 @@ class InventoryList extends Component {
             <div>
                 {InventoryCard}
                 <Link to='/AddInventory'><button> Add an Item</button></Link>
-                <Link to="/ProfileView"> <button>Finished Adding Items</button> </Link>
+                <Link to="/ProfileView"> <button onClick={this.props.CLEARSALE}>Finished Adding Items</button> </Link>
             </div>
         )
     }
@@ -78,5 +78,5 @@ function mapStateToProps(state) {return {
     newSale: state.newSale
 } }
 
-export default connect(mapStateToProps, { GETURL })(InventoryList)
+export default connect(mapStateToProps, { GETURL, CLEARSALE, getOneInventory })(InventoryList)
 

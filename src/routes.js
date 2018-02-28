@@ -3,7 +3,6 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 
 import MapView from './components/MapView/MapView';
 import Login from './components/Login/Login';
-import CreateAccount from './components/Login/CreateAccount';
 import SaleList from './components/SaleList';
 import ProfileView from './components/ProfileView/ProfileView';
 import AddNewSale from './components/AddNewSale';
@@ -11,9 +10,9 @@ import AddInventory from './components/AddInventory';
 import InventoryList from './components/InventoryList';
 import SaleReview from './components/SaleReview';
 import ThankYou from './components/ThankYou'
-import EditProfile from './components/ProfileView/EditProfile/EditProfile'
 import SaleDesc from './components/SaleDesc'
 import EditSale from './components/ProfileView/EditSale/EditSale'
+import Uploader from './components/Uploader'
 
 
 export default class Routes extends Component {
@@ -24,7 +23,6 @@ export default class Routes extends Component {
         
               <Route component={ MapView } exact path="/MapView" />
               <Route component={ Login } path="/Login"/>
-              <Route component={ CreateAccount } path="/CreateAccount" />
               <Route component={ SaleList } path="/SaleList" />
               <Route component={ ProfileView } path="/ProfileView" />
               <Route component={ AddNewSale } path="/AddNewSale" />
@@ -33,7 +31,6 @@ export default class Routes extends Component {
               <Route component={ SaleReview } path="/SaleReview" />
               <Route component={ ThankYou } path="/ThankYou" />
               <Route component={ SaleDesc } path='/SaleDescription' />
-              <Route component={EditProfile} path="/EditProfile" />
               <Route component={ EditSale } path = "/EditSale" />
 
                 <Redirect to='/MapView' />
