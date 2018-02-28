@@ -2,6 +2,19 @@ import axios from "axios";
 
 const initialState = {
     user: null,
+    // {
+    //     address_city:"Hillsboro",
+    //     address_state:"OR",
+    //     address_street:"1700 NW 138th Ave",
+    //     address_zip:"97229",
+    //     auth_id:null,
+    //     id:1,
+    //     latitude:5,
+    //     longitude:42.54,
+    //     user_id:null,
+    //     user_img:"https://img.memecdn.com/hd-harold_o_4085447.jpg",
+    //     user_name:"Robert Baratheon"
+    // },
     sales: [],
     url: '/mapview',
     newSale: {
