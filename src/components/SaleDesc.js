@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { GETURL, ADDDESCRIPT } from '../Duck/redux';
+import Uploader from './Uploader'
 
 class SaleDesc extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             sale_name: null,
@@ -31,6 +32,7 @@ class SaleDesc extends Component {
     }
 
     render() {
+        console.log(this.props.newSale.id)
         return (
             <div>
                 <h2>Sale Description</h2>
@@ -48,7 +50,7 @@ class SaleDesc extends Component {
                     onChange={e => this.handleDec(e.target.value)} />
                 <p>Characters Left: {this.state.count}</p>
 
-                <div className="itemPic"></div>
+                <Uploader/>
                 <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
             </div >
         )
@@ -56,7 +58,9 @@ class SaleDesc extends Component {
 }
 
 function mapStateToProps(state) { return {
-    newSale: state.newSale
+    newSale: state.newSale,
+
+    user: state.user
 } }
 
 export default connect(mapStateToProps, { GETURL, ADDDESCRIPT })(SaleDesc);
