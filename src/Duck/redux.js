@@ -61,9 +61,10 @@ export function GETURL(url) {
 }
 
 export function GETUSER() {
+    
     return {
         type: GET_USER,
-        payload: axios.get('/api/getUser').then()
+        payload: axios.get('/auth/me').then()
     }
 }
 
@@ -118,7 +119,7 @@ export default function reducer(state = initialState, action) {
         case GET_URL:
             return Object.assign({}, state, { url: action.payload })
         case GET_USER + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload.data[0] })
+            return Object.assign({}, state, { user: action.payload.data })
         case ADD_NEW_SALE:
             var tempObj = Object.assign({}, state.newSale, action.payload)
             return Object.assign({}, state, { newSale: tempObj })

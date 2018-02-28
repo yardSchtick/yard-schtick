@@ -13,15 +13,20 @@ class ThankYou extends Component {
     return (
       <div >
         <h2>Thank You For Your Post!</h2>
-      <Link to="/ViewMap"><button>View Sales</button></Link>
-      <Link to="/ProfileView"><button>View Profile</button></Link>
+        <Link to='/AddInventory'><button>Add Items</button></Link>
+        <div>
+          <Link to="/ViewMap"><button>View Sales</button></Link>
+          <Link to="/ProfileView"><button>View Profile</button></Link>
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) { return {
-  url: state.url
-}}
+function mapStateToProps(state) {
+  return {
+    url: state.url
+  }
+}
 
 export default connect(mapStateToProps, { GETURL })(ThankYou);
