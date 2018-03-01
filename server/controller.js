@@ -70,6 +70,24 @@ module.exports = {
         db.inventory.create_inventory(inv_name, inv_picture, inv_desc, inv_price, sale_id).then(result => res.send(result))
     },
 
+    searchInventory: (req, res) => {
+        const db = req.app.get('db')
+
+        const { longitude, latitude, distance, search } = req.query
+        const id = req.user ? req.user.id : 0;
+        const searchTerm = '%' + search.toUpperCase() + '%'
+        
+        db.inventory.search_inventory(latitude, longitude, distance, id, searchTerm).then(result => {
+            var tempArr = []
+            var searches = result.filter((val,i) => {
+                if (tempArr.indexOf(val.id) === -1) {
+                    tempArr.push(val.id)
+                    return val
+                }
+            })
+            res.send(searches)
+        })
+    },
 
     // PUT
     updateSale: (req, res) => {
