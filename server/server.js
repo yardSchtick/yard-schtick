@@ -123,7 +123,7 @@ app.get('/api/getInventory/:id', ctrl.getInventory)
 // =============END POINTS=============\\
 
 app.get('/api/getUser', ctrl.getUser)
-app.get('/api/getUserSales', ctrl.getUserSales)
+app.get('/api/getUserSales/:id', ctrl.getUserSales)
 app.get('/api/distance', ctrl.getDistance)
 app.get('/api/geo/:geo', ctrl.getGeo)
 
