@@ -18,7 +18,7 @@ class SaleDesc extends Component {
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
         if (this.props.newSale) {
-            this.setState({sale_desc: this.props.newSale.sale_desc, sale_name: this.props.newSale.sale_name})
+            this.setState({ sale_desc: this.props.newSale.sale_desc, sale_name: this.props.newSale.sale_name })
         }
     }
 
@@ -28,15 +28,14 @@ class SaleDesc extends Component {
     }
 
     handleName = (e) => {
-        this.setState({sale_name: e})
+        this.setState({ sale_name: e })
     }
 
     render() {
-        console.log(this.props.newSale.id)
         return (
             <div>
-                <h2>Sale Description</h2>
-                <p>(this part is optional)</p>
+                <h1 className="saleDescH1">Sale Description</h1>
+                <p className="subtitle">(this part is optional)</p>
 
                 <p>Sale Title</p>
                 <input
@@ -54,15 +53,46 @@ class SaleDesc extends Component {
                 {/* <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
                 <div className="itemPic"></div> */}
                 <Link to='/SaleReview'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
+                <div className="inputContainer">
+                    <div className="inputIndividualContainer">
+                        <p>Sale Title:</p>
+                        <input
+                            id="largeInput"
+                            value={this.state.sale_name ? this.state.sale_name : ''}
+                            onChange={e => this.handleName(e.target.value)} />
+                    </div>
+                
             </div >
+                    <div className="inputIndividualContainer descriptionContainer inputContainer">
+                        <p>Description:</p>
+                        <textarea
+                            id="descriptionInput"
+                            placeholder="This should be a general overview of what you're selling"
+                            value={this.state.sale_desc ? this.state.sale_desc : ''}
+                            onChange={e => this.handleDec(e.target.value)} />
+                        <p className="characters">Characters Left: {this.state.count}</p>
+                    </div>
+
+                    <div className="inputIndividualContainer" id="pictureContainer">
+                        <p>Picture:</p>
+                        <Uploader />
+                    </div>
+
+                    <div className="profileButtonContainer">
+                    <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name })}>Submit</button></Link>
+                    </div>
+                </div>
+            
         )
     }
 }
 
-function mapStateToProps(state) { return {
-    newSale: state.newSale,
+function mapStateToProps(state) {
+    return {
+        newSale: state.newSale,
 
-    user: state.user
-} }
+        user: state.user
+    }
+}
 
 export default connect(mapStateToProps, { GETURL, ADDDESCRIPT })(SaleDesc);

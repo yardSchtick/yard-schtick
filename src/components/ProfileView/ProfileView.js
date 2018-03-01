@@ -33,9 +33,8 @@ class ProfileView extends Component {
 
     getUserSales() {
         axios.get(`/api/getUserSales/${this.props.user ? this.props.user.id : ''}`).then(response => {
-            this.setState({ sales: response.data })
-        })
-    }
+    })
+}
 
     toggleEditShow() {
         this.setState({ edit: !this.state.edit })

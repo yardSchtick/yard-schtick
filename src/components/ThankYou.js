@@ -11,12 +11,14 @@ class ThankYou extends Component {
 
   render() {
     return (
-      <div >
-        <h2>Thank You For Your Post!</h2>
-        <Link to='/AddInventory'><button>Add Items</button></Link>
-        <div>
-          <Link to="/ViewMap"><button onClick={this.props.CLEARSALE}>View Sales</button></Link>
-          <Link to="/ProfileView"><button onClick={this.props.CLEARSALE}>View Profile</button></Link>
+      <div className="thankYouContainer">
+        <h1 className="title" id="thankYouTitle">Thank You For Your Post!</h1>
+        <p className="subtitle" id="thankYouSubtitle">Your sale is now visible. You can sit back watch people flood in <br/><br/> or you could always</p>
+        <Link to='/AddInventory'><button id="profileAddSaleButton">Add Items to Your Sale</button></Link>
+        <p className="subtitle" id="thankYouSubtitle">to help people focus in on your sale.</p>
+        <div className="thankYouInner">
+          <Link to="/ViewMap"><button className="thankYouButton">View Sales</button></Link>
+          <Link to="/ProfileView"><button className="thankYouButton">View Profile</button></Link>
         </div>
       </div>
     );

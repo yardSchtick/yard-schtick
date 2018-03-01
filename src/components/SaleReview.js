@@ -61,7 +61,7 @@ class SaleReview extends Component {
 
   submitSale = () => {
     if (!this.props.newSale.id) {
-      axios.post('/api/newSale',{
+      axios.post('/api/newSale', {
         newSale: this.props.newSale,
         user_id: this.props.user.id}).then(res => {
         this.props.currentSale(res.data[0])
@@ -79,22 +79,37 @@ class SaleReview extends Component {
 
     return (
       <div >
-        <Link to="/SaleDescription"><button className="itemPic"></button></Link>
-        <h2>Review</h2>
+        <div>
+          <Link to="/SaleDescription"><button className="reviewBanner"></button></Link>
+          <div className="reviewBannerSideFade"></div>
+          <div className="reviewBannerBottomFade"></div>
+          <h2 className="reviewTitle">Review</h2>
+        </div>
 
-        <p>Address</p>
-        <Link to="/ProfileView"><button>{user.address_street}<br/>{user.address_city},{user.address_state} {user.address_zip}</button></Link>
+        <div className="inputContainer">
+          <div className="inputIndividualContainer">
+            <p>Address:</p>
+            <Link to="/ProfileView"><button className="clearButton">{user.address_street}<br />{user.address_city},{user.address_state} {user.address_zip}</button></Link>
+          </div>
 
-        <p>Time</p>
-        <Link to="/AddNewSale"><button>{this.state.time}</button></Link>
+          <div className="inputIndividualContainer">
+            <p>Time:</p>
+            <Link to="/AddNewSale"><button className="clearButton">{this.state.time}</button></Link>
+          </div>
 
-        <p>Date</p>
-        <Link to="/AddNewSale"><button>{this.state.date}</button></Link>
-        
-        <p>Description</p>
-        <Link to="/SaleDescription"><button>{newSale.sale_desc}</button></Link>
+          <div className="inputIndividualContainer">
+            <p>Date:</p>
+            <Link to="/AddNewSale"><button className="clearButton">{this.state.date}</button></Link>
+          </div>
 
-        <Link to="/ThankYou"><button onClick={this.submitSale}>Looks good to me!</button></Link>
+          <div className="inputIndividualContainer descriptionContainer">
+            <p>Description:</p>
+            <Link to="/SaleDescription"><button className="clearButton desciptionReview">{newSale.sale_desc === '' ? 'No Description' : newSale.sale_desc}</button></Link>
+          </div>
+        </div>
+        <div className="profileButtonContainer">
+          <Link to="/ThankYou"><button id="profileAddSaleButton" onClick={this.submitSale}>Looks good to me!</button></Link>
+        </div>
       </div>
     );
   }

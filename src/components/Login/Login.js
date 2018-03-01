@@ -24,7 +24,7 @@ class Login extends Component {
             <button id="loginButton">Login</button>
           </a>
           <a href={process.env.REACT_APP_LOGIN}>
-            <button className="btn">Create Account</button>
+            <button id="accountButton">Create Account</button>
           </a>
         </div>
       </div>
