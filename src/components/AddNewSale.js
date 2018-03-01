@@ -69,22 +69,22 @@ class AddNewSale extends Component {
       <div >
         <h1>Sale Time</h1>
         <div className="timeDate">
-          <label>Start Time: <span class="glyphicon glyphicon-time" /></label>
+          <label>Start Time: <span className="glyphicon glyphicon-time" /></label>
           <input type='time'
             value={this.state.start_time ? this.state.start_time : ''}
             onChange={e => this.handleChange(e.target.value, 'start')} /><br />
 
-          <label>End Time: <span class="glyphicon glyphicon-time" /></label>
+          <label>End Time: <span className="glyphicon glyphicon-time" /></label>
           <input type='time'
             value={this.state.end_time ? this.state.end_time : ''}
             onChange={e => this.handleChange(e.target.value, 'end')} />
 
-          <label>Start Date: <span class="glyphicon glyphicon-calendar" /></label>
+          <label>Start Date: <span className="glyphicon glyphicon-calendar" /></label>
           <input type='date'
             value={this.state.start_date ? this.state.start_date : ''}
             onChange={e => this.handleChange(e.target.value, 'start date')} />
 
-          <label>End Date <span class="glyphicon glyphicon-calendar" /></label>
+          <label>End Date <span className="glyphicon glyphicon-calendar" /></label>
           <input type='date'
             value={this.state.end_date ? this.state.end_date : ''}
             onChange={e => this.handleChange(e.target.value, 'end date')} />

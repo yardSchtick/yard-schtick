@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL, CLEARSALE, getOneInventory } from '../Duck/redux';
 import { Link } from 'react-router-dom';
