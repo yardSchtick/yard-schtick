@@ -75,6 +75,7 @@ class SaleReview extends Component {
   }
 
   render() {
+    console.log(this.props)
     var { user, newSale } = this.props
 
     return (
@@ -108,7 +109,11 @@ class SaleReview extends Component {
           </div>
         </div>
         <div className="profileButtonContainer">
+          {!this.props.newSale.id ?
           <Link to="/ThankYou"><button id="profileAddSaleButton" onClick={this.submitSale}>Looks good to me!</button></Link>
+          :
+          <Link to='/EditThankYou'><button id="profileAddSaleButton" onClick={this.submitSale}>Looks good to me!</button></Link>
+          }
         </div>
       </div>
     );
