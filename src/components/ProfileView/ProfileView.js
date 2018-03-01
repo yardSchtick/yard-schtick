@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
-import { GETURL, GETUSER } from '../../Duck/redux';
+import { GETURL, GETUSER, getUserSales } from '../../Duck/redux';
 import SaleHistory from './../SaleHistory/SaleHistory';
 import { Link } from 'react-router-dom'
 import EditProfile from './EditProfile'
 import UserInfo from './UserInfo'
 
 class ProfileView extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             sales: [],
@@ -21,44 +21,35 @@ class ProfileView extends Component {
     }
 
     componentDidMount() {
-        this.props.GETUSER()
-        this.getUserSales()
+        this.props.GETUSER().then(() => {
+            axios.get(`/api/getUserSales/${this.props.user.id}`).then(response => {
+                this.setState({ sales: response.data })
+                this.props.getUserSales(response.data)
+            })
+        })
         this.props.GETURL(this.props.match.url)
     }
 
-    componentWillReceiveProps() {
-        this.getUserSales()
-        this.props.GETUSER()
-    }
 
     getUserSales() {
-        axios.get('/api/getUserSales').then(response => {
-            this.setState({ sales: response.data })
-        })
-    }
+        axios.get(`/api/getUserSales/${this.props.user ? this.props.user.id : ''}`).then(response => {
+    })
+}
 
-    toggleEditShow () {
-        this.setState({edit: !this.state.edit})
+    toggleEditShow() {
+        this.setState({ edit: !this.state.edit })
     }
 
     render() {
-        let data;
-        let show = <UserInfo 
-                        user={this.props.user}
-                        toggleEditShow={this.toggleEditShow}/>
+       
+        let show = <UserInfo
+            user={this.props.user}
+            toggleEditShow={this.toggleEditShow} />
 
-        if (this.state.sales) {
-            data = this.state.sales.map((e, i) => {
-                return (
-                    <SaleHistory key={i} data={e} reget={this.getUserSales} />
-                )
-            })
-        }
-
-        if(this.state.edit) {
+        if (this.state.edit) {
             show = <EditProfile
-                        user={this.props.user}
-                        toggleEditShow={this.toggleEditShow}/>      
+                user={this.props.user}
+                toggleEditShow={this.toggleEditShow} />
         }
 
         return (
@@ -72,7 +63,7 @@ class ProfileView extends Component {
                 <div className="saleDisplay">
                     <h1 id="userName">Sale History</h1>
                     <div className="dataDisplay">
-                        {data}
+                    <SaleHistory />
                     </div>
                 </div>
             </div>
@@ -84,7 +75,8 @@ function mapStateToProps(state) {
     return {
         url: state.url,
         user: state.user,
-        sales: state.sales
+        sales: state.sales,
+        userSales: state.userSales
     }
 }
-export default connect(mapStateToProps, { GETURL, GETUSER })(ProfileView);
+export default connect(mapStateToProps, { GETURL, GETUSER, getUserSales })(ProfileView);

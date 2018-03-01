@@ -28,7 +28,7 @@ class EditProfile extends Component {
             zip : this.props.user.address_zip
         })
     }
-
+    
     handleChange = (input, type) => {
         switch (type) {
             case 'name':

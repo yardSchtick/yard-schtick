@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
+// import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL, getSales } from '../Duck/redux';
 import Search from './Search/SearchBar';

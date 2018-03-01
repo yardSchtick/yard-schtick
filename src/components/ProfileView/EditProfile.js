@@ -12,10 +12,28 @@ class EditProfile extends Component {
             street: props.user.address_street,
             city: props.user.address_city,
             state: props.user.address_state,
-            zip: props.user.address_zip
+            zip: props.user.address_zip,
+            latitude: '',
+            longitude: '',
         }
+        this.getAddress = this.getAddress.bind(this);
     }
-
+    getAddress(){
+        let getGeoForAddress = `${this.state.street},${this.state.city},${this.state.state},${this.state.zip}`
+        axios({
+             url:`/api/geo/${getGeoForAddress}`,
+             method: 'get',
+        }).then((response) => {
+            this.setState({
+                latitude: response.data.lat,
+                longitude: response.data.lng
+            })
+            console.log('you got it',response.data)
+            console.log('check state',this.state)
+            // console.log('gps spot',response.data.results[0].geometry.location)
+            this.submitChange()
+        })
+    }
     handleChange = (input, type) => {
         switch (type) {
             case 'name':
@@ -48,7 +66,9 @@ class EditProfile extends Component {
             address_city: city,
             address_state: state,
             address_zip: zip,
-            user_img: this.props.user.user_img
+            user_img: this.props.user.user_img,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude
         }
 
         axios.put('/api/updateUser', tempUser).then(res => {
@@ -59,6 +79,7 @@ class EditProfile extends Component {
     }
 
     render() {
+        
         var { name, street, city, state, zip } = this.state
 
         return (
@@ -90,7 +111,7 @@ class EditProfile extends Component {
                                 onChange={e => this.handleChange(e.target.value, 'zip')}
                                 maxLength='15'></input>
                 
-                        <button id="updateProfileButton" onClick={this.submitChange}>Save Changes</button>
+                        <button id="updateProfileButton" onClick={this.getAddress}>Save Changes</button>
                 </div>
 
 

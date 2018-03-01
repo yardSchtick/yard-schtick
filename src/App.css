@@ -1,7 +1,19 @@
+.app {
+  height: 100vh;
+  position: relative;
+  overflow: scroll;
+}
+
 h1 {
   font-size: 2em;
   line-height: 2em;
   margin: 0.5em;
+}
+
+.saleDescH1 {
+  font-size: 2em;
+  /* line-height: 2em; */
+  margin: 0.5em 0.5em -0.3em 0.5em;
 }
 
 a {
@@ -16,17 +28,18 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
   height: 54px;
-  box-shadow: -1px -1px 1px grey
+  box-shadow: -1px -1px 1px grey;
 }
 
 .itemPic {
   height: 150px;
   width: 150px;
   border: 1px solid black;
-  box-shadow: 1px 1px 1px grey
+  box-shadow: 1px 1px 1px grey;
+  margin: 15px;
 }
 
 button {
@@ -107,7 +120,7 @@ input {
 
 .dataDisplay {
   margin: 0 10px 10px 10px;
-  max-height: 450px;
+  max-height: 225px;
   overflow-y: scroll;
 }
 
@@ -236,13 +249,14 @@ h2 {
 }
 
 .inputIndividualContainer {
-  margin-top: 25px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .descriptionContainer {
+  display: flex;
   flex-direction: column;
   align-items: baseline;
 }
@@ -258,13 +272,13 @@ h2 {
   height: 50px;
   width: 100%;
   color: grey;
-  font-size: 17px;
+  font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .subtitle {
   color: grey;
-  margin: 5px 25px;
+  margin: 0em 1.4em;
   font-size: 12px;
 }
 
@@ -276,6 +290,7 @@ h2 {
 
 #pictureContainer {
   align-items: baseline;
+  margin: 25px 15px 0 15px;
 }
 
 .reviewBannerSideFade {
@@ -444,6 +459,28 @@ h2 {
   margin-left: 10px;
   margin-top: 10px;
 }
+
+.addItemSaleContainer {
+  height: 120vh;
+}
+
+.addItemSale {
+  margin: 15px 15px 0px 15px;
+  width: 90%;
+}
+
+.addItemButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.addItemsButton {
+  width: 40%;
+  padding: 20px;
+}
+
 .glyphicon-time, .glyphicon-calendar {
   color: #236e96;
 }
@@ -471,4 +508,28 @@ h2 {
   margin: 0;
   padding: 0;
   font-size: 400;
+
+}
+@media (max-height: 640px) {
+  .profileButtonContainer {
+    margin: 27px 0px;
+  }
+}
+
+@media (max-height: 640px) {
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+  /* .addItemSaleContainer {
+    height: 100vh;
+  } */
+}
+
+@media (min-height: 812px) {
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+  .addItemSaleContainer {
+    height: 100vh;
+  }
 }
