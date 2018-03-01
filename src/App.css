@@ -1,6 +1,7 @@
 .app {
   height: 100vh;
   position: relative;
+  overflow: scroll;
 }
 
 h1 {
@@ -37,7 +38,8 @@ a {
   height: 150px;
   width: 150px;
   border: 1px solid black;
-  box-shadow: 1px 1px 1px grey
+  box-shadow: 1px 1px 1px grey;
+  margin: 15px;
 }
 
 button {
@@ -455,6 +457,28 @@ h2 {
   margin-left: 10px;
   margin-top: 10px;
 }
+
+.addItemSaleContainer {
+  height: 120vh;
+}
+
+.addItemSale {
+  margin: 15px 15px 0px 15px;
+  width: 90%;
+}
+
+.addItemButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.addItemsButton {
+  width: 40%;
+  padding: 20px;
+}
+
 .glyphicon-time, .glyphicon-calendar {
   color: #236e96;
 }
@@ -475,5 +499,23 @@ h2 {
 @media (max-height: 640px) {
   .profileButtonContainer {
     margin: 27px 0px;
+  }
+}
+
+@media (max-height: 640px) {
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+  /* .addItemSaleContainer {
+    height: 100vh;
+  } */
+}
+
+@media (min-height: 812px) {
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+  .addItemSaleContainer {
+    height: 100vh;
   }
 }
