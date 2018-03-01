@@ -37,22 +37,7 @@ class SaleDesc extends Component {
                 <h1 className="saleDescH1">Sale Description</h1>
                 <p className="subtitle">(this part is optional)</p>
 
-                <p>Sale Title</p>
-                <input
-                    value={this.state.sale_name ? this.state.sale_name : ''}
-                    onChange={e => this.handleName(e.target.value)} />
-                    
-                <p>Description:</p>
-                <input 
-                    placeholder="This should be a general overview of what you're selling"
-                    value={this.state.sale_desc ? this.state.sale_desc : ''}
-                    onChange={e => this.handleDec(e.target.value)} />
-                <p>Characters Left: {this.state.count}</p>
-
-                <Uploader/>
-                {/* <Link to='/InventoryList'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
-                <div className="itemPic"></div> */}
-                <Link to='/SaleReview'><button onClick={_=>this.props.ADDDESCRIPT({sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
+            
                 <div className="inputContainer">
                     <div className="inputIndividualContainer">
                         <p>Sale Title:</p>
@@ -79,7 +64,7 @@ class SaleDesc extends Component {
                     </div>
 
                     <div className="profileButtonContainer">
-                    <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name })}>Submit</button></Link>
+                    <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
                     </div>
                 </div>
             
