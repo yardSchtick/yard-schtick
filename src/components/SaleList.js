@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL, getSales } from '../Duck/redux';
 import Search from './Search/SearchBar';
+import AnimatedWrapper from './AnimatedWrapper'
 
 class SaleList extends Component {
 
@@ -60,7 +60,7 @@ class SaleList extends Component {
             let time = this.formatTime(val.start_time, val.end_time)
             let descrip = this.formatDescrip(val.sale_desc)
             
-            return (<div key={index} className="saleCard">
+            return (<div key={val.id} className="saleCard">
                 <img className="saleCardImage" src={val.sale_img} alt="" />
                 <div className="saleCardContent">
                     <div className="saleCardFirstLine">
@@ -93,4 +93,6 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { GETURL, getSales })(SaleList)
+var connect = connect(mapStateToProps, { GETURL, getSales })(SaleList)
+
+export default AnimatedWrapper(connect)

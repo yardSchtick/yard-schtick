@@ -8,6 +8,7 @@ import './MapView.css';
 import bluePin from '../../images/pushpin-blue.png'
 import greenPin from '../../images/pushpin-green.png'
 import SearchBar from '../Search/SearchBar';
+import AnimatedWrapper from '../AnimatedWrapper'
 
 class MapView extends Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class MapView extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      sales: [],
       open: false,
       markerInfo: {},
       lat: null,
@@ -27,7 +27,7 @@ class MapView extends Component {
   }
 
   onCenterChanged(center){
-    console.log(center);
+   console.log(center)
   }
   onOpenModal(idx) {
     this.setState({
@@ -56,7 +56,6 @@ class MapView extends Component {
 
   
   render() {
-    console.log(this.props.sales)
     const { open } = this.state;
     const style = {
       height: '515px',
@@ -65,7 +64,7 @@ class MapView extends Component {
     }
     const markers = this.props.sales.map((e, i) => {
       return (
-        <Marker key={i}
+        <Marker key={e.id}
           google={this.props.google}
           onClick={_ => this.onOpenModal(i)}
           title={e.sale_desc}
@@ -79,8 +78,6 @@ class MapView extends Component {
       )
     })
     const miles = this.props.distance * 1000;
-    console.log('miles', miles)
-    console.log('distance', this.props.distance);
     const MyMapComponent = withScriptjs(withGoogleMap((props) =>
       <div>
         <GoogleMap
@@ -150,7 +147,8 @@ function mapStateToProps(state) {
 }
 
 var MapConnect = connect(mapStateToProps, { GETURL, getSales })(MapView)
+var Animated = AnimatedWrapper(MapConnect)
 
 export default GoogleApiWrapper({
   apiKey: process.env.API_KEY
-})(MapConnect);
+})(Animated);
