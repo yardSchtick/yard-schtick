@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL, clearInventory } from '../Duck/redux';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 class AddInventory extends Component {

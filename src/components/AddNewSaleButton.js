@@ -21,7 +21,7 @@ class AddNewSaleButton extends Component {
 
     showWarning = () => {
         if (this.state.show) {
-            return <p>Please Fill Out Entire Form</p>
+            return <p className="warning">Please Fill Out Entire Form</p>
         }
         return <div></div>
     }

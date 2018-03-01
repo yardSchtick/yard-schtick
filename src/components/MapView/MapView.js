@@ -127,7 +127,7 @@ class MapView extends Component {
 
           <Modal open={open} onClose={this.onCloseModal} little>
             <h1>{this.state.markerInfo.sale_name}</h1>
-            <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale' />
+            <img className='modal-img' src={this.state.markerInfo.sale_img} ref='picture of garage sale' alt="" />
             <h2>{this.state.markerInfo.sale_desc}</h2>
             <h3>{this.state.markerInfo.address_street}</h3>
             <h3>{this.state.markerInfo.address_city}</h3>

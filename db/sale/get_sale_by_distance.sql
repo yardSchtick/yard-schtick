@@ -42,5 +42,7 @@ where
             sin(radians(latitude))
         )
     ) < $3
+    and
+    sale.sale_user != $4
 ORDER BY
     distance

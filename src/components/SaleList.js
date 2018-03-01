@@ -59,9 +59,9 @@ class SaleList extends Component {
         var saleCard = this.props.sales.map((val, index) => {
             let time = this.formatTime(val.start_time, val.end_time)
             let descrip = this.formatDescrip(val.sale_desc)
-
+            
             return (<div key={index} className="saleCard">
-                <img className="saleCardImage" src={val.sale_img} />
+                <img className="saleCardImage" src={val.sale_img} alt="" />
                 <div className="saleCardContent">
                     <div className="saleCardFirstLine">
                         <p>{val.address_street} {val.address_city}</p>

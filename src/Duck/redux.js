@@ -47,6 +47,7 @@ const SET_SALE = "SET_SALE"
 const CURRENT_SALE = 'CURRENT_SALE';
 const GET_ONE_INVENTORY = 'GET_ONE_INVENTORY'
 const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
+const ADD_SALE_IMAGE = 'ADD_SALE_IMAGE'
 const USER_SALES = 'USER_SALES'
 
 export function getUserSales(sales){
@@ -57,6 +58,12 @@ export function getUserSales(sales){
     }
 }
 
+export function addSaleImage(img_url){
+    return {
+        type: ADD_SALE_IMAGE,
+        payload: img_url
+    }
+}
 export function clearInventory() {
     return {
         type: CLEAR_INVENTORY,
@@ -147,8 +154,13 @@ export function SETSALE(sale) {
     }
 }
 
+
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case ADD_SALE_IMAGE:
+            var newImg = Object.assign({}, state.newSale, {sale_img:action.payload })
+            return Object.assign({}, state, { newSale: newImg})
         case USER_SALES:
              return Object.assign({}, state, {userSales: action.payload})
              
@@ -173,7 +185,7 @@ export default function reducer(state = initialState, action) {
             var tempObj = Object.assign({}, state.newSale, action.payload)
             return Object.assign({}, state, { newSale: tempObj })
         case ADD_DESCRIPT:
-            var descObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_img: action.payload.sale_img }, { sale_name: action.payload.sale_name })
+            var descObj = Object.assign({}, state.newSale, { sale_desc: action.payload.sale_desc }, { sale_name: action.payload.sale_name })
             return Object.assign({}, state, { newSale: descObj })
         case EDIT_SALE:
             return Object.assign({}, state, { newSale: action.payload })
