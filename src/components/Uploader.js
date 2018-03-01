@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { ADDDESCRIPT } from '../Duck/redux'
+import { GETURL, addSaleImage } from '../Duck/redux'
 
 
 class Uploader extends Component {
@@ -12,6 +12,8 @@ class Uploader extends Component {
         sale_img: null
       }
     }
+
+    
     handleDrop = files => {
         // Push all the axios request promise into a single array
         const uploaders = files.map(file => {
@@ -36,7 +38,7 @@ class Uploader extends Component {
         // Once all the files are uploaded 
         axios.all(uploaders).then(() => {
           alert('image was uploaded')
-          {this.props.ADDDESCRIPT({sale_img: this.state.sale_img})}
+          this.props.addSaleImage( this.state.sale_img )
         });
       }
 
@@ -44,9 +46,9 @@ class Uploader extends Component {
       
         return (
           <div>
-            <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+            <Dropzone onDrop={ this.handleDrop } multiple accept="image/*">
                         <p>Drop your files or click here to upload</p>
-                </Dropzone>
+            </Dropzone>
                 
           </div>
 
@@ -59,4 +61,4 @@ function mapStateToProps(state){ return {
    newSale: state.newSale
 }}
 
-export default connect(mapStateToProps, {ADDDESCRIPT}) (Uploader); 
+export default connect(mapStateToProps, {addSaleImage}) (Uploader); 
