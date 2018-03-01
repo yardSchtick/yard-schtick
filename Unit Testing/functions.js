@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 module.exports = {
     getAllSales: () => {
@@ -24,5 +24,24 @@ module.exports = {
     },
     formatTime: (start, end) => {
         return start.split('').splice(0,5).join('') + ' - ' + end.split('').splice(0,5).join('')
+    },
+    getAddress:(str) =>{
+        let getGeoForAddress = str
+        return axios.get(`/api/geo/${getGeoForAddress}`).then((response) => {
+            console.log(response.data)
+            return response.data
+        })
+    },
+    getAddress2:(str) =>{
+        let getGeoForAddress = str
+        return axios.get(`/api/geo/${getGeoForAddress}`).then((response) => {
+            return response.data.results[0].geometry.location
+        })
+    },
+    getAddress3:(str) =>{
+        let getGeoForAddress = str
+        return axios.get(`/api/geo/${getGeoForAddress}`).then((response) => {
+            return response.data.results[0].geometry.location.lat
+        })
     }
 }
