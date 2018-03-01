@@ -59,9 +59,9 @@ class MapView extends Component {
     console.log(this.props.sales)
     const { open } = this.state;
     const style = {
-      height: '80.5vh',
+      height: '515px',
       width: '100%',
-      margin: '72px 0'
+      margin: '72px 0 54px 0'
     }
     const markers = this.props.sales.map((e, i) => {
       return (

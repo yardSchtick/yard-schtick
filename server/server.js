@@ -125,6 +125,7 @@ app.get('/api/getInventory/:id', ctrl.getInventory)
 app.get('/api/getUser', ctrl.getUser)
 app.get('/api/getUserSales/:id', ctrl.getUserSales)
 app.get('/api/distance', ctrl.getDistance)
+app.get('/api/search', ctrl.searchInventory)
 app.get('/api/geo/:geo', ctrl.getGeo)
 
 app.post('/api/newSale', ctrl.newSale)

@@ -3,7 +3,8 @@ import Slider from 'react-rangeslider'
 import '../../../node_modules/react-rangeslider/lib/index.css'
 // import axios from 'axios';
 import { connect } from 'react-redux';
-import { getSales, changeDistance } from '../../Duck/redux';
+import { getSales, changeDistance, SETSEARCH } from '../../Duck/redux';
+import Dropdown from './SearchDropdown'
 
 
 class SearchBar extends Component {
@@ -11,12 +12,16 @@ class SearchBar extends Component {
         super(props)
         this.state = {
             value: 20,
-            sales: []
-
+            sales: [],
+            drop: false
         }
     }
 
-    handleChangeStart = () => {
+    componentDidMount() {
+        this.setState({
+            value: this.props.distance
+        })
+
     };
 
     handleChange = value => {
@@ -29,36 +34,42 @@ class SearchBar extends Component {
     handleChangeComplete = () => {
         this.props.getSales(this.props.longitude, this.props.latitude, this.state.value);
     };
-    componentDidMount() {
-        this.setState({
-            value: this.props.distance
-        })
 
-    };
-
+    toggleSearch = () => {
+        this.setState({ drop: !this.state.drop })
+        this.props.getSales(this.props.longitude, this.props.latitude, this.state.value);        
+        document.getElementById('searchInput').value=''
+    }
 
     render() {
         return (
-            <div className='search-main'>
-                <div className='search-div'>
-                    <div className='sliderButton'>
-                        {/* <input className='search' placeholder='Search' /> */}
-                        <Slider
-                            min={0}
-                            max={100}
-                            value={this.props.distance}
-                            onChangeStart={this.handleChangeStart}
-                            onChange={this.handleChange}
-                            onChangeComplete={this.handleChangeComplete}
-                            className='slider'
-                        />
-                        <button className='search'></button>
+            <div className="search-outer">
+                <div className='search-main'>
+                    <div className='search-div'>
+                        <div className='sliderButton'>
+                            {/* <input className='search' placeholder='Search' /> */}
+                            <Slider
+                                min={0}
+                                max={100}
+                                value={this.props.distance}
+                                onChangeStart={this.handleChangeStart}
+                                onChange={this.handleChange}
+                                onChangeComplete={this.handleChangeComplete}
+                                className='slider'
+                            />
+                            <button className='search' onClick={this.toggleSearch}></button>
+                        </div>
+                        <p className='p'>DISTANCE: {this.props.distance} miles</p>
                     </div>
-                    <p className='p'>DISTANCE: {this.props.distance} miles</p>
                 </div>
-
+                <Dropdown
+                    show={this.state.drop}
+                    long={this.props.longitude}
+                    lat={this.props.latitude}
+                    distance={this.state.value}
+                    SETSEARCH={this.props.SETSEARCH}
+                    getSales={this.props.getSales} />
             </div>
-
         )
     }
 }
@@ -69,4 +80,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { getSales, changeDistance })(SearchBar);
+export default connect(mapStateToProps, { getSales, changeDistance, SETSEARCH })(SearchBar);
