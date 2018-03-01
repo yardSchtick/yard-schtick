@@ -47,7 +47,7 @@ class SaleDesc extends Component {
                     </div>
                 
             </div >
-                    <div className="inputIndividualContainer descriptionContainer">
+                    <div className="inputIndividualContainer descriptionContainer inputContainer">
                         <p>Description:</p>
                         <textarea
                             id="descriptionInput"
