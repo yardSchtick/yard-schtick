@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
-import {GETURL} from './../../../Duck/redux';
+// import {GETURL} from './../../../Duck/redux';
 import { connect } from 'react-redux';
 
 
