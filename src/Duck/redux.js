@@ -29,7 +29,8 @@ const initialState = {
         sale_desc: ''
     },
     distance: 20,
-    inventory: {}
+    inventory: {},
+    userSales: []
 }
 
 const DEMO = 'DEMO'
@@ -47,6 +48,15 @@ const CURRENT_SALE = 'CURRENT_SALE';
 const GET_ONE_INVENTORY = 'GET_ONE_INVENTORY'
 const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
 const ADD_SALE_IMAGE = 'ADD_SALE_IMAGE'
+const USER_SALES = 'USER_SALES'
+
+export function getUserSales(sales){
+    
+    return {
+        type: USER_SALES,
+        payload: sales
+    }
+}
 
 export function addSaleImage(img_url){
     return {
@@ -61,7 +71,6 @@ export function clearInventory() {
     }
 }
 export function getOneInventory(inv) {
-    console.log(inv);
     return {
         type: GET_ONE_INVENTORY,
         payload: inv
@@ -152,6 +161,10 @@ export default function reducer(state = initialState, action) {
         case ADD_SALE_IMAGE:
             var newImg = Object.assign({}, state.newSale, {sale_img:action.payload })
             return Object.assign({}, state, { newSale: newImg})
+        case USER_SALES:
+             return Object.assign({}, state, {userSales: action.payload})
+             
+             
         case CLEAR_INVENTORY:
             return Object.assign({}, state, { inventory: action.payload})
         case GET_ONE_INVENTORY:

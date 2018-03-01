@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL, clearInventory } from '../Duck/redux';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 class AddInventory extends Component {
@@ -67,24 +66,27 @@ class AddInventory extends Component {
   }
   render() {
     return (
-      <div >
-        <h2>Add Item to Sale</h2>
-        <p>Item Name</p>
-        <input
+      <div className="addItemSaleContainer">
+        <h1>Add Item to Sale</h1>
+        <label className="addItemSale">Item Name</label>
+        <input className="addItemSale"
           placeholder={this.props.inventory ? this.state.inv_name : ''}
           onBlur={e => this.handleInput(e.target.value, 'name')} />
-        <p>Picture</p>
+        <p className="addItemSale">Picture</p>
         <div className="itemPic"></div>
-        <p>Item Description</p>
-        <input
+        <label className="addItemSale">Item Description</label>
+        <input className="addItemSale"
           placeholder={this.props.inventory ? this.state.inv_desc : ''}
           onChange={e => this.handleDec(e.target.value)} />
-        <p>Character's Left: {this.state.count}</p>
-        <p>Price</p>
-        <input type="number" placeholder={this.state.inv_price}
+        <p className="addItemSale">Character's Left: {this.state.count}</p>
+        <br /><br />
+        <label className="addItemSale">Price</label>
+        <input className="addItemSale" type="number" placeholder={this.state.inv_price}
           placeholder={this.props.inventory ? this.state.inv_price : ''}
           onBlur={e => this.handleInput(e.target.value, 'price')} />
-        <button onClick={this.addItem}>Add Item</button>
+        <div className="addItemButtonContainer">
+          <button className="addItemsButton" onClick={this.addItem}>Add Item</button>
+        </div>
       </div>
     );
   }

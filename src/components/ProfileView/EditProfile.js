@@ -4,16 +4,29 @@ import { SETUSER } from './../../Duck/redux';
 import { connect } from 'react-redux';
 
 class EditProfile extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = {
-            name: props.user.user_name,
-            street: props.user.address_street,
-            city: props.user.address_city,
-            state: props.user.address_state,
-            zip: props.user.address_zip
+            name: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+            latitude: '',
+            longitude: '',
         }
+        this.getAddress = this.getAddress.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            name: this.props.user.user_name,
+            street: this.props.user.address_street,
+            city: this.props.user.address_city,
+            state: this.props.user.address_state,
+            zip: this.props.user.address_zip
+        })
     }
 
     handleChange = (input, type) => {
@@ -48,17 +61,30 @@ class EditProfile extends Component {
             address_city: city,
             address_state: state,
             address_zip: zip,
-            user_img: this.props.user.user_img
+            user_img: this.props.user.user_img,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude
         }
 
         axios.put('/api/updateUser', tempUser).then(res => {
-            this.props.SETUSER(res.data)
+            this.props.SETUSER(res.data[0])
         })
 
         this.props.toggleEditShow()
     }
 
+    getAddress() {
+        let getGeoForAddress = `${this.state.street},${this.state.city},${this.state.state},${this.state.zip}`
+        axios.get(`/api/geo/${getGeoForAddress}`).then((response) => {
+            this.setState({
+                latitude: response.data.lat,
+                longitude: response.data.lng
+            })
+            this.submitChange()
+        })
+    }
     render() {
+
         var { name, street, city, state, zip } = this.state
 
         return (
@@ -66,31 +92,36 @@ class EditProfile extends Component {
                 <div className="userPic"></div>
                 <div className="userInfo">
                     <input value={name}
-                            placeholder='Name'
-                            onChange={e => this.handleChange(e.target.value, 'name')}
-                            maxLength='25'></input>
+                        id="profileInput"
+                        placeholder='Name'
+                        onChange={e => this.handleChange(e.target.value, 'name')}
+                        maxLength='25'></input>
 
-                        <input value={street}
-                            placeholder='Street Address'
-                            onChange={e => this.handleChange(e.target.value, 'street')}
-                            maxLength='50'></input>
+                    <input value={street}
+                        id="profileInput"
+                        placeholder='Street Address'
+                        onChange={e => this.handleChange(e.target.value, 'street')}
+                        maxLength='50'></input>
 
-                            <input value={city}
-                                placeholder='City'
-                                onChange={e => this.handleChange(e.target.value, 'city')}
-                                maxLength='25'></input>
+                    <input value={city}
+                        id="profileInput"
+                        placeholder='City'
+                        onChange={e => this.handleChange(e.target.value, 'city')}
+                        maxLength='25'></input>
 
-                            <input value={state} 
-                                placeholder='State'
-                                onChange={e => this.handleChange(e.target.value, 'state')}
-                                maxLength='2'></input>
+                    <input value={state}
+                        id="profileInput"
+                        placeholder='State'
+                        onChange={e => this.handleChange(e.target.value, 'state')}
+                        maxLength='2'></input>
 
-                            <input value={zip}
-                                placeholder='Zip Code'
-                                onChange={e => this.handleChange(e.target.value, 'zip')}
-                                maxLength='15'></input>
-                
-                        <button id="updateProfileButton" onClick={this.submitChange}>Save Changes</button>
+                    <input value={zip}
+                        id="profileInput"
+                        placeholder='Zip Code'
+                        onChange={e => this.handleChange(e.target.value, 'zip')}
+                        maxLength='15'></input>
+
+                    <button id="updateProfileButton" onClick={this.getAddress}>Save Changes</button>
                 </div>
 
 
