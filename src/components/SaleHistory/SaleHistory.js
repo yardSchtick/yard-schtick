@@ -44,7 +44,7 @@ class SaleHistory extends Component {
         const data = this.props.userSales.map((e, i) => {
             var time = this.formatDate(e.start_date)
             return (<div key={i} className="saleInfo">
-                <h2 id="item">{time}</h2>
+                <h2 id="item" onClick={() => this.props.EDITSALE(this.props.userSales[i])}><Link to="/InventoryList">{time}</Link></h2>
                 <div className="saleInfoButtons">
                     <Link to="/AddNewSale" >
                         <button id="itemButton" onClick={() => this.props.EDITSALE(this.props.data)}>Edit</button>

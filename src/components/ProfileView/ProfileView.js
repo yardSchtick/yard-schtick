@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
-import { GETURL, GETUSER, getUserSales } from '../../Duck/redux';
+import { GETURL, GETUSER, getUserSales, CLEARSALE } from '../../Duck/redux';
 import SaleHistory from './../SaleHistory/SaleHistory';
 import { Link } from 'react-router-dom'
 import EditProfile from './EditProfile'
@@ -41,7 +41,6 @@ class ProfileView extends Component {
     }
 
     render() {
-       
         let show = <UserInfo
             user={this.props.user}
             toggleEditShow={this.toggleEditShow} />
@@ -57,7 +56,7 @@ class ProfileView extends Component {
                 {show}
 
                 <div className="profileButtonContainer">
-                    <Link to='/AddNewSale'><button id="profileAddSaleButton">Add Sale</button></Link>
+                    <Link to='/AddNewSale'><button id="profileAddSaleButton" onClick={this.props.CLEARSALE}>Add Sale</button></Link>
                 </div>
 
                 <div className="saleDisplay">
@@ -79,4 +78,4 @@ function mapStateToProps(state) {
         userSales: state.userSales
     }
 }
-export default connect(mapStateToProps, { GETURL, GETUSER, getUserSales })(ProfileView);
+export default connect(mapStateToProps, { GETURL, GETUSER, getUserSales, CLEARSALE })(ProfileView);
