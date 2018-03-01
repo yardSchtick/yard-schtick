@@ -48,6 +48,7 @@ const CURRENT_SALE = 'CURRENT_SALE';
 const GET_ONE_INVENTORY = 'GET_ONE_INVENTORY'
 const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
 const USER_SALES = 'USER_SALES'
+const SET_SEARCH = "SET_SEARCH"
 
 export function getUserSales(sales){
     
@@ -147,6 +148,13 @@ export function SETSALE(sale) {
     }
 }
 
+export function SETSEARCH(sales) {
+    return {
+        type: SET_SEARCH,
+        payload: sales
+    }
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case USER_SALES:
@@ -180,6 +188,8 @@ export default function reducer(state = initialState, action) {
         case SET_USER:
             return Object.assign({}, state, { user: action.payload })
         case SET_SALE:
+            return Object.assign({}, state, { sales: action.payload })
+        case SET_SEARCH:
             return Object.assign({}, state, { sales: action.payload })
         case CLEAR_SALE:
             return Object.assign({}, state, {
