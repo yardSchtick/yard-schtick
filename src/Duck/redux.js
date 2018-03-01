@@ -28,7 +28,8 @@ const initialState = {
         sale_desc: ''
     },
     distance: 20,
-    inventory: {}
+    inventory: {},
+    userSales: []
 }
 
 const DEMO = 'DEMO'
@@ -45,6 +46,15 @@ const SET_SALE = "SET_SALE"
 const CURRENT_SALE = 'CURRENT_SALE';
 const GET_ONE_INVENTORY = 'GET_ONE_INVENTORY'
 const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
+const USER_SALES = 'USER_SALES'
+
+export function getUserSales(sales){
+    
+    return {
+        type: USER_SALES,
+        payload: sales
+    }
+}
 
 export function clearInventory() {
     return {
@@ -53,7 +63,6 @@ export function clearInventory() {
     }
 }
 export function getOneInventory(inv) {
-    console.log(inv);
     return {
         type: GET_ONE_INVENTORY,
         payload: inv
@@ -139,6 +148,10 @@ export function SETSALE(sale) {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case USER_SALES:
+             return Object.assign({}, state, {userSales: action.payload})
+             
+             
         case CLEAR_INVENTORY:
             return Object.assign({}, state, { inventory: action.payload})
         case GET_ONE_INVENTORY:
