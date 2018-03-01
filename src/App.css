@@ -227,6 +227,13 @@ h2 {
   color: black;
 }
 
+#profileInput {
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid grey;
+  font-size: 13px;
+}
+
 #smallInput {
   text-align: center;
   border: 1px solid lightgray;
