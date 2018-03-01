@@ -63,7 +63,7 @@ class EditProfile extends Component {
             user_img: this.props.user.user_img,
             id: this.props.user.id
         }
-
+        console.log(tempUser)
         axios.put('/api/updateUser', tempUser).then(res => {
             this.props.SETUSER(res.data)
         })
@@ -84,23 +84,29 @@ class EditProfile extends Component {
 
                 <h1>address</h1>
                 <input value={street} 
+                    id="editProfile"
                     onChange={e => this.handleChange(e.target.value, 'street')}
                     maxlength='50'></input>
 
                 <h1>city</h1>
-                <input value={city} onChange={e => this.handleChange(e.target.value, 'city')}
+                <input value={city} 
+                    id="editProfile"
+                    onChange={e => this.handleChange(e.target.value, 'city')}
                     maxlength='25'></input>
 
                 <h1>state</h1>
-                <input value={state} onChange={e => this.handleChange(e.target.value, 'state')}
+                <input value={state}
+                    id="editProfile"
+                    onChange={e => this.handleChange(e.target.value, 'state')}
                     maxlength='2'></input>
 
                 <h1>zip</h1>
-                <input value={zip} 
+                <input value={zip}
+                    id="smallInput" 
                     onChange={e => this.handleChange(e.target.value, 'zip')}
                     maxlength='15'></input>
 
-                <Link to='/ProfileView'><button onClick={this.submitChange}>Save Changes</button></Link>
+                <Link to='/ProfileView'><button id="updateProfileButton" onClick={this.submitChange}>Save Changes</button></Link>
 
             </div>
         );
