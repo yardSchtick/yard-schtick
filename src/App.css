@@ -1,7 +1,18 @@
+.app {
+  height: 100vh;
+  position: relative;
+}
+
 h1 {
   font-size: 2em;
   line-height: 2em;
   margin: 0.5em;
+}
+
+.saleDescH1 {
+  font-size: 2em;
+  /* line-height: 2em; */
+  margin: 0.5em 0.5em -0.3em 0.5em;
 }
 
 a {
@@ -16,10 +27,10 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
   height: 54px;
-  box-shadow: -1px -1px 1px grey
+  box-shadow: -1px -1px 1px grey;
 }
 
 .itemPic {
@@ -234,13 +245,14 @@ h2 {
 }
 
 .inputIndividualContainer {
-  margin-top: 25px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .descriptionContainer {
+  display: flex;
   flex-direction: column;
   align-items: baseline;
 }
@@ -256,13 +268,13 @@ h2 {
   height: 50px;
   width: 100%;
   color: grey;
-  font-size: 17px;
+  font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .subtitle {
   color: grey;
-  margin: 5px 25px;
+  margin: 0em 1.4em;
   font-size: 12px;
 }
 
@@ -274,6 +286,7 @@ h2 {
 
 #pictureContainer {
   align-items: baseline;
+  margin: 25px 15px 0 15px;
 }
 
 .reviewBannerSideFade {
@@ -457,4 +470,10 @@ h2 {
   padding: 20px;
   width: 220px;
   height: 60px;
+}
+
+@media (max-height: 640px) {
+  .profileButtonContainer {
+    margin: 27px 0px;
+  }
 }
