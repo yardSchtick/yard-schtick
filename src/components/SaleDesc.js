@@ -63,7 +63,7 @@ class SaleDesc extends Component {
                     </div>
 
                     <div className="profileButtonContainer">
-                    <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name })}>Submit</button></Link>
+                    <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
                     </div>
                 </div>
             
