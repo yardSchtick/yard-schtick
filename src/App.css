@@ -517,6 +517,17 @@ h2 {
   font-size: 400;
 
 }
+
+.inventoryListContainer {
+  margin-top: 20%;
+}
+
+.inventoryListButton {
+  width: 60vw;
+  padding: 20px;
+  margin: 20px;
+}
+
 @media (max-height: 640px) {
   .profileButtonContainer {
     margin: 27px 0px;

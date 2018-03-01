@@ -16,16 +16,16 @@ class InventoryList extends Component {
         this.removeInv = this.removeInv.bind(this)
         this.getInv = this.getInv.bind(this)
     }
-    removeInv(id){
+    removeInv(id) {
         axios({
-            url:`/api/deleteOneInv/${id}`,
-            method:'delete',
-        }).then((response) =>{
+            url: `/api/deleteOneInv/${id}`,
+            method: 'delete',
+        }).then((response) => {
             this.getInv();
         })
     }
-    getInv(){
-        axios.get(`/api/getInventory/${ this.props.newSale ? this.props.newSale.id :null}`)
+    getInv() {
+        axios.get(`/api/getInventory/${this.props.newSale ? this.props.newSale.id : null}`)
             .then((response) => {
                 this.setState(
                     { inventory: response.data }
@@ -43,17 +43,17 @@ class InventoryList extends Component {
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
-        
+
     }
 
     render() {
-        
+
         if (this.state.inventory) {
             var InventoryCard = this.state.inventory.map((val, index) => (
 
                 <div key={index}>
                     <p>{val.inv_name}</p>
-                    {/* <img src={val.inv_picture}/> */}
+                    <img src={val.inv_picture} />
                     <p>{val.inv_desc}</p>
                     <p>{val.inv_price}</p>
                     <Link to='/AddInventory'><button onClick={() => this.props.getOneInventory(val)}>Edit</button></Link>
@@ -65,17 +65,21 @@ class InventoryList extends Component {
         return (
             <div>
                 {InventoryCard}
-                <Link to='/AddInventory'><button> Add an Item</button></Link>
-                <Link to="/ProfileView"> <button onClick={this.props.CLEARSALE}>Finished Adding Items</button> </Link>
+                <div className="inventoryListContainer">
+                    <Link to='/AddInventory'><button className="inventoryListButton"> Add an Item</button></Link>
+                    <Link to="/ProfileView"> <button className="inventoryListButton" onClick={this.props.CLEARSALE}>Finished Adding Items</button> </Link>
+                </div>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {return {
-    user: state.user,
-    newSale: state.newSale
-} }
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+        newSale: state.newSale
+    }
+}
 
 export default connect(mapStateToProps, { GETURL, CLEARSALE, getOneInventory })(InventoryList)
 
