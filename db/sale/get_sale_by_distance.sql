@@ -22,7 +22,9 @@ SELECT
     end_date,
     sale_img,
     address_street,
-    address_city
+    address_city,
+    latitude,
+    longitude
 FROM
     users
 JOIN 
