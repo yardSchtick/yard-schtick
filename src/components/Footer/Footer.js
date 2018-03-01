@@ -52,7 +52,7 @@ class Footer extends Component {
         return (
             <div className="Footer">
                 {leftDisplay}
-                <div className="Logo"></div>
+                <Link to='/SaleList' className="Logo"></Link>
                 {rightDisplay}
             </div>
         )

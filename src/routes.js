@@ -11,6 +11,7 @@ import InventoryList from './components/InventoryList';
 import SaleReview from './components/SaleReview';
 import ThankYou from './components/ThankYou'
 import SaleDesc from './components/SaleDesc'
+import EditThankYou from './components/EditThankYou';
 
 
 export default class Routes extends Component {
@@ -29,6 +30,7 @@ export default class Routes extends Component {
               <Route component={ SaleReview } path="/SaleReview" />
               <Route component={ ThankYou } path="/ThankYou" />
               <Route component={ SaleDesc } path='/SaleDescription' />
+              <Route component={ EditThankYou } path = "/EditThankYou" />
 
                 <Redirect to='/MapView' />
             </Switch>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'react-rangeslider'
 import '../../../node_modules/react-rangeslider/lib/index.css'
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import { getSales, changeDistance, SETSEARCH } from '../../Duck/redux';
 import Dropdown from './SearchDropdown'
