@@ -2,6 +2,12 @@
   height: 100vh;
   position: relative;
   overflow: scroll;
+  background-color: ghostwhite;
+}
+
+.margin {
+  width: 100%;
+  height: 55px;
 }
 
 h1 {
@@ -37,9 +43,10 @@ a {
 .itemPic {
   height: 150px;
   width: 150px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   box-shadow: 1px 1px 1px grey;
   margin: 15px;
+  background-color: white;
 }
 
 button {
@@ -80,7 +87,7 @@ input {
   width: 75px;
   color:white;
   font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif
+  font-family: 'Open Sans', sans-serif;
 }
 
 .Logo {
@@ -283,7 +290,7 @@ h2 {
   width: 100%;
   color: grey;
   font-size: 12px;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .subtitle {
@@ -412,8 +419,14 @@ h2 {
 }
 
 #thankYouTitle {
-  color:rgb(0, 187, 0);
-  margin-bottom: 35px;
+  /* color:rgb(0, 187, 0); */
+  color: green;
+  margin-bottom: 20px;
+}
+
+.glyphicon-ok-sign {
+  color: green;
+  font-size: 75px;
 }
 
 .thankYouButton {
@@ -431,6 +444,7 @@ h2 {
 #thankYouSubtitle {
   text-align: center;
   margin: 15px;
+  font-size: 15px;
 }
 
 .saleCard {
@@ -459,12 +473,15 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
+  padding: 10px 5px 0px 5px;
   margin-bottom: 3px;
+  color: white;
 }
 
 .saleCardTime {
   font-size: 12px;
+  color: white;
+  padding: 0px 5px 0px 5px;
 }
 
 .timeDate input {
@@ -526,20 +543,49 @@ h2 {
   position: absolute;
   background-color: #236e96; 
 }
-.modal-img {
 
-}
 .markers {
   background-image: url('./images/greenPin.svg')
 }
 .inventoryListContainer {
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 .inventoryListButton {
   width: 60vw;
   padding: 20px;
   margin: 20px;
+}
+
+.inventoryCardLineItem {
+  line-height: 2em;
+}
+
+.inventoryCardLineItem span {
+  color: #236e96;
+}
+
+.inventoryCardContainer {
+  margin: 20px;
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.inventoryCardContainer button {
+  padding: 10px;
+  margin: 20px 10px 10px 10px;
+  width: 100px;
+}
+
+.inventoryCard {
+  margin-bottom: 20px;
+}
+
+.inventoryCardButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .editSaleContainer {
@@ -561,26 +607,6 @@ h2 {
   padding: 20px;
 }
 
-@media (max-height: 640px) {
-  .profileButtonContainer {
-    margin: 27px 0px;
-  }
-  .editSaleContainer {
-    height: 140vh;
-  }
-  .addItemButtonContainer{
-    margin-top: 30px;
-  }
-}
-
-@media (min-height: 812px) {
-  .addItemButtonContainer{
-    margin-top: 30px;
-  }
-  .addItemSaleContainer {
-    height: 100vh;
-  }
-}
 
 .search-outer {
   position: relative;
@@ -609,6 +635,27 @@ h2 {
 #searchInput {
   text-align: center;
   margin-top: 10px;
+}
+
+@media (max-height: 640px) {
+  .profileButtonContainer {
+    margin: 27px 0px;
+  }
+  .editSaleContainer {
+    height: 140vh;
+  }
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+}
+
+@media (min-height: 812px) {
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+  .addItemSaleContainer {
+    height: 100vh;
+  }
 }
 
 @media (min-height: 1024px) {

@@ -13,9 +13,11 @@ class ThankYou extends Component {
     return (
       <div className="thankYouContainer">
         <h1 className="title" id="thankYouTitle">Thank You For Your Post!</h1>
-        <p className="subtitle" id="thankYouSubtitle">Your sale is now visible. You can sit back watch people flood in <br/><br/> or you could always</p>
+        {/* <i class="glyphicon glyphicon-ok-circle"></i> */}
+        <i class="glyphicon glyphicon-ok-sign"></i>
+        <p className="subtitle" id="thankYouSubtitle">Your sale is now visible. You can sit back watch people flood in. <br/><br/> Add Items to your sale to help people<br/> focus in on your sale.</p>
         <Link to='/AddInventory'><button id="profileAddSaleButton">Add Items to Your Sale</button></Link>
-        <p className="subtitle" id="thankYouSubtitle">to help people focus in on your sale.</p>
+        {/* <p className="subtitle" id="thankYouSubtitle">to help people focus in on your sale.</p> */}
         <div className="thankYouInner">
           <Link to="/ViewMap"><button className="thankYouButton">View Sales</button></Link>
           <Link to="/ProfileView"><button className="thankYouButton">View Profile</button></Link>
