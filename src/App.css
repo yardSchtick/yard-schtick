@@ -516,7 +516,17 @@ h2 {
   padding: 0;
   font-size: 400;
 }
+.modal {
+  z-index: 20;
+  position: absolute;
+  background-color: #236e96; 
+}
+.modal-img {
 
+}
+.markers {
+  background-image: url('./images/greenPin.svg')
+}
 .inventoryListContainer {
   margin-top: 20%;
 }
