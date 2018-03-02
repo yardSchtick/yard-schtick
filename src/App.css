@@ -531,8 +531,59 @@ h2 {
   position: absolute;
   background-color: #236e96; 
 }
+.closeButton {
+  padding-right: 1px;
+  background: white;
+  color: #236e96;
+  height: 35px;
+  width: 35px;
+  border-radius: 0;
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  font-size: 30px;
+  box-shadow: -1px 1px grey;
+  border-bottom-left-radius: 50%;
+}
 .modal-img {
-
+  width: 355px;
+}
+.img-container {
+  width: 355px;
+  height: 150px;
+  overflow-y: hidden;
+  background: linear-gradient(grey,white);
+}
+.modalContainer {
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+#modalTitle {
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+}
+#modalSubtitle {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  margin-top: 5px;
+  color: grey;
+}
+.modalOuter {
+  height: 325px;
+}
+#modalBorder {
+  height: 1px;
+  width: 250px;
+  margin: 0 50px;
+  background: grey;
+}
+#modalDesc {
+  margin-top: 15px;
 }
 .markers {
   background-image: url('./images/greenPin.svg')

@@ -97,15 +97,20 @@ class MapView extends Component {
           defaultZoom={10}
           defaultCenter={{ lat: this.state.lat, lng: this.state.lng }}
         >
-          <Modal open={open} onClose={this.onCloseModal} little>
-            <h1>{this.state.markerInfo.sale_name}</h1>
-            <img className='modal-img' src={this.state.markerInfo.sale_img} alt="" />
-            <h2>{this.state.markerInfo.sale_desc}</h2>
-            <h3>{this.state.markerInfo.address_street}</h3>
-            <h3>{this.state.markerInfo.address_city}</h3>
-            <h3>{this.state.markerInfo.address_state}</h3>
-            <h3>{this.state.markerInfo.address_zip}</h3>
-          </Modal>
+          <Modal open={open} onClose={this.onCloseModal} little showCloseIcon={false}>
+                    <div className="modalOuter">
+                        <button className='closeButton' onClick={this.onCloseModal}>X</button>
+                        <div className="img-container">
+                            <img className='modal-img' src={this.state.markerInfo.sale_img} alt="" />
+                        </div>
+                        <div className="modalContainer">
+                            <h1 id="modalTitle">{this.state.markerInfo.sale_name}</h1>
+                            <div id="modalBorder"></div>
+                            <h1 id="modalSubtitle">{this.state.markerInfo.address_street}, {this.state.markerInfo.address_city}</h1>
+                            <p id="modalDesc">{this.state.markerInfo.sale_desc}</p>
+                        </div>
+                    </div>
+                </Modal>
           {markers}
           {props.isMarkerShown && <Marker position={{ lat: this.state.lat, lng: this.state.lng }} />}
           <Circle clickable={false}
