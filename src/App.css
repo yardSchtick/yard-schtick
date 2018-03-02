@@ -37,7 +37,7 @@ a {
 .itemPic {
   height: 150px;
   width: 150px;
-  border: 1px solid black;
+  border: 1px solid darkgray;
   box-shadow: 1px 1px 1px grey;
   margin: 15px;
 }
@@ -528,6 +528,19 @@ h2 {
   margin: 20px;
 }
 
+.glyphicon-upload {
+  color: lightgray;
+  font-size: 400%;
+    display: block;
+    margin: 40px;
+    
+    
+}
+
+.uploaderText {
+  font-size:14%
+}
+
 @media (max-height: 640px) {
   .profileButtonContainer {
     margin: 27px 0px;
@@ -551,3 +564,9 @@ h2 {
     height: 100vh;
   }
 }
+
+
+
+
+
+
