@@ -46,8 +46,10 @@ class Uploader extends Component {
       
         return (
           <div>
-            <Dropzone onDrop={ this.handleDrop } multiple accept="image/*">
-                        <p>Drop your files or click here to upload</p>
+            <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
+                        <div className="glyphicon glyphicon-upload">
+                            <p className="uploaderText">Click to Upload</p>
+                        </div>
             </Dropzone>
                 
           </div>

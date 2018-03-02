@@ -37,7 +37,7 @@ a {
 .itemPic {
   height: 150px;
   width: 150px;
-  border: 1px solid black;
+  border: 1px solid darkgray;
   box-shadow: 1px 1px 1px grey;
   margin: 15px;
 }
@@ -526,9 +526,7 @@ h2 {
   position: absolute;
   background-color: #236e96; 
 }
-.modal-img {
 
-}
 .markers {
   background-image: url('./images/greenPin.svg')
 }
@@ -540,6 +538,19 @@ h2 {
   width: 60vw;
   padding: 20px;
   margin: 20px;
+}
+
+.glyphicon-upload {
+  color: lightgray;
+  font-size: 400%;
+    display: block;
+    margin: 40px;
+    
+    
+}
+
+.uploaderText {
+  font-size:14%
 }
 
 .editSaleContainer {
@@ -581,6 +592,11 @@ h2 {
     height: 100vh;
   }
 }
+
+
+
+
+
 
 .search-outer {
   position: relative;
