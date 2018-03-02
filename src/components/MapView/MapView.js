@@ -8,7 +8,6 @@ import './MapView.css';
 import bluePin from '../../images/pushpin-blue.png'
 import greenPin from '../../images/pushpin-green.png'
 import SearchBar from '../Search/SearchBar';
-import AnimatedWrapper from '../AnimatedWrapper'
 
 class MapView extends Component {
   constructor(props) {
@@ -95,7 +94,7 @@ class MapView extends Component {
             onCenterChanged={(e)=> this.onCenterChanged(e)}
             onRadiusChanged={this.onRadiusChanged}
             options={{
-              fillColor: '#236e96',
+              fillColor: '#236e9650',
               strokeColor: '#236e96',
             }} /> 
         </GoogleMap>
@@ -147,8 +146,7 @@ function mapStateToProps(state) {
 }
 
 var MapConnect = connect(mapStateToProps, { GETURL, getSales })(MapView)
-var Animated = AnimatedWrapper(MapConnect)
 
 export default GoogleApiWrapper({
   apiKey: process.env.API_KEY
-})(Animated);
+})(MapConnect);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GETURL, getSales } from '../Duck/redux';
 import Search from './Search/SearchBar';
-import AnimatedWrapper from './AnimatedWrapper'
+
 
 class SaleList extends Component {
 
@@ -93,6 +93,4 @@ function mapStateToProps(state) {
     }
 }
 
-var connect = connect(mapStateToProps, { GETURL, getSales })(SaleList)
-
-export default AnimatedWrapper(connect)
+export default connect(mapStateToProps, { GETURL, getSales })(SaleList)

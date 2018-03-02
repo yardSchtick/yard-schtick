@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
-import TransitionGroup from 'react-transition-group'
 
 import MapView from './components/MapView/MapView';
 import Login from './components/Login/Login';
@@ -14,10 +13,6 @@ import ThankYou from './components/ThankYou'
 import SaleDesc from './components/SaleDesc'
 import EditThankYou from './components/EditThankYou';
 
-const firstChild = props => {
-    const childrenArray = React.Children.toArray(props.children);
-    return childrenArray[0] || null;
-}
 
 export default class Routes extends Component {
     render() {
@@ -25,22 +20,9 @@ export default class Routes extends Component {
             <div>
             <Switch>
         
-              <Route 
-                exact path="/MapView" 
-                children={({ match, ...rest }) => (
-                    <TransitionGroup component={firstChild}>
-                    {match && <MapView {...rest} />}
-                    </TransitionGroup>
-                )}/>
-                <Route 
-                exact path="/SaleList" 
-                children={({ match, ...rest }) => (
-                    <TransitionGroup component={firstChild}>
-                    {match && <SaleList {...rest} />}
-                    </TransitionGroup>
-                )}/>
-              {/* <Route component={ SaleList } path="/SaleList" /> */}
+              <Route component={ MapView } exact path="/MapView" />
               <Route component={ Login } path="/Login"/>
+              <Route component={ SaleList } path="/SaleList" />
               <Route component={ ProfileView } path="/ProfileView" />
               <Route component={ AddNewSale } path="/AddNewSale" />
               <Route component={ AddInventory } path="/AddInventory" />

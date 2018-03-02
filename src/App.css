@@ -598,15 +598,6 @@ h2 {
   margin-top: 10px;
 }
 
-.animated-page-wrapper {
-  position: absolute;
-  top: 62px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-
 @media (min-height: 1024px) {
   .editSaleContainer {
     height: 100%;
