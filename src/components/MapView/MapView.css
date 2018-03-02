@@ -3,3 +3,7 @@
     height: 500px;
     margin: 0 auto;
   }
+  .modal {
+    z-index: 20;
+    position: absolute;
+  }

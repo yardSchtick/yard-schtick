@@ -32,7 +32,6 @@ class SaleHistory extends Component {
 
     formatDate = (date) => {
         var tempArr1 = []
-        var tempArr2 = []
         var tempDate = date.substring(0, 10).split('-').reverse()
         tempArr1[0] = tempDate[1]
         tempArr1[1] = tempDate[0]
