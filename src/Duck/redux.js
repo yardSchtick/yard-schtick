@@ -51,6 +51,10 @@ const ADD_SALE_IMAGE = 'ADD_SALE_IMAGE'
 const USER_SALES = 'USER_SALES'
 const SET_SEARCH = "SET_SEARCH"
 
+
+
+
+
 export function getUserSales(sales){
     
     return {
@@ -168,9 +172,7 @@ export default function reducer(state = initialState, action) {
             var newImg = Object.assign({}, state.newSale, {sale_img:action.payload })
             return Object.assign({}, state, { newSale: newImg})
         case USER_SALES:
-             return Object.assign({}, state, {userSales: action.payload})
-             
-             
+             return Object.assign({}, state, {userSales: action.payload})            
         case CLEAR_INVENTORY:
             return Object.assign({}, state, { inventory: action.payload})
         case GET_ONE_INVENTORY:

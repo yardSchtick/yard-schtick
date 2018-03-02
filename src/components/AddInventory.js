@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { GETURL, clearInventory } from '../Duck/redux';
 // import { Link } from 'react-router-dom'
 import axios from 'axios';
+import Dropzone from 'react-dropzone'
 
 class AddInventory extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class AddInventory extends Component {
       method: 'post',
       data: {
         inv_name: this.state.inv_name,
-        inv_picture: null,
+        inv_picture: this.state.inv_picture,
         inv_desc: this.state.inv_desc,
         inv_price: this.state.inv_price,
         sale_id: this.props.newSale.id
@@ -61,9 +62,40 @@ class AddInventory extends Component {
     }).then((response) => {
       this.props.clearInventory()
       this.props.history.push('/InventoryList')
+      console.log(response)
     }).catch((error) => {
     })
   }
+
+  handleDrop = files => {
+    // Push all the axios request promise into a single array
+    const uploaders = files.map(file => {
+      // Initial FormData
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", `yardschtick`);
+      formData.append("upload_preset", "xaytd9ya"); 
+      formData.append("api_key", "744751991133399");
+      // formData.append("unique_filename", "true");
+      
+      
+      return axios.post("https://api.cloudinary.com/v1_1/dqval3kpy/image/upload", formData)
+      .then(response => {
+        const data = response.data;
+        const fileURL = data.secure_url         // You should store this URL for future references in your app
+        this.setState({ inv_picture: fileURL })    //change sale_img to inv_picture
+        
+      })
+    });
+  
+    // Once all the files are uploaded 
+    axios.all(uploaders).then(() => {
+      alert('image was uploaded')
+    });
+  }
+
+
+
   render() {
     return (
       <div className="addItemSaleContainer">
@@ -73,7 +105,12 @@ class AddInventory extends Component {
           placeholder={this.props.inventory ? this.state.inv_name : ''}
           onBlur={e => this.handleInput(e.target.value, 'name')} />
         <p className="addItemSale">Picture</p>
-        <div className="itemPic"></div>
+        <div >
+            <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
+                        <div className="glyphicon glyphicon-upload">
+                            <p className="uploaderText">Click to Upload</p>
+                        </div>
+            </Dropzone></div>
         <label className="addItemSale">Item Description</label>
         <input className="addItemSale"
           placeholder={this.props.inventory ? this.state.inv_desc : ''}
