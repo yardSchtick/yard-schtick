@@ -13,9 +13,9 @@ class EditThankYou extends Component {
     return (
       <div className="thankYouContainer">
         <h1 className="title" id="thankYouTitle">Your sale has been edited.</h1>
-        <p className="subtitle" id="thankYouSubtitle">Would you like to </p>
+        <p className="subtitle" id="thankYouSubtitle">You can always</p>
         <Link to='/AddInventory'><button id="profileAddSaleButton">Add Items to Your Sale</button></Link>
-        <p className="subtitle" id="thankYouSubtitle">to help people focus in on your sale?</p>
+        <p className="subtitle" id="thankYouSubtitle">if you'd like.</p>
         <div className="thankYouInner">
           <Link to="/ViewMap"><button className="thankYouButton">View Sales</button></Link>
           <Link to="/ProfileView"><button className="thankYouButton">View Profile</button></Link>

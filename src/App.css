@@ -16,7 +16,7 @@ h1 {
   margin: 0.5em 0.5em -0.3em 0.5em;
 }
 
-a {
+a, a:hover, a:focus {
   display: flex;
   justify-content: space-around;
   text-decoration: none;
@@ -308,7 +308,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
 }
 
 .reviewBannerBottomFade {
@@ -513,6 +513,11 @@ h2 {
 
 .warning {
   color: red
+}
+
+.reviewButton {
+  color: grey;
+  font-weight: 400;
 }
 
 #editInputProfile {
