@@ -418,6 +418,10 @@ h2 {
   align-items: center;
 }
 
+.thankYouSection {
+  margin-top: 50px;
+}
+
 #thankYouTitle {
   /* color:rgb(0, 187, 0); */
   color: green;
@@ -430,7 +434,7 @@ h2 {
 }
 
 .thankYouButton {
-  width: 100px;
+  width: 110px;
   height: 45px;
 }
 
@@ -438,12 +442,17 @@ h2 {
   display: flex;
   justify-content: space-between;
   width: 65%;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 #thankYouSubtitle {
   text-align: center;
-  margin: 15px;
+  margin: 35px 10px 15px 10px;
+  font-size: 15px;
+}
+#thankYouSubtitle2 {
+  text-align: center;
+  margin: 15px 10px 15px 10px;
   font-size: 15px;
 }
 
