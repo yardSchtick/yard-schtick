@@ -65,6 +65,8 @@ class SaleReview extends Component {
         newSale: this.props.newSale,
         user_id: this.props.user.id}).then(res => {
         this.props.currentSale(res.data[0])
+      }).then(res => {
+        this.props.CLEARSALE()        
       })
     } else {
       axios.put('/api/updateSale',this.props.newSale).then(res => {

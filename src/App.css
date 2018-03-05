@@ -120,8 +120,6 @@ input {
 
 .dataDisplay {
   margin: 0 10px 10px 10px;
-  max-height: 225px;
-  overflow-y: scroll;
 }
 
 .saleInfo {
@@ -397,7 +395,7 @@ h2 {
 } 
 
 .listView {
-  height: 515px;
+  height: 533px;
   width: 100%;
   overflow-y: scroll;
   margin: 72px 0 54px 0;

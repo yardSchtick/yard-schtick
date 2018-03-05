@@ -57,9 +57,9 @@ class MapView extends Component {
   render() {
     const { open } = this.state;
     const style = {
-      height: '515px',
+      height: '532px',
       width: '100%',
-      margin: '72px 0 54px 0'
+      margin: '72px 0 50px 0'
     }
     const modal = {
       'z-index': '20'
