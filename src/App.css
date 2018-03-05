@@ -217,7 +217,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(transparent,white)
+  background: linear-gradient(transparent,whitesmoke)
 }
 
 #loginButton {
@@ -239,7 +239,7 @@ h2 {
   padding: 0;
   border: none;
   border-bottom: 1px solid grey;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 #smallInput {
@@ -313,7 +313,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
+  background: linear-gradient(right, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
 }
 
 .reviewBannerBottomFade {
@@ -321,7 +321,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(transparent, rgba(255, 255, 255, 0.25),white)
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.25),whitesmoke)
 }
 
 .reviewBanner {
@@ -456,6 +456,7 @@ h2 {
 
 .saleCard {
   position: relative;
+  min-height: 135px;
 }
 
 .saleCardImage {
