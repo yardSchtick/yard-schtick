@@ -84,7 +84,7 @@ class SaleReview extends Component {
           <Link to="/SaleDescription"><button className="reviewBanner"></button></Link>
           <div className="reviewBannerSideFade"></div>
           <div className="reviewBannerBottomFade"></div>
-          <h2 className="reviewTitle">Review</h2>
+          <h1 className="reviewTitle">Review</h1>
         </div>
 
         <div className="inputContainer">
