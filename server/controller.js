@@ -75,7 +75,7 @@ module.exports = {
 
         const { longitude, latitude, distance, search } = req.query
         const id = req.user ? req.user.id : 0;
-        const searchTerm = '%' + search.toUpperCase() + '%'
+        const searchTerm = search.toUpperCase()
         
         db.inventory.search_inventory(latitude, longitude, distance, id, searchTerm).then(result => {
             var tempArr = []
