@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="app">
         <Routes />
-
+        <section classNames="margin"></section>
         <Footer />
       </div>
     );
