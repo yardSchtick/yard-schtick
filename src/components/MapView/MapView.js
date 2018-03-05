@@ -15,7 +15,6 @@ class MapView extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      sales: [],
       open: false,
       markerInfo: {},
       lat: null,
@@ -58,9 +57,9 @@ class MapView extends Component {
   render() {
     const { open } = this.state;
     const style = {
-      height: '515px',
+      height: '532px',
       width: '100%',
-      margin: '72px 0 54px 0'
+      margin: '72px 0 50px 0'
     }
     const modal = {
       'z-index': '20'
@@ -71,7 +70,7 @@ class MapView extends Component {
     }
     const markers = this.props.sales.map((e, i) => {
       return (
-        <Marker key={i}
+        <Marker key={e.id}
         className= 'markers'
         style={markerStyle}
           google={this.props.google}
@@ -92,22 +91,26 @@ class MapView extends Component {
       )
     })
     const miles = this.props.distance * 1000;
-
     const MyMapComponent = withScriptjs(withGoogleMap((props) =>
       <div>
         <GoogleMap
           defaultZoom={10}
           defaultCenter={{ lat: this.state.lat, lng: this.state.lng }}
         >
-          <Modal open={open} onClose={this.onCloseModal} little>
-            <h1>{this.state.markerInfo.sale_name}</h1>
-            <img className='modal-img' src={this.state.markerInfo.sale_img} alt="" />
-            <h2>{this.state.markerInfo.sale_desc}</h2>
-            <h3>{this.state.markerInfo.address_street}</h3>
-            <h3>{this.state.markerInfo.address_city}</h3>
-            <h3>{this.state.markerInfo.address_state}</h3>
-            <h3>{this.state.markerInfo.address_zip}</h3>
-          </Modal>
+          <Modal open={open} onClose={this.onCloseModal} little showCloseIcon={false}>
+                    <div className="modalOuter">
+                        <button className='closeButton' onClick={this.onCloseModal}>X</button>
+                        <div className="img-container">
+                            <img className='modal-img' src={this.state.markerInfo.sale_img} alt="" />
+                        </div>
+                        <div className="modalContainer">
+                            <h1 id="modalTitle">{this.state.markerInfo.sale_name}</h1>
+                            <div id="modalBorder"></div>
+                            <h1 id="modalSubtitle">{this.state.markerInfo.address_street}, {this.state.markerInfo.address_city}</h1>
+                            <p id="modalDesc">{this.state.markerInfo.sale_desc}</p>
+                        </div>
+                    </div>
+                </Modal>
           {markers}
           {props.isMarkerShown && <Marker position={{ lat: this.state.lat, lng: this.state.lng }} />}
           <Circle clickable={false}
@@ -119,7 +122,7 @@ class MapView extends Component {
             onCenterChanged={(e) => this.onCenterChanged(e)}
             onRadiusChanged={this.onRadiusChanged}
             options={{
-              fillColor: '#236e96',
+              fillColor: '#236e9650',
               strokeColor: '#236e96',
             }} />
         </GoogleMap>

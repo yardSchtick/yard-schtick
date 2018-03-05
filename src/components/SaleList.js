@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import Footer from '../components/Footer/Footer';
 import { connect } from 'react-redux';
 import { GETURL, getSales } from '../Duck/redux';
 import Search from './Search/SearchBar';
+import Modal from 'react-responsive-modal';
 
 class SaleList extends Component {
 
@@ -10,7 +10,9 @@ class SaleList extends Component {
         super()
         this.state = {
             lat: null,
-            lng: null
+            lng: null,
+            open: false,
+            sale: {}
         }
     }
 
@@ -49,18 +51,33 @@ class SaleList extends Component {
 
     formatDescrip = (descrip) => {
         if (descrip.split('').length > 50) {
-            return descrip.substring(0,55) + '...'
+            return descrip.substring(0, 55) + '...'
         } else {
             return descrip
         }
     }
 
+    onOpenModal = () => {
+        this.setState({ open: true });
+    }
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    }
+
+    handleModal = (sale) => {
+        this.setState({ sale: sale },
+            this.onOpenModal())
+    }
+
     render() {
+        const { open, sale } = this.state;
+
         var saleCard = this.props.sales.map((val, index) => {
             let time = this.formatTime(val.start_time, val.end_time)
             let descrip = this.formatDescrip(val.sale_desc)
-            
-            return (<div key={index} className="saleCard">
+
+            return (<div key={val.id} className="saleCard" onClick={_ => this.handleModal(val)}>
                 <img className="saleCardImage" src={val.sale_img} alt="" />
                 <div className="saleCardContent">
                     <div className="saleCardFirstLine">
@@ -72,7 +89,6 @@ class SaleList extends Component {
             </div>)
         })
 
-
         return (
             <div>
                 <Search
@@ -81,6 +97,21 @@ class SaleList extends Component {
                 <div className="listView">
                     {saleCard}
                 </div>
+
+                <Modal open={open} onClose={this.onCloseModal} little showCloseIcon={false}>
+                    <div className="modalOuter">
+                        <button className='closeButton' onClick={this.onCloseModal}>X</button>
+                        <div className="img-container">
+                            <img className='modal-img' src={sale.sale_img} alt="" />
+                        </div>
+                        <div className="modalContainer">
+                            <h1 id="modalTitle">{sale.sale_name}</h1>
+                            <div id="modalBorder"></div>
+                            <h1 id="modalSubtitle">{sale.address_street}, {sale.address_city}</h1>
+                            <p id="modalDesc">{sale.sale_desc}</p>
+                        </div>
+                    </div>
+                </Modal>
             </div>
         )
     }

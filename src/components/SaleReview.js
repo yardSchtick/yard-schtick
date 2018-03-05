@@ -65,17 +65,17 @@ class SaleReview extends Component {
         newSale: this.props.newSale,
         user_id: this.props.user.id}).then(res => {
         this.props.currentSale(res.data[0])
-        console.log('res', res);
+      }).then(res => {
+        this.props.CLEARSALE()        
       })
     } else {
       axios.put('/api/updateSale',this.props.newSale).then(res => {
-        // this.props.CLEARSALE()
+        this.props.CLEARSALE()
       })
     }
   }
 
   render() {
-    console.log(this.props)
     var { user, newSale } = this.props
 
     return (
@@ -90,22 +90,22 @@ class SaleReview extends Component {
         <div className="inputContainer">
           <div className="inputIndividualContainer">
             <p>Address:</p>
-            <Link to="/ProfileView"><button className="clearButton">{user.address_street}<br />{user.address_city},{user.address_state} {user.address_zip}</button></Link>
+            <Link to="/ProfileView"><button className="clearButton reviewButton">{user.address_street}<br />{user.address_city},{user.address_state} {user.address_zip}</button></Link>
           </div>
 
           <div className="inputIndividualContainer">
             <p>Time:</p>
-            <Link to="/AddNewSale"><button className="clearButton">{this.state.time}</button></Link>
+            <Link to="/AddNewSale"><button className="clearButton reviewButton">{this.state.time}</button></Link>
           </div>
 
           <div className="inputIndividualContainer">
             <p>Date:</p>
-            <Link to="/AddNewSale"><button className="clearButton">{this.state.date}</button></Link>
+            <Link to="/AddNewSale"><button className="clearButton reviewButton">{this.state.date}</button></Link>
           </div>
 
           <div className="inputIndividualContainer descriptionContainer">
             <p>Description:</p>
-            <Link to="/SaleDescription"><button className="clearButton desciptionReview">{newSale.sale_desc === '' ? 'No Description' : newSale.sale_desc}</button></Link>
+            <Link to="/SaleDescription"><button className="clearButton desciptionReview reviewButton">{newSale.sale_desc === '' ? 'No Description' : newSale.sale_desc}</button></Link>
           </div>
         </div>
         <div className="profileButtonContainer">
