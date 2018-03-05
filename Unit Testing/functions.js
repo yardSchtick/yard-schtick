@@ -1,10 +1,18 @@
-import axios from 'axios';
+const axios = require('axios');
 
 module.exports = {
+    Lat : 0,
+    lng : 0,
+    sales: [],
+
     getAllSales: () => {
-        return axios.get('/api/getAllSales').then(res => {
+       return axios.get(`http://localhost:3030/api/distance?longitude=${-111.66049754658866}&latitude=${40.21453719402246}&distance=${20}`)
+       .then(res => {
             return res.data
-        })
+        })  
+    },
+    salesFromSales: (sale) => {
+        this.sales = sale;
     },
     formatDate: (str1, str2) => {
         var tempArr1 = []
