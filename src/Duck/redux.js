@@ -61,10 +61,6 @@ export function setLatLng(obj){
     }
 }
 
-
-
-
-
 export function getUserSales(sales){
     
     return {

@@ -9,16 +9,26 @@ describe('Testing sales coming back', () => {
 
     test('Array is not empty',  () => {
         return fns.getAllSales().then(res => {
-            expect(res.length).toBeGreaterThan(0);
-        
-    });
-            
+            expect(res.length).toBeGreaterThan(0); 
+    });       
     })
 
     test('Longitude is a key in object in array', () => {
         const data = fns.getAllSales().then(res => {
 
             expect(res[0].longitude).toBeTruthy();
+        })
+    })
+
+    test('Distance is less than what is being sent', () => {
+        const data = fns.getAllSales().then(res => {
+            expect(res[2] <= 20).toBeTruthy()
+        })
+    })
+
+    test('getting back both sale and user info', () => {
+        const data = fns.getAllSales().then(res => {
+            expect (res[0].user_name && res[0].sale_name).toBeTruthy();
         })
     })
 })
