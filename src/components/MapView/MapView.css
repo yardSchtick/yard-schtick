@@ -7,3 +7,7 @@
     z-index: 20;
     position: absolute;
   }
+  .markers {
+    width: 10px;
+    height: 10px;
+  }

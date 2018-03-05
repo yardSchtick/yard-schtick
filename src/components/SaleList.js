@@ -17,14 +17,13 @@ class SaleList extends Component {
     }
 
     componentWillMount() {
-        navigator.geolocation.getCurrentPosition(position => {
             this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+                lat: this.props.latLng.lat,
+                lng: this.props.latLng.lng
             }, _ => this.props.getSales(this.state.lng, this.state.lat, this.props.distance))
-        })
-        this.props.GETURL(this.props.match.url);
-    }
+            this.props.GETURL(this.props.match.url);
+     }
+    
 
     formatTime = (start, end) => {
         var one = this.convertMilitary(start)
@@ -120,7 +119,8 @@ class SaleList extends Component {
 function mapStateToProps(state) {
     return {
         sales: state.sales,
-        distance: state.distance
+        distance: state.distance,
+        latLng: state.latLng
     }
 }
 
