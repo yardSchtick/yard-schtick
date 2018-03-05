@@ -1,21 +1,25 @@
 const fns = require('./functions');
+const saleInfo = require('./sales');
 
 describe('Testing sales coming back', () => {
-
     test('checking data type to be an array', async () => {
-        let data = await fns.getAllSales();
+       let data= await fns.getAllSales();
         expect(Array.isArray(data)).toBeTruthy();
     })
 
-    test('Array is not empty', () => {
+    test('Array is not empty',  () => {
         return fns.getAllSales().then(res => {
             expect(res.length).toBeGreaterThan(0);
-        })
+        
+    });
+            
     })
 
     test('Longitude is a key in object in array', () => {
-        const data = fns.getAllSales();
-        expect(data[0].longitude).toBeTruthy();
+        const data = fns.getAllSales().then(res => {
+
+            expect(res[0].longitude).toBeTruthy();
+        })
     })
 })
 
@@ -27,7 +31,7 @@ describe('Reformatting a Dates', () => {
     test('Testing to get the right output', () => {
         expect(fns.formatDate('2018-03-10','2017-1-31')).toBe('03-10-2018 - 1-31-2017') 
      })
-    
+
     test('Testing to get the right output', () => {
         expect(fns.formatDate('1991-5-10','2017-01-31')).toBe('5-10-1991 - 1-31-2017') 
      })
@@ -58,7 +62,7 @@ describe('Counting Characters in String', () => {
     test("Correct output", () => {
         expect(fns.countTrack(16,100)).toBe(98)
     })
-    
+
     test("Correct output type", () => {
         expect(typeof fns.countTrack('16',100)).toBe('number')
     })
