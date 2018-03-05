@@ -2,6 +2,12 @@
   height: 100vh;
   position: relative;
   overflow: scroll;
+  background-color: ghostwhite;
+}
+
+.margin {
+  width: 100%;
+  height: 55px;
 }
 
 h1 {
@@ -16,7 +22,7 @@ h1 {
   margin: 0.5em 0.5em -0.3em 0.5em;
 }
 
-a {
+a, a:hover, a:focus {
   display: flex;
   justify-content: space-around;
   text-decoration: none;
@@ -37,9 +43,10 @@ a {
 .itemPic {
   height: 150px;
   width: 150px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   box-shadow: 1px 1px 1px grey;
   margin: 15px;
+  background-color: white;
 }
 
 button {
@@ -80,7 +87,7 @@ input {
   width: 75px;
   color:white;
   font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif
+  font-family: 'Open Sans', sans-serif;
 }
 
 .Logo {
@@ -120,8 +127,6 @@ input {
 
 .dataDisplay {
   margin: 0 10px 10px 10px;
-  max-height: 225px;
-  overflow-y: scroll;
 }
 
 .saleInfo {
@@ -212,7 +217,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(transparent,white)
+  background: linear-gradient(transparent,whitesmoke)
 }
 
 #loginButton {
@@ -234,7 +239,7 @@ h2 {
   padding: 0;
   border: none;
   border-bottom: 1px solid grey;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 #smallInput {
@@ -283,7 +288,7 @@ h2 {
   width: 100%;
   color: grey;
   font-size: 12px;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .subtitle {
@@ -308,7 +313,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
+  background: linear-gradient(right, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
 }
 
 .reviewBannerBottomFade {
@@ -316,7 +321,7 @@ h2 {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(transparent, rgba(255, 255, 255, 0.25),white)
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.25),whitesmoke)
 }
 
 .reviewBanner {
@@ -397,7 +402,7 @@ h2 {
 } 
 
 .listView {
-  height: 515px;
+  height: 533px;
   width: 100%;
   overflow-y: scroll;
   margin: 72px 0 54px 0;
@@ -411,13 +416,23 @@ h2 {
   align-items: center;
 }
 
+.thankYouSection {
+  margin-top: 50px;
+}
+
 #thankYouTitle {
-  color:rgb(0, 187, 0);
-  margin-bottom: 35px;
+  /* color:rgb(0, 187, 0); */
+  color: green;
+  margin-bottom: 20px;
+}
+
+.glyphicon-ok-sign {
+  color: green;
+  font-size: 75px;
 }
 
 .thankYouButton {
-  width: 100px;
+  width: 110px;
   height: 45px;
 }
 
@@ -425,16 +440,23 @@ h2 {
   display: flex;
   justify-content: space-between;
   width: 65%;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 #thankYouSubtitle {
   text-align: center;
-  margin: 15px;
+  margin: 35px 10px 15px 10px;
+  font-size: 15px;
+}
+#thankYouSubtitle2 {
+  text-align: center;
+  margin: 15px 10px 15px 10px;
+  font-size: 15px;
 }
 
 .saleCard {
   position: relative;
+  min-height: 135px;
 }
 
 .saleCardImage {
@@ -459,12 +481,15 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
+  padding: 10px 5px 0px 5px;
   margin-bottom: 3px;
+  color: white;
 }
 
 .saleCardTime {
   font-size: 12px;
+  color: white;
+  padding: 0px 5px 0px 5px;
 }
 
 .timeDate input {
@@ -515,6 +540,11 @@ h2 {
   color: red
 }
 
+.reviewButton {
+  color: grey;
+  font-weight: 400;
+}
+
 #editInputProfile {
   border: none;
   margin: 0;
@@ -526,20 +556,124 @@ h2 {
   position: absolute;
   background-color: #236e96; 
 }
+.closeButton {
+  padding-right: 1px;
+  background: white;
+  color: #236e96;
+  height: 35px;
+  width: 35px;
+  border-radius: 0;
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  font-size: 30px;
+  box-shadow: -1px 1px grey;
+  border-bottom-left-radius: 50%;
+}
 .modal-img {
-
+  width: 355px;
+}
+.img-container {
+  width: 355px;
+  height: 150px;
+  overflow-y: hidden;
+  background: linear-gradient(grey,white);
+}
+.modalContainer {
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+#modalTitle {
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+}
+#modalSubtitle {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  margin-top: 5px;
+  color: grey;
+}
+.modalOuter {
+  height: 325px;
+}
+#modalBorder {
+  height: 1px;
+  width: 250px;
+  margin: 0 50px;
+  background: grey;
+}
+#modalDesc {
+  margin-top: 15px;
 }
 .markers {
   background-image: url('./images/greenPin.svg')
 }
 .inventoryListContainer {
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 .inventoryListButton {
   width: 60vw;
   padding: 20px;
   margin: 20px;
+}
+
+.inventoryCardLineItem {
+  line-height: 2em;
+}
+
+.inventoryCardLineItem span {
+  color: #236e96;
+}
+
+.inventoryCardContainer {
+  margin: 20px;
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.inventoryCardContainer button {
+  padding: 10px;
+  margin: 20px 10px 10px 10px;
+  width: 100px;
+}
+
+.inventoryCard {
+  margin-bottom: 20px;
+}
+
+.inventoryCardButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.glyphicon-upload {
+  color: lightgray;
+  font-size: 400%;
+  display: block;
+  margin: 40px;
+}
+
+.uploaderText {
+  font-size:14%;
+}
+
+.glyphicon-upload {
+  color: lightgray;
+  font-size: 400%;
+  display: block;
+  margin: 40px; 
+}
+
+.uploaderText {
+  font-size:14%;
 }
 
 .editSaleContainer {
@@ -559,27 +693,6 @@ h2 {
   margin: 30px 25vw;
   width: 50vw;
   padding: 20px;
-}
-
-@media (max-height: 640px) {
-  .profileButtonContainer {
-    margin: 27px 0px;
-  }
-  .editSaleContainer {
-    height: 140vh;
-  }
-  .addItemButtonContainer{
-    margin-top: 30px;
-  }
-}
-
-@media (min-height: 812px) {
-  .addItemButtonContainer{
-    margin-top: 30px;
-  }
-  .addItemSaleContainer {
-    height: 100vh;
-  }
 }
 
 .search-outer {
@@ -609,6 +722,27 @@ h2 {
 #searchInput {
   text-align: center;
   margin-top: 10px;
+}
+
+@media (max-height: 640px) {
+  .profileButtonContainer {
+    margin: 27px 0px;
+  }
+  .editSaleContainer {
+    height: 140vh;
+  }
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+}
+
+@media (min-height: 812px) {
+  .addItemButtonContainer{
+    margin-top: 30px;
+  }
+  .addItemSaleContainer {
+    height: 100vh;
+  }
 }
 
 @media (min-height: 1024px) {

@@ -14,7 +14,7 @@ class EditProfile extends Component {
             state: '',
             zip: '',
             latitude: '',
-            longitude: '',
+            longitude: ''
         }
         this.getAddress = this.getAddress.bind(this);
     }
@@ -75,6 +75,7 @@ class EditProfile extends Component {
 
     getAddress() {
         let getGeoForAddress = `${this.state.street},${this.state.city},${this.state.state},${this.state.zip}`
+        
         axios.get(`/api/geo/${getGeoForAddress}`).then((response) => {
             this.setState({
                 latitude: response.data.lat,
