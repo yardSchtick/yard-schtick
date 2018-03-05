@@ -97,25 +97,21 @@ class EditProfile extends Component {
                         placeholder='Name'
                         onChange={e => this.handleChange(e.target.value, 'name')}
                         maxLength='25'></input>
-
                     <input value={street}
                         id="profileInput"
                         placeholder='Street Address'
                         onChange={e => this.handleChange(e.target.value, 'street')}
                         maxLength='50'></input>
-
                     <input value={city}
                         id="profileInput"
                         placeholder='City'
                         onChange={e => this.handleChange(e.target.value, 'city')}
                         maxLength='25'></input>
-
                     <input value={state}
                         id="profileInput"
                         placeholder='State'
                         onChange={e => this.handleChange(e.target.value, 'state')}
                         maxLength='2'></input>
-
                     <input value={zip}
                         id="profileInput"
                         placeholder='Zip Code'
