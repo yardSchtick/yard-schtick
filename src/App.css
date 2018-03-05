@@ -605,7 +605,18 @@ h2 {
 }
 
 .uploaderText {
-  font-size:14%
+  font-size:14%;
+}
+
+.glyphicon-upload {
+  color: lightgray;
+  font-size: 400%;
+  display: block;
+  margin: 40px; 
+}
+
+.uploaderText {
+  font-size:14%;
 }
 
 .editSaleContainer {
@@ -626,12 +637,6 @@ h2 {
   width: 50vw;
   padding: 20px;
 }
-
-
-
-
-
-
 
 .search-outer {
   position: relative;
