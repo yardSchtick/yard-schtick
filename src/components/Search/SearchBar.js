@@ -59,7 +59,7 @@ class SearchBar extends Component {
                             />
                             <button className='search' onClick={this.toggleSearch}></button>
                         </div>
-                        <p className='p'>DISTANCE: {this.props.distance} miles</p>
+                        <p className='p'>DISTANCE: {this.props.distance.toFixed()} miles</p>
                     </div>
                 </div>
                 <Dropdown

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleMap, Marker, Circle, withGoogleMap, MyMapComponent, withScriptjs } from 'react-google-maps';
-import { GETURL, getSales, setLatLng } from '../../Duck/redux';
+import { GETURL, getSales, setLatLng, changeDistance } from '../../Duck/redux';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import './MapView.css';
@@ -26,28 +26,28 @@ class MapView extends Component {
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.onCenterChanged = this.onCenterChanged.bind(this);
-
+    this.onRadiusChanged = this.onRadiusChanged.bind(this);
   }
 
   onCenterChanged(mapView) {
     return function () {
       const center = this.getCenter();
-      console.log(center)
       mapView.props.getSales(center.lng(), center.lat(), mapView.props.distance).then(() => {
-         mapView.props.setLatLng({
+        mapView.props.setLatLng({
           lat: center.lat(),
           lng: center.lng()
         })
       })
-      console.log(center.lat())
     }
   }
   onRadiusChanged(mapView) {
     return function () {
-      console.log(this.getRadius());
-
+      const radius = this.getRadius();
+      const miles = radius / 1000;
+      mapView.props.changeDistance(miles)
+      mapView.props.getSales(mapView.props.latLng.lng, mapView.props.latLng.lat, miles).then(() => {
+      })
     }
-
   }
   onOpenModal(idx) {
     this.setState({
@@ -63,22 +63,22 @@ class MapView extends Component {
   };
 
   componentDidMount() {
-    
-    if(!this.props.latLng.lat) {
+
+    if (!this.props.latLng.lat) {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
-        }, _ => 
-        this.props.getSales(this.state.lng, this.state.lat, this.props.distance).then(res => {
+        }, _ =>
+            this.props.getSales(this.state.lng, this.state.lat, this.props.distance).then(res => {
 
-          this.props.setLatLng({
-            lat: this.state.lat,
-            lng: this.state.lng
-          })
-        }))
+              this.props.setLatLng({
+                lat: this.state.lat,
+                lng: this.state.lng
+              })
+            }))
       })
     } else {
       this.setState({
@@ -109,17 +109,17 @@ class MapView extends Component {
     const markers = this.props.sales.map((e, i) => {
       return (
         <Marker key={e.id}
-        className= 'markers'
-        style={markerStyle}
+          className='markers'
+          style={markerStyle}
           google={this.props.google}
           options={{
             color: 'green'
           }}
           onClick={_ => this.onOpenModal(i)}
           title={e.sale_desc}
-           icon={{
-            url:greenPin
-          }} 
+          icon={{
+            url: greenPin
+          }}
           name={e.sale_name}
           position={{ lat: e.latitude, lng: e.longitude }}
         />
@@ -133,30 +133,30 @@ class MapView extends Component {
           defaultCenter={{ lat: this.props.latLng.lat, lng: this.props.latLng.lng }}
         >
           <Modal open={open} onClose={this.onCloseModal} little showCloseIcon={false}>
-                    <div className="modalOuter">
-                        <button className='closeButton' onClick={this.onCloseModal}>X</button>
-                        <div className="img-container">
-                            <img className='modal-img' src={this.state.markerInfo.sale_img} alt="" />
-                        </div>
-                        <div className="modalContainer">
-                            <h1 id="modalTitle">{this.state.markerInfo.sale_name}</h1>
-                            <div id="modalBorder"></div>
-                            <h1 id="modalSubtitle">{this.state.markerInfo.address_street}, {this.state.markerInfo.address_city}</h1>
-                            <p id="modalDesc">{this.state.markerInfo.sale_desc}</p>
-                        </div>
-                    </div>
-                </Modal>
-          {props.isMarkerShown && <Marker 
-          position={{ lat: this.state.latitude, lng: this.state.longitude }}
-          icon={{
-            url:bluePin
-          }}  />}
+            <div className="modalOuter">
+              <button className='closeButton' onClick={this.onCloseModal}>X</button>
+              <div className="img-container">
+                <img className='modal-img' src={this.state.markerInfo.sale_img} alt="" />
+              </div>
+              <div className="modalContainer">
+                <h1 id="modalTitle">{this.state.markerInfo.sale_name}</h1>
+                <div id="modalBorder"></div>
+                <h1 id="modalSubtitle">{this.state.markerInfo.address_street}, {this.state.markerInfo.address_city}</h1>
+                <p id="modalDesc">{this.state.markerInfo.sale_desc}</p>
+              </div>
+            </div>
+          </Modal>
+          {props.isMarkerShown && <Marker
+            position={{ lat: this.state.latitude, lng: this.state.longitude }}
+            icon={{
+              url: bluePin
+            }} />}
           {markers}
           <Circle
             clickable
             draggable={false}
             editable={true}
-            center={{ lat: this.props.latLng.lat, lng: this.props.latLng.lng}}
+            center={{ lat: this.props.latLng.lat, lng: this.props.latLng.lng }}
             radius={miles}
             ref={circle => { this.circle = circle; }}
             onCenterChanged={this.onCenterChanged(this)}
@@ -172,7 +172,7 @@ class MapView extends Component {
 
     return (
       <div style={{}}>
-        <SearchBar 
+        <SearchBar
         />
 
 
@@ -202,7 +202,7 @@ function mapStateToProps(state) {
   }
 }
 
-var MapConnect = connect(mapStateToProps, { GETURL, getSales, setLatLng })(MapView)
+var MapConnect = connect(mapStateToProps, { GETURL, getSales, setLatLng, changeDistance })(MapView)
 
 export default
   // GoogleApiWrapper({
