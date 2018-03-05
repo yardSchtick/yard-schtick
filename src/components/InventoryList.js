@@ -60,6 +60,7 @@ class InventoryList extends Component {
                         <Link to='/AddInventory'><button onClick={() => this.props.getOneInventory(val)}>Edit</button></Link>
                         <button onClick={() => this.removeInv(val.id)}>Remove</button>
                     </div>
+                    <hr />
                 </div>
             ))
         }
