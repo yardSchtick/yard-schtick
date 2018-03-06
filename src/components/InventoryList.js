@@ -51,15 +51,16 @@ class InventoryList extends Component {
         if (this.state.inventory) {
             var InventoryCard = this.state.inventory.map((val, index) => (
 
-                <div className="inventoryCard " key={index}>
-                    <p className="inventoryCardLineItem"><span>Item: </span>{val.inv_name}</p>
+                <div className="inventoryCard" key={index}>
+                    <h2 className="inventoryCardLineItem">{val.inv_name}</h2>
+                    <p className="inventoryCardLineItem"><span>Price: </span>${val.inv_price}</p>
                     <img src={val.inv_picture} />
                     <p className="inventoryCardLineItem"><span>Desc: </span>{val.inv_desc}</p>
-                    <p className="inventoryCardLineItem"><span>Price: </span>${val.inv_price}</p>
                     <div className="inventoryCardButtonContainer">
                         <Link to='/AddInventory'><button onClick={() => this.props.getOneInventory(val)}>Edit</button></Link>
                         <button onClick={() => this.removeInv(val.id)}>Remove</button>
                     </div>
+                    <hr />
                 </div>
             ))
         }
@@ -71,7 +72,7 @@ class InventoryList extends Component {
                 </div>
                 <div className="inventoryListContainer">
                     <Link to='/AddInventory'><button className="inventoryListButton"> Add an Item</button></Link>
-                    <Link to="/ProfileView"> <button className="inventoryListButton" onClick={this.props.CLEARSALE}>Finished Adding Items</button> </Link>
+                    <Link to="/ProfileView"> <button className="inventoryListButton2" onClick={this.props.CLEARSALE}>Done Adding Items</button> </Link>
                 </div>
             </div>
         )

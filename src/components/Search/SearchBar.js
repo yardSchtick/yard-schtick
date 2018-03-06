@@ -32,12 +32,12 @@ class SearchBar extends Component {
     };
 
     handleChangeComplete = () => {
-        this.props.getSales(this.props.longitude, this.props.latitude, this.state.value);
+        this.props.getSales(this.props.latLng.lng, this.props.latLng.lat, this.state.value);
     };
 
     toggleSearch = () => {
         this.setState({ drop: !this.state.drop })
-        this.props.getSales(this.props.longitude, this.props.latitude, this.state.value);        
+        this.props.getSales(this.props.latLng.lng, this.props.latLng.lat, this.state.value);        
         document.getElementById('searchInput').value=''
     }
 
@@ -59,13 +59,13 @@ class SearchBar extends Component {
                             />
                             <button className='search' onClick={this.toggleSearch}></button>
                         </div>
-                        <p className='p'>DISTANCE: {this.props.distance} miles</p>
+                        <p className='p'>DISTANCE: {this.props.distance.toFixed()} miles</p>
                     </div>
                 </div>
                 <Dropdown
                     show={this.state.drop}
-                    long={this.props.longitude}
-                    lat={this.props.latitude}
+                    long={this.props.latLng.lng}
+                    lat={this.props.latLng.lat}
                     distance={this.state.value}
                     SETSEARCH={this.props.SETSEARCH}
                     getSales={this.props.getSales} />
@@ -76,7 +76,8 @@ class SearchBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        distance: state.distance
+        distance: state.distance,
+        latLng: state.latLng
     }
 }
 
