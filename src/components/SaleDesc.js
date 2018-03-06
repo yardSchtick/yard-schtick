@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { GETURL, ADDDESCRIPT } from '../Duck/redux';
+import { GETURL, ADDDESCRIPT, LOGINOUT } from '../Duck/redux';
 import Uploader from './Uploader'
 
 class SaleDesc extends Component {
@@ -32,6 +32,9 @@ class SaleDesc extends Component {
     }
 
     render() {
+        if (!this.props.loggedin) {
+            return <Redirect to='/Login' />
+        }
         return (
             <div>
                 <h1 className="saleDescH1">Sale Description</h1>
@@ -75,9 +78,9 @@ class SaleDesc extends Component {
 function mapStateToProps(state) {
     return {
         newSale: state.newSale,
-
-        user: state.user
+        user: state.user,
+        loggedin: state.loggedin
     }
 }
 
-export default connect(mapStateToProps, { GETURL, ADDDESCRIPT })(SaleDesc);
+export default connect(mapStateToProps, { GETURL, ADDDESCRIPT, LOGINOUT })(SaleDesc);

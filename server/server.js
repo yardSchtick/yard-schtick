@@ -81,8 +81,7 @@ passport.deserializeUser((id, done) => {
 app.get('/auth/me', (req, res) => {
     if (!req.user) {
         res.status(404).send('User not found.');
-    }
-    else {
+    } else {
         res.status(200).send(req.user);
     }
 })
@@ -96,6 +95,9 @@ app.get('auth/logout', function (req, res) {
 
 app.get('/api/getAllSales', ctrl.getAllSales)
 app.get('/api/getInventory/:id', ctrl.getInventory)
+app.get('/checkLogin', (req,res) => {
+    req.user ? res.send(true) : res.send(false)
+})
 
 
 ///////////////////////////////////

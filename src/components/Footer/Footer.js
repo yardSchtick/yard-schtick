@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { CLEARSALE } from '../../Duck/redux'
+import { CLEARSALE, LOGINOUT } from '../../Duck/redux'
 
 class Footer extends Component {
     constructor() {
@@ -11,6 +11,10 @@ class Footer extends Component {
             showMap: null,
             buttonShow: null
         }
+    }
+
+    componentWillUnmount() {
+        this.props.LOGINOUT(false)
     }
 
     render() {
@@ -29,11 +33,11 @@ class Footer extends Component {
 
         if (this.props.user) {
             if (url === '/ProfileView') {
-                rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">Add Sale</button></Link>
+                rightDisplay = <a href={`${process.env.REACT_APP_LOGOUT}`}><button className="rightButton" id="navButton">Log Out</button></a>
             } else if (url === '/AddInventory') {
                 rightDisplay = <Link to='/InventoryList'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/InventoryList') {
-                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton">Back</button></Link>
+                rightDisplay = <Link to='/ProfileView'><button className="rightButton" id="navButton">Profile</button></Link>
             } else if (url === '/SaleDescription') {
                 rightDisplay = <Link to='/AddNewSale'><button className="rightButton" id="navButton">Back</button></Link>
             } else if (url === '/SaleReview') {
@@ -49,6 +53,9 @@ class Footer extends Component {
             }
         }
 
+        if (url === '/Loading') {
+            return <div> </div>
+        }
         return (
             <div className="Footer">
                 {leftDisplay}
@@ -66,4 +73,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { CLEARSALE })(Footer)
+export default connect(mapStateToProps, { CLEARSALE, LOGINOUT })(Footer)
