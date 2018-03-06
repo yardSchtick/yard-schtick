@@ -31,6 +31,7 @@ const initialState = {
     distance: 20,
     inventory: {},
     userSales: [],
+    loggedin: false,
     latLng: {}
 }
 
@@ -51,6 +52,7 @@ const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
 const ADD_SALE_IMAGE = 'ADD_SALE_IMAGE'
 const USER_SALES = 'USER_SALES'
 const SET_SEARCH = "SET_SEARCH"
+const LOG_IN_OUT = "LOG_IN_OUT"
 const SET_LATLNG = 'SET_LATLNG'
 
 
@@ -172,6 +174,14 @@ export function SETSEARCH(sales) {
     }
 }
 
+export function LOGINOUT(boo) {
+    return {
+        type: LOG_IN_OUT,
+        payload: boo
+    }
+}
+
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case ADD_SALE_IMAGE:
@@ -211,6 +221,8 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { sales: action.payload })
         case SET_SEARCH:
             return Object.assign({}, state, { sales: action.payload })
+        case LOG_IN_OUT:
+            return Object.assign({}, state, {loggedin: action.payload})            
         case CLEAR_SALE:
             return Object.assign({}, state, {
                 newSale: {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {Switch, Route, Redirect, withRouter} from 'react-router-dom'
 
 import MapView from './components/MapView/MapView';
 import Login from './components/Login/Login';
@@ -9,20 +9,25 @@ import AddNewSale from './components/AddNewSale';
 import AddInventory from './components/AddInventory';
 import InventoryList from './components/InventoryList';
 import SaleReview from './components/SaleReview';
-import ThankYou from './components/ThankYou'
-import SaleDesc from './components/SaleDesc'
+import ThankYou from './components/ThankYou';
+import SaleDesc from './components/SaleDesc';
 import EditThankYou from './components/EditThankYou';
+import LandingPage from './components/LoadingPage/LandingPage'
 
 
-export default class Routes extends Component {
+class Routes extends Component {
+
     render() {
+
         return (
             <div>
             <Switch>
-        
               <Route component={ MapView } exact path="/MapView" />
               <Route component={ Login } path="/Login"/>
               <Route component={ SaleList } path="/SaleList" />
+
+              <Route component={ LandingPage } path="/Loading" />
+
               <Route component={ ProfileView } path="/ProfileView" />
               <Route component={ AddNewSale } path="/AddNewSale" />
               <Route component={ AddInventory } path="/AddInventory" />
@@ -38,3 +43,5 @@ export default class Routes extends Component {
         )
     }
 }
+
+export default Routes

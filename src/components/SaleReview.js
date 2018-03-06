@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL, CLEARSALE, currentSale } from '../Duck/redux';
-import { Link } from 'react-router-dom';
+import { GETURL, CLEARSALE, currentSale, getSales, LOGINOUT } from '../Duck/redux';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios'
 
 class SaleReview extends Component {
@@ -70,6 +70,7 @@ class SaleReview extends Component {
       })
     } else {
       axios.put('/api/updateSale',this.props.newSale).then(res => {
+        this.props.getSales()
         this.props.CLEARSALE()
       })
     }
@@ -77,6 +78,10 @@ class SaleReview extends Component {
 
   render() {
     var { user, newSale } = this.props
+
+    if (!this.props.loggedin) {
+      return <Redirect to='/Login' />
+  }
 
     return (
       <div >
@@ -123,8 +128,9 @@ class SaleReview extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    newSale: state.newSale
+    newSale: state.newSale,
+    loggedin: state.loggedin
   }
 }
 
-export default connect(mapStateToProps, { GETURL, CLEARSALE, currentSale })(SaleReview);
+export default connect(mapStateToProps, { GETURL, CLEARSALE, currentSale, getSales, LOGINOUT })(SaleReview);

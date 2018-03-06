@@ -6,6 +6,7 @@ import SaleHistory from './../SaleHistory/SaleHistory';
 import { Link } from 'react-router-dom'
 import EditProfile from './EditProfile'
 import UserInfo from './UserInfo'
+import { Redirect } from 'react-router-dom'
 
 class ProfileView extends Component {
     constructor(props) {
@@ -22,10 +23,11 @@ class ProfileView extends Component {
 
     componentDidMount() {
         this.props.GETUSER().then(() => {
-            axios.get(`/api/getUserSales/${this.props.user.id}`).then(response => {
-                this.setState({ sales: response.data })
-                this.props.getUserSales(response.data)
-            })
+            axios.get(`/api/getUserSales/${this.props.user.id}`)
+                .then(response => {
+                    this.setState({ sales: response.data })
+                    this.props.getUserSales(response.data)
+                })
         })
         this.props.GETURL(this.props.match.url)
     }
@@ -33,14 +35,18 @@ class ProfileView extends Component {
 
     getUserSales() {
         axios.get(`/api/getUserSales/${this.props.user ? this.props.user.id : ''}`).then(response => {
-    })
-}
+        })
+    }
 
     toggleEditShow() {
         this.setState({ edit: !this.state.edit })
     }
 
     render() {
+        if (!this.props.loggedin) {
+            return <Redirect to='/Login' />
+        }
+
         let show = <UserInfo
             user={this.props.user}
             toggleEditShow={this.toggleEditShow} />
@@ -50,6 +56,7 @@ class ProfileView extends Component {
                 user={this.props.user}
                 toggleEditShow={this.toggleEditShow} />
         }
+
 
         return (
             <div>
@@ -62,7 +69,7 @@ class ProfileView extends Component {
                 <div className="saleDisplay">
                     <h1 id="userName">Sale History</h1>
                     <div className="dataDisplay">
-                    <SaleHistory />
+                        <SaleHistory />
                     </div>
                 </div>
             </div>
@@ -75,7 +82,8 @@ function mapStateToProps(state) {
         url: state.url,
         user: state.user,
         sales: state.sales,
-        userSales: state.userSales
+        userSales: state.userSales,
+        loggedin: state.loggedin
     }
 }
 export default connect(mapStateToProps, { GETURL, GETUSER, getUserSales, CLEARSALE })(ProfileView);

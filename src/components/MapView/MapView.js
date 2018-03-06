@@ -195,6 +195,7 @@ class MapView extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     sales: state.sales,
     url: state.url,
     distance: state.distance,

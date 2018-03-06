@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL, clearInventory } from '../Duck/redux';
-// import { Link } from 'react-router-dom'
+import { GETURL, clearInventory, LOGINOUT } from '../Duck/redux';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Dropzone from 'react-dropzone'
 
@@ -97,6 +97,10 @@ class AddInventory extends Component {
 
 
   render() {
+    if (!this.props.loggedin) {
+      return <Redirect to='/Login' />
+  }
+
     return (
       <div className="addItemSaleContainer">
         <h1>Add Item to Sale</h1>
@@ -134,8 +138,9 @@ function mapStateToProps(state) {
     url: state.url,
     user: state.user,
     newSale: state.newSale,
-    inventory: state.inventory
+    inventory: state.inventory,
+    loggedin: state.loggedin
   }
 }
 
-export default connect(mapStateToProps, { GETURL, clearInventory })(AddInventory);
+export default connect(mapStateToProps, { GETURL, clearInventory, LOGINOUT })(AddInventory);

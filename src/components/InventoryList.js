@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { GETURL, CLEARSALE, getOneInventory } from '../Duck/redux';
-import { Link } from 'react-router-dom';
-
-
+import { Link, Redirect } from 'react-router-dom';
 
 class InventoryList extends Component {
 
@@ -43,10 +41,12 @@ class InventoryList extends Component {
 
     componentDidMount() {
         this.props.GETURL(this.props.match.url)
-
     }
 
     render() {
+        if (!this.props.loggedin) {
+            return <Redirect to='/Login' />
+        }
 
         if (this.state.inventory) {
             var InventoryCard = this.state.inventory.map((val, index) => (
@@ -82,7 +82,8 @@ class InventoryList extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        newSale: state.newSale
+        newSale: state.newSale,
+        loggedin: state.loggedin
     }
 }
 

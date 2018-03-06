@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL, CLEARSALE } from '../Duck/redux';
-import { Link } from 'react-router-dom'
+import { GETURL, CLEARSALE, LOGINOUT } from '../Duck/redux';
+import { Link, Redirect } from 'react-router-dom'
 
 class EditThankYou extends Component {
 
@@ -10,6 +10,9 @@ class EditThankYou extends Component {
   }
 
   render() {
+    if (!this.props.loggedin) {
+      return <Redirect to='/Login' />
+  }
     return (
       <div className="thankYouContainer">
         <h1 className="title" id="thankYouTitle">Your sale has been edited.</h1>
@@ -27,8 +30,9 @@ class EditThankYou extends Component {
 
 function mapStateToProps(state) {
   return {
-    url: state.url
+    url: state.url,
+    loggedin: state.loggedin
   }
 }
 
-export default connect(mapStateToProps, { GETURL, CLEARSALE })(EditThankYou);
+export default connect(mapStateToProps, { GETURL, CLEARSALE, LOGINOUT })(EditThankYou);
