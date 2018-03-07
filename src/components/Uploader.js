@@ -37,21 +37,20 @@ class Uploader extends Component {
       
         // Once all the files are uploaded 
         axios.all(uploaders).then(() => {
-          alert('image was uploaded')
           this.props.addSaleImage( this.state.sale_img )
         });
       }
 
     render(){
-      
         return (
           <div>
             <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
                         <div className="glyphicon glyphicon-upload">
                             <p className="uploaderText">Click to Upload</p>
+                            <img className="uploadedPic" src={this.state.sale_img}/>  
                         </div>
             </Dropzone>
-                
+              
           </div>
 
 
