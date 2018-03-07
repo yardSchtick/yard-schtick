@@ -63,13 +63,7 @@ class SaleDesc extends Component {
                         <p className="characters">Characters Left: {this.state.count}</p>
                     </div>
 
-                    <div className="inputIndividualContainer" id="pictureContainer">
-                        <div className="pictureContainerUploader">
-                        <p>Picture:</p>
-                        <Uploader />
-                        </div>
-                        <img className="pictureContainerFilled" style={{ backgroundImage: `url('${!this.props.newSale.sale_img  ? '' : this.props.newSale.sale_img}')`}}/>
-                    </div>
+                    <Uploader />
 
                     <div className="submitButtonContainer">
                     <Link to='/SaleReview'><button id="submitSaleBtn" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>

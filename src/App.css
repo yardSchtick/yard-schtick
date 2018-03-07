@@ -802,6 +802,15 @@ input {
   font-size:14%;
 }
 
+.uploadedPic {
+  position: absolute;
+  top: -5px;
+  bottom: 0px;
+  left: -33px;
+  max-width: 200%;
+  max-height: 200%;
+}
+
 .editSaleContainer {
     height: 140vh;
 }
