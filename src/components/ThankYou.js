@@ -18,7 +18,7 @@ class ThankYou extends Component {
         <h1 className="title" id="thankYouTitle">Thank You For Your Post!</h1>
         <i className="glyphicon glyphicon-ok-sign"></i>
         <p className="subtitle" id="thankYouSubtitle">Your sale is now visible. You can sit back and <br /> watch people flood in. <br/><br/> Or you can</p>
-        <Link to='/AddInventory'><button id="profileAddSaleButton">Add Items to Your Sale</button></Link>
+        <Link to='/AddInventory'><button id="AddItemButton">Add Items to Your Sale</button></Link>
         <p className="subtitle" id="thankYouLower">to help people find your sale.</p>
         <div className="thankYouInner">
           <Link to="/ViewMap"><button className="thankYouButton">View Sales</button></Link>

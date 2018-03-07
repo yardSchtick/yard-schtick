@@ -53,7 +53,7 @@ class InventoryList extends Component {
                 <div className="inventoryCard" key={val.id} id={index === arr.length-1 ? 'lastCard' : 'cardBorder'}>
                     <h2 className="inventoryCardLineItem">{val.inv_name}</h2>
                     <p className="inventoryCardLineItem"><span>Price: </span>${val.inv_price}</p>
-                    <img src={val.inv_picture} alt='inventory item'/>
+                    {/* <img src={val.inv_picture} alt='inventory item'/> */}
                     <p className="inventoryCardLineItem invenDesc"><span>Desc: </span>{val.inv_desc}</p>
                     <div className="inventoryCardButtonContainer">
                         <Link to='/AddInventory'><button onClick={() => this.props.getOneInventory(val)}>Edit</button></Link>
@@ -64,12 +64,12 @@ class InventoryList extends Component {
         }
 
         return (
-            <div>
+            <div className='inventoryListOuter'>
                 <div className="inventoryCardContainer">
                     {InventoryCard}
                 </div>
                 <div className="inventoryListContainer">
-                    <Link to='/AddInventory'><button className="inventoryListButton"> Add an Item</button></Link>
+                    <Link to='/AddInventory'><button className="inventoryListButton">Add an Item</button></Link>
                 </div>
             </div>
         )

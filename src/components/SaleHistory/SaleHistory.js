@@ -9,7 +9,8 @@ class SaleHistory extends Component {
         super()
 
         this.state = {
-            date: ''
+            date: '',
+            longList: false
         }
     }
     componentWillReceiveProps() {
@@ -17,7 +18,13 @@ class SaleHistory extends Component {
             this.formatDate()
         }
     }
-
+    
+    componentDidUpdate() {
+        if (document.getElementsByClassName('dataDisplay')[0].clientHeight > 235 && !this.state.longList ) {
+            this.setState({longList: true})
+        }
+    }
+    
     componentDidMount() {
         if (this.props.userSales.start_date) {
             this.formatDate()
@@ -47,7 +54,7 @@ class SaleHistory extends Component {
                 month = 'Apr'
                 break
             case "05":
-                month = 'Map'
+                month = 'May'
                 break
             case "06":
                 month = 'Jun'
@@ -89,7 +96,7 @@ class SaleHistory extends Component {
 
         })
         return (
-            <div>
+            <div className="dataDisplay" id={this.state.longList ? 'longList' : ''}>
                 {data}
             </div>
         )

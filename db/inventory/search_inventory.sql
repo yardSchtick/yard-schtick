@@ -49,7 +49,11 @@ where
     and
     (UPPER(sale_name) like ('%' || $5 || '%')
         or
-    UPPER(sale_desc) like ('%' || $5 || '%'))
+    UPPER(sale_desc) like ('%' || $5 || '%')
+        or
+    UPPER(inv_name) like ('%' || $5 || '%')
+        or 
+    UPPER(inv_desc) like ('%' || $5 || '%'))
 
 ORDER BY
     distance

@@ -19,6 +19,7 @@ class Dropdown extends Component {
         return (
             <div className={this.props.show ? "dropdownMain" : "dropdownMain closed"}>
                 <input id="searchInput"
+                    maxLength='50'
                     onChange={this.handleChange}
                     placeholder="Search by Inventory"/>
             </div>
