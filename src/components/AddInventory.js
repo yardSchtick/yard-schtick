@@ -62,7 +62,6 @@ class AddInventory extends Component {
     }).then((response) => {
       this.props.clearInventory()
       this.props.history.push('/InventoryList')
-      console.log(response)
     }).catch((error) => {
     })
   }
@@ -104,26 +103,29 @@ class AddInventory extends Component {
     return (
       <div className="addItemSaleContainer">
         <h1>Add Item to Sale</h1>
-        <label className="addItemSale">Item Name</label>
+        <label className="addItemSale">Item Name:</label>
         <input className="addItemSale"
+          maxLength='25'
           placeholder={this.props.inventory ? this.state.inv_name : ''}
           onBlur={e => this.handleInput(e.target.value, 'name')} />
-        <p className="addItemSale">Picture</p>
+        <p className="addItemSale">Picture:</p>
         <div >
             <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
                         <div className="glyphicon glyphicon-upload">
                             <p className="uploaderText">Click to Upload</p>
                         </div>
             </Dropzone></div>
-        <label className="addItemSale">Item Description</label>
+        <label className="addItemSale">Item Description:</label>
         <input className="addItemSale"
+          maxLength='300'
           placeholder={this.props.inventory ? this.state.inv_desc : ''}
           onChange={e => this.handleDec(e.target.value)} />
-        <p className="addItemSale">Character's Left: {this.state.count}</p>
+        <p className="addItemSale characters">Character's Left: {this.state.count}</p>
         <br /><br />
-        <label className="addItemSale">Price</label>
-        <input className="addItemSale" type="number" placeholder={this.state.inv_price}
-          placeholder={this.props.inventory ? this.state.inv_price : ''}
+        <label className="addItemSale">Price:</label>
+        <input className="addItemSale" type="number" min="0.00" max="2500"
+          maxLength='6'
+          placeholder={this.state.inv_price}
           onBlur={e => this.handleInput(e.target.value, 'price')} />
         <div className="addItemButtonContainer">
           <button className="addItemsButton" onClick={this.addItem}>Add Item</button>

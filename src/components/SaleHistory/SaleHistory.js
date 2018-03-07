@@ -9,15 +9,22 @@ class SaleHistory extends Component {
         super()
 
         this.state = {
-            date: ''
+            date: '',
+            longList: false
         }
     }
-    componentWillReceiveProps(){
+    componentWillReceiveProps() {
         if (this.props.userSales.start_date) {
             this.formatDate()
         }
     }
-
+    
+    componentDidUpdate() {
+        if (document.getElementsByClassName('dataDisplay')[0].clientHeight > 235 && !this.state.longList ) {
+            this.setState({longList: true})
+        }
+    }
+    
     componentDidMount() {
         if (this.props.userSales.start_date) {
             this.formatDate()
@@ -26,17 +33,51 @@ class SaleHistory extends Component {
 
     deleteClick(id) {
         axios.delete(`/api/deleteSale/${id}`).then(res => {
-            this.props.getUserSales(res.data);            
+            this.props.getUserSales(res.data);
         })
     }
 
     formatDate = (date) => {
-        var tempArr1 = []
-        var tempDate = date.substring(0, 10).split('-').reverse()
-        tempArr1[0] = tempDate[1]
-        tempArr1[1] = tempDate[0]
-        tempArr1[2] = tempDate[2]
-        return tempArr1.join('/') 
+        var tempDate = date.substring(0, 10).split('-')
+        var month ='';
+        switch (tempDate[1]) {
+            case "01":
+                month = 'Jan'
+                break
+            case "02":
+                month = 'Feb'
+                break
+            case "03":
+                month = 'Mar'
+                break
+            case "04":
+                month = 'Apr'
+                break
+            case "05":
+                month = 'May'
+                break
+            case "06":
+                month = 'Jun'
+                break
+            case "07":
+                month = 'Jul'
+                break
+            case "08":
+                month = 'Aug'
+                break
+            case "09":
+                month = 'Sep'
+                break
+            case "10":
+                month = 'Oct'
+                break
+            case "11":
+                month = 'Nov'
+                break
+            default:
+                month = 'Dec'
+        }
+        return `${month} ${tempDate[2]}, ${tempDate[0]}`
     }
 
     render() {
@@ -55,16 +96,18 @@ class SaleHistory extends Component {
 
         })
         return (
-            <div>
+            <div className="dataDisplay" id={this.state.longList ? 'longList' : ''}>
                 {data}
             </div>
         )
     }
 }
 
-function mapStateToProps(state) { return {
-    userSales: state.userSales,
-    user: state.user
-} }
+function mapStateToProps(state) {
+    return {
+        userSales: state.userSales,
+        user: state.user
+    }
+}
 
-export default connect(mapStateToProps, { GETURL, EDITSALE, SETSALE, getUserSales})(SaleHistory)
+export default connect(mapStateToProps, { GETURL, EDITSALE, SETSALE, getUserSales })(SaleHistory)

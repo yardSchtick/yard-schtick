@@ -3,10 +3,9 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import { GETURL, GETUSER, getUserSales, CLEARSALE } from '../../Duck/redux';
 import SaleHistory from './../SaleHistory/SaleHistory';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import EditProfile from './EditProfile'
 import UserInfo from './UserInfo'
-import { Redirect } from 'react-router-dom'
 
 class ProfileView extends Component {
     constructor(props) {
@@ -67,10 +66,8 @@ class ProfileView extends Component {
                 </div>
 
                 <div className="saleDisplay">
-                    <h1 id="userName">Sale History</h1>
-                    <div className="dataDisplay">
+                    <h1 className="saleHistory" id="userName">Sale History</h1>
                         <SaleHistory />
-                    </div>
                 </div>
             </div>
         );

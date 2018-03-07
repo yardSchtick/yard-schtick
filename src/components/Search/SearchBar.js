@@ -47,7 +47,6 @@ class SearchBar extends Component {
                 <div className='search-main'>
                     <div className='search-div'>
                         <div className='sliderButton'>
-                            {/* <input className='search' placeholder='Search' /> */}
                             <Slider
                                 min={0}
                                 max={100}

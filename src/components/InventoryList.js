@@ -33,7 +33,6 @@ class InventoryList extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-        console.log(this.props.match.url)
     }
     componentWillMount() {
         this.getInv()
@@ -49,30 +48,28 @@ class InventoryList extends Component {
         }
 
         if (this.state.inventory) {
-            var InventoryCard = this.state.inventory.map((val, index) => (
+            var InventoryCard = this.state.inventory.map((val, index, arr) => (
 
-                <div className="inventoryCard" key={index}>
+                <div className="inventoryCard" key={val.id} id={index === arr.length-1 ? 'lastCard' : 'cardBorder'}>
                     <h2 className="inventoryCardLineItem">{val.inv_name}</h2>
                     <p className="inventoryCardLineItem"><span>Price: </span>${val.inv_price}</p>
-                    <img src={val.inv_picture} />
-                    <p className="inventoryCardLineItem"><span>Desc: </span>{val.inv_desc}</p>
+                    {/* <img src={val.inv_picture} alt='inventory item'/> */}
+                    <p className="inventoryCardLineItem invenDesc"><span>Desc: </span>{val.inv_desc}</p>
                     <div className="inventoryCardButtonContainer">
                         <Link to='/AddInventory'><button onClick={() => this.props.getOneInventory(val)}>Edit</button></Link>
                         <button onClick={() => this.removeInv(val.id)}>Remove</button>
                     </div>
-                    <hr />
                 </div>
             ))
         }
 
         return (
-            <div>
+            <div className='inventoryListOuter'>
                 <div className="inventoryCardContainer">
                     {InventoryCard}
                 </div>
                 <div className="inventoryListContainer">
-                    <Link to='/AddInventory'><button className="inventoryListButton"> Add an Item</button></Link>
-                    <Link to="/ProfileView"> <button className="inventoryListButton2" onClick={this.props.CLEARSALE}>Done Adding Items</button> </Link>
+                    <Link to='/AddInventory'><button className="inventoryListButton">Add an Item</button></Link>
                 </div>
             </div>
         )
