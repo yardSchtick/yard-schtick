@@ -66,10 +66,8 @@ class ProfileView extends Component {
                 </div>
 
                 <div className="saleDisplay">
-                    <h1 id="userName">Sale History</h1>
-                    <div className="dataDisplay">
+                    <h1 className="saleHistory" id="userName">Sale History</h1>
                         <SaleHistory />
-                    </div>
                 </div>
             </div>
         );

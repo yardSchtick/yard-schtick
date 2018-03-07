@@ -46,6 +46,7 @@ class SaleDesc extends Component {
                         <p>Sale Title:</p>
                         <input
                             id="largeInput"
+                            maxLength='25'
                             value={this.state.sale_name ? this.state.sale_name : ''}
                             onChange={e => this.handleName(e.target.value)} />
                     </div>
@@ -55,6 +56,7 @@ class SaleDesc extends Component {
                         <p>Description:</p>
                         <textarea
                             id="descriptionInput"
+                            maxLength='300'
                             placeholder="This should be a general overview of what you're selling"
                             value={this.state.sale_desc ? this.state.sale_desc : ''}
                             onChange={e => this.handleDec(e.target.value)} />
@@ -66,11 +68,11 @@ class SaleDesc extends Component {
                         <p>Picture:</p>
                         <Uploader />
                         </div>
-                        <img className="pictureContainerFilled" style={{ backgroundImage: `url('${!this.props.newSale.sale_img  ? '' : this.props.newSale.sale_img}')`}} alt='sale'/>
+                        <img className="pictureContainerFilled" style={{ backgroundImage: `url('${!this.props.newSale.sale_img  ? '' : this.props.newSale.sale_img}')`}}/>
                     </div>
 
-                    <div className="profileButtonContainer">
-                    <Link to='/SaleReview'><button id="profileAddSaleButton" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
+                    <div className="submitButtonContainer">
+                    <Link to='/SaleReview'><button id="submitSaleBtn" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
                     </div>
                 </div>
             

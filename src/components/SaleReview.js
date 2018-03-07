@@ -92,32 +92,32 @@ class SaleReview extends Component {
           <h1 className="reviewTitle">Review</h1>
         </div>
 
-        <div className="inputContainer">
-          <div className="inputIndividualContainer">
+        <div className="reviewContainer">
+          <div className="reviewIndividualContainer">
             <p>Address:</p>
-            <Link to="/ProfileView"><button className="clearButton reviewButton">{user.address_street}<br />{user.address_city},{user.address_state} {user.address_zip}</button></Link>
+            <Link to="/ProfileView"><button className="clearButton reviewButton">{user.address_street} {user.address_city},{user.address_state} {user.address_zip}</button></Link>
           </div>
 
-          <div className="inputIndividualContainer">
+          <div className="reviewIndividualContainer">
             <p>Time:</p>
             <Link to="/AddNewSale"><button className="clearButton reviewButton">{this.state.time}</button></Link>
           </div>
 
-          <div className="inputIndividualContainer">
+          <div className="reviewIndividualContainer">
             <p>Date:</p>
             <Link to="/AddNewSale"><button className="clearButton reviewButton">{this.state.date}</button></Link>
           </div>
 
-          <div className="inputIndividualContainer descriptionContainer">
+          <div className="reviewIndividualContainer descriptionContainer">
             <p>Description:</p>
             <Link to="/SaleDescription"><button className="clearButton desciptionReview reviewButton">{newSale.sale_desc === '' ? 'No Description' : newSale.sale_desc}</button></Link>
           </div>
         </div>
-        <div className="profileButtonContainer">
+        <div className="reviewButtonContainer">
           {!this.props.newSale.id ?
-          <Link to="/ThankYou"><button id="profileAddSaleButton" onClick={this.submitSale}>Looks good to me!</button></Link>
+          <Link to="/ThankYou"><button id="reviewSumbitButton" onClick={this.submitSale}>Looks good to me!</button></Link>
           :
-          <Link to='/EditThankYou'><button id="profileAddSaleButton" onClick={this.submitSale}>Looks good to me!</button></Link>
+          <Link to='/EditThankYou'><button id="reviewSumbitButton" onClick={this.submitSale}>Looks good to me!</button></Link>
           }
         </div>
       </div>
