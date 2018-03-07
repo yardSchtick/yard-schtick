@@ -3,19 +3,6 @@ import axios from "axios";
 const initialState = {
     user: 
     null,
-    // {
-    //     address_city:"Hillsboro",
-    //     address_state:"OR",
-    //     address_street:"1700 NW 138th Ave",
-    //     address_zip:"97229",
-    //     auth_id:null,
-    //     id:1,
-    //     latitude:5,
-    //     longitude:42.54,
-    //     user_id:null,
-    //     user_img:"https://img.memecdn.com/hd-harold_o_4085447.jpg",
-    //     user_name:"Robert Baratheon"
-    // },
     sales: [],
     url: '/mapview',
     newSale: {
@@ -29,7 +16,7 @@ const initialState = {
         sale_desc: ''
     },
     distance: 20,
-    inventory: {},
+    inventory: null,
     userSales: [],
     latLng: {},
     location: {},
@@ -87,8 +74,7 @@ export function addSaleImage(img_url){
 }
 export function clearInventory() {
     return {
-        type: CLEAR_INVENTORY,
-        payload: {}
+        type: CLEAR_INVENTORY
     }
 }
 export function getOneInventory(inv) {
@@ -202,7 +188,7 @@ export default function reducer(state = initialState, action) {
         case SET_LOCATION:
             return Object.assign({}, state, {location: action.payload})             
         case CLEAR_INVENTORY:
-            return Object.assign({}, state, { inventory: action.payload})
+            return Object.assign({}, state, { inventory: null})
         case GET_ONE_INVENTORY:
             return Object.assign({}, state, { inventory: action.payload });
         case CURRENT_SALE:

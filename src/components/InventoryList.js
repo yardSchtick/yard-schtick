@@ -14,38 +14,32 @@ class InventoryList extends Component {
         this.removeInv = this.removeInv.bind(this)
         this.getInv = this.getInv.bind(this)
     }
-    removeInv(id) {
-        axios({
-            url: `/api/deleteOneInv/${id}`,
-            method: 'delete',
-        }).then((response) => {
-            this.getInv();
-        })
-    }
-    getInv() {
-        axios.get(`/api/getInventory/${this.props.newSale ? this.props.newSale.id : null}`)
-            .then((response) => {
-                this.setState(
-                    { inventory: response.data }
-                )
-            }
-            )
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
+
     componentWillMount() {
         this.getInv()
-    }
-
-    componentDidMount() {
         this.props.GETURL(this.props.match.url)
     }
 
+    removeInv(id) {
+        axios.delete(`/api/deleteOneInv/${id}`).then((response) => {
+            this.getInv();
+        })
+    }
+
+    // ===========================================
+    getInv() {
+        axios.get(`/api/getInventory/
+        110`)
+        // ${this.props.newSale ? this.props.newSale.id : null}
+        .then(r => {
+                this.setState({ inventory: r.data.sort((a,b) => a.inv_name.toUpperCase() > b.inv_name.toUpperCase()) })
+            })
+    }
+
     render() {
-        if (!this.props.loggedin) {
-            return <Redirect to='/Login' />
-        }
+        // if (!this.props.loggedin) {
+        //     return <Redirect to='/Login' />
+        // }
 
         if (this.state.inventory) {
             var InventoryCard = this.state.inventory.map((val, index, arr) => (
