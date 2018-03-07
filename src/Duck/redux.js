@@ -31,7 +31,8 @@ const initialState = {
     distance: 20,
     inventory: {},
     userSales: [],
-    latLng: {}
+    latLng: {},
+    location: {}
 }
 
 const DEMO = 'DEMO'
@@ -52,11 +53,18 @@ const ADD_SALE_IMAGE = 'ADD_SALE_IMAGE'
 const USER_SALES = 'USER_SALES'
 const SET_SEARCH = "SET_SEARCH"
 const SET_LATLNG = 'SET_LATLNG'
+const SET_LOCATION= 'SET_LOCATION'
 
 
 export function setLatLng(obj){
     return {
         type: SET_LATLNG,
+        payload: obj
+    }
+}
+export function setUserLocation(obj){
+    return {
+        type: SET_LOCATION,
         payload: obj
     }
 }
@@ -181,6 +189,8 @@ export default function reducer(state = initialState, action) {
              return Object.assign({}, state, {userSales: action.payload})
         case SET_LATLNG:
             return Object.assign({}, state, {latLng: action.payload})             
+        case SET_LOCATION:
+            return Object.assign({}, state, {location: action.payload})             
         case CLEAR_INVENTORY:
             return Object.assign({}, state, { inventory: action.payload})
         case GET_ONE_INVENTORY:

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleMap, Marker, Circle, withGoogleMap, MyMapComponent, withScriptjs } from 'react-google-maps';
-import { GETURL, getSales, setLatLng, changeDistance } from '../../Duck/redux';
+import { GETURL, getSales, setLatLng, changeDistance, setUserLocation } from '../../Duck/redux';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import './MapView.css';
@@ -73,7 +73,10 @@ class MapView extends Component {
           longitude: position.coords.longitude
         }, _ =>
             this.props.getSales(this.state.lng, this.state.lat, this.props.distance).then(res => {
-
+              this.props.setUserLocation({
+                latitude: this.state.latitude,
+                longitude: this.state.longitude
+              })
               this.props.setLatLng({
                 lat: this.state.lat,
                 lng: this.state.lng
@@ -118,7 +121,7 @@ class MapView extends Component {
           onClick={_ => this.onOpenModal(i)}
           title={e.sale_desc}
           icon={{
-            url: greenPin
+            url: bluePin
           }}
           name={e.sale_name}
           position={{ lat: e.latitude, lng: e.longitude }}
@@ -147,10 +150,8 @@ class MapView extends Component {
             </div>
           </Modal>
           {props.isMarkerShown && <Marker
-            position={{ lat: this.state.latitude, lng: this.state.longitude }}
-            icon={{
-              url: bluePin
-            }} />}
+            position={{ lat: this.props.location.latitude, lng: this.props.location.longitude }}
+             />}
           {markers}
           <Circle
             clickable
@@ -198,11 +199,12 @@ function mapStateToProps(state) {
     sales: state.sales,
     url: state.url,
     distance: state.distance,
-    latLng: state.latLng
+    latLng: state.latLng,
+    location: state.location
   }
 }
 
-var MapConnect = connect(mapStateToProps, { GETURL, getSales, setLatLng, changeDistance })(MapView)
+var MapConnect = connect(mapStateToProps, { GETURL, getSales, setLatLng, changeDistance, setUserLocation })(MapView)
 
 export default
   // GoogleApiWrapper({
