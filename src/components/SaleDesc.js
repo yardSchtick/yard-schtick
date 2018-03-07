@@ -62,8 +62,11 @@ class SaleDesc extends Component {
                     </div>
 
                     <div className="inputIndividualContainer" id="pictureContainer">
+                        <div className="pictureContainerUploader">
                         <p>Picture:</p>
                         <Uploader />
+                        </div>
+                        <img className="pictureContainerFilled" style={{ backgroundImage: `url('${!this.props.newSale.sale_img  ? '' : this.props.newSale.sale_img}')`}} alt='sale'/>
                     </div>
 
                     <div className="profileButtonContainer">

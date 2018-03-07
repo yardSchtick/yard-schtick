@@ -62,7 +62,6 @@ class AddInventory extends Component {
     }).then((response) => {
       this.props.clearInventory()
       this.props.history.push('/InventoryList')
-      console.log(response)
     }).catch((error) => {
     })
   }
@@ -119,10 +118,10 @@ class AddInventory extends Component {
         <input className="addItemSale"
           placeholder={this.props.inventory ? this.state.inv_desc : ''}
           onChange={e => this.handleDec(e.target.value)} />
-        <p className="addItemSale">Character's Left: {this.state.count}</p>
+        <p className="addItemSale characters">Character's Left: {this.state.count}</p>
         <br /><br />
         <label className="addItemSale">Price</label>
-        <input className="addItemSale" type="number" placeholder={this.state.inv_price}
+        <input className="addItemSale" type="number"
           placeholder={this.props.inventory ? this.state.inv_price : ''}
           onBlur={e => this.handleInput(e.target.value, 'price')} />
         <div className="addItemButtonContainer">

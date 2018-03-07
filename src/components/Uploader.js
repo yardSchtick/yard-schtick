@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { GETURL, addSaleImage } from '../Duck/redux'
+import { addSaleImage } from '../Duck/redux'
 
 
 class Uploader extends Component {
