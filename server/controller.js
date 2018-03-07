@@ -34,8 +34,6 @@ module.exports = {
         const db = req.app.get('db');
         const { longitude, latitude, distance } = req.query
         const id = req.user ? req.user.id : 0;
-
-        console.log(longitude, latitude, distance);
         
         db.sale.get_sale_by_distance([latitude, longitude, distance, id]).then(response => {
             res.status(200).send(response);
@@ -97,7 +95,7 @@ module.exports = {
         const db = req.app.get('db')
 
         const { start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img } = req.body
-        console.log(req.body)
+     
         db.sale.update_sale(start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img).then(result => res.send(result))
     },
 

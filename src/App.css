@@ -237,7 +237,8 @@ input {
 }
 
 #profileInput {
-  padding: 10px;
+  padding: 0;
+  margin-bottom: 5px;
   border: 1px solid lightgray;
   font-size: 12px;
 }
@@ -316,8 +317,27 @@ input {
 }
 
 #pictureContainer {
-  align-items: baseline;
+  display: flex;
   margin: 25px 15px 0 15px;
+}
+
+.pictureContainerUploader {
+  flex-direction: column;
+}
+
+.pictureContainerFilled {
+  height: 150px;
+  width: 150px;
+  background-size: 150px;
+  margin: 25px 15px 15px 15px;
+  border: 1px solid lightgray;
+  box-shadow: 1px 1px 1px grey;
+}
+
+#thankYouLower {
+  text-align: center;
+  margin: 15px 10px 15px 10px;
+  font-size: 15px;
 }
 
 .reviewBannerSideFade {
@@ -325,7 +345,7 @@ input {
   top: 0;
   height: 150px;
   width: 100%;
-  background: linear-gradient(right, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.50),rgba(255, 255, 255, 0.75))
 }
 
 .reviewBannerBottomFade {
@@ -605,6 +625,15 @@ input {
   text-align: center;
   margin: 0;
 }
+
+#lastCard {
+ border: none;
+}
+
+#cardBorder {
+  border-bottom: 1px solid lightgrey
+}
+
 #modalSubtitle {
   font-size: 20px;
   text-align: center;
@@ -632,6 +661,10 @@ input {
   margin-bottom: 20px;
 }
 
+.invenDesc {
+  margin-top: -25px;
+}
+
 .inventoryCardInline {
   display: flex;
   justify-content: space-between;
@@ -641,7 +674,7 @@ input {
 .inventoryCard h2{
   font-size: 1.5em;
   line-height: 1em;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .inventoryListContainer {
@@ -672,7 +705,7 @@ input {
   margin: 20px;
   background-color: white;
   border: 1px solid lightgray;
-  padding: 20px;
+  padding: 20px 20px 0px;
 }
 
 .inventoryCardContainer button {
@@ -685,6 +718,7 @@ input {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 .glyphicon-upload {

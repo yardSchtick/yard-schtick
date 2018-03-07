@@ -24,7 +24,7 @@ const initialState = {
         end_time: '',
         start_date: '',
         end_date: '',
-        sale_img: '',
+        sale_img: 'https://res.cloudinary.com/dqval3kpy/image/upload/v1520438821/yardschtick_gbjsid.png',
         sale_name: '',
         sale_desc: ''
     },
@@ -231,7 +231,7 @@ export default function reducer(state = initialState, action) {
                     end_time: '',
                     start_date: '',
                     end_date: '',
-                    sale_img: '',
+                    sale_img: null,
                     sale_name: '',
                     sale_desc: ''
                 }

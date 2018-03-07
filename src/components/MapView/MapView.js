@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleMap, Marker, Circle, withGoogleMap, MyMapComponent, withScriptjs } from 'react-google-maps';
+import { GoogleMap, Marker, Circle, withGoogleMap, withScriptjs } from 'react-google-maps';
 import { GETURL, getSales, setLatLng, changeDistance } from '../../Duck/redux';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
@@ -98,9 +98,6 @@ class MapView extends Component {
       height: '532px',
       width: '100%',
       margin: '72px 0 50px 0'
-    }
-    const modal = {
-      'z-index': '20'
     }
     const markerStyle = {
       width: '10px',
