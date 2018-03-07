@@ -90,7 +90,7 @@ class EditProfile extends Component {
 
         return (
             <div className="profileDisplay">
-                <div className="userPic"></div>
+                    <div className="userPic" style={{ backgroundImage: `url('${!this.props.user ? '' : this.props.user.user_img}')` }}></div>
                 <div className="userInfo">
                     <input value={name}
                         id="profileInput"

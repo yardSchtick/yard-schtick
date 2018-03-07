@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL, CLEARSALE } from '../Duck/redux';
-import { Link } from 'react-router-dom'
+import { GETURL, CLEARSALE, LOGINOUT } from '../Duck/redux';
+import { Link, Redirect } from 'react-router-dom'
 
 class ThankYou extends Component {
 
@@ -10,13 +10,16 @@ class ThankYou extends Component {
   }
 
   render() {
+    if (!this.props.loggedin) {
+      return <Redirect to='/Login' />
+  }
     return (
       <div className="thankYouContainer">
         <h1 className="title" id="thankYouTitle">Thank You For Your Post!</h1>
         <i className="glyphicon glyphicon-ok-sign"></i>
-        <p className="subtitle" id="thankYouSubtitle">Your sale is now visible. You can sit back and <br /> watch people flood in. <br/><br/> Add Items to your sale to help people<br/> focus in on your post.</p>
+        <p className="subtitle" id="thankYouSubtitle">Your sale is now visible. You can sit back and <br /> watch people flood in. <br/><br/> Or you can</p>
         <Link to='/AddInventory'><button id="profileAddSaleButton">Add Items to Your Sale</button></Link>
-        {/* <p className="subtitle" id="thankYouSubtitle">to help people focus in on your sale.</p> */}
+        <p className="subtitle" id="thankYouLower">to help people find your sale.</p>
         <div className="thankYouInner">
           <Link to="/ViewMap"><button className="thankYouButton">View Sales</button></Link>
           <Link to="/ProfileView"><button className="thankYouButton">View Profile</button></Link>
@@ -28,8 +31,9 @@ class ThankYou extends Component {
 
 function mapStateToProps(state) {
   return {
-    url: state.url
+    url: state.url,
+    loggedin: state.loggedin
   }
 }
 
-export default connect(mapStateToProps, { GETURL, CLEARSALE })(ThankYou);
+export default connect(mapStateToProps, { GETURL, CLEARSALE, LOGINOUT })(ThankYou);

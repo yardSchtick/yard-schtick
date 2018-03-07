@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GETURL, clearInventory } from '../Duck/redux';
-// import { Link } from 'react-router-dom'
+import { GETURL, clearInventory, LOGINOUT } from '../Duck/redux';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Dropzone from 'react-dropzone'
 
@@ -62,7 +62,6 @@ class AddInventory extends Component {
     }).then((response) => {
       this.props.clearInventory()
       this.props.history.push('/InventoryList')
-      console.log(response)
     }).catch((error) => {
     })
   }
@@ -97,6 +96,10 @@ class AddInventory extends Component {
 
 
   render() {
+    if (!this.props.loggedin) {
+      return <Redirect to='/Login' />
+  }
+
     return (
       <div className="addItemSaleContainer">
         <h1>Add Item to Sale</h1>
@@ -115,10 +118,10 @@ class AddInventory extends Component {
         <input className="addItemSale"
           placeholder={this.props.inventory ? this.state.inv_desc : ''}
           onChange={e => this.handleDec(e.target.value)} />
-        <p className="addItemSale">Character's Left: {this.state.count}</p>
+        <p className="addItemSale characters">Character's Left: {this.state.count}</p>
         <br /><br />
         <label className="addItemSale">Price</label>
-        <input className="addItemSale" type="number" placeholder={this.state.inv_price}
+        <input className="addItemSale" type="number"
           placeholder={this.props.inventory ? this.state.inv_price : ''}
           onBlur={e => this.handleInput(e.target.value, 'price')} />
         <div className="addItemButtonContainer">
@@ -134,8 +137,9 @@ function mapStateToProps(state) {
     url: state.url,
     user: state.user,
     newSale: state.newSale,
-    inventory: state.inventory
+    inventory: state.inventory,
+    loggedin: state.loggedin
   }
 }
 
-export default connect(mapStateToProps, { GETURL, clearInventory })(AddInventory);
+export default connect(mapStateToProps, { GETURL, clearInventory, LOGINOUT })(AddInventory);

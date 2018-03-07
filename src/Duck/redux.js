@@ -24,7 +24,7 @@ const initialState = {
         end_time: '',
         start_date: '',
         end_date: '',
-        sale_img: '',
+        sale_img: 'https://res.cloudinary.com/dqval3kpy/image/upload/v1520438821/yardschtick_gbjsid.png',
         sale_name: '',
         sale_desc: ''
     },
@@ -32,7 +32,8 @@ const initialState = {
     inventory: {},
     userSales: [],
     latLng: {},
-    location: {}
+    location: {},
+    loggedin: false
 }
 
 const DEMO = 'DEMO'
@@ -52,6 +53,7 @@ const CLEAR_INVENTORY = 'CLEAR_INVENTORY'
 const ADD_SALE_IMAGE = 'ADD_SALE_IMAGE'
 const USER_SALES = 'USER_SALES'
 const SET_SEARCH = "SET_SEARCH"
+const LOG_IN_OUT = "LOG_IN_OUT"
 const SET_LATLNG = 'SET_LATLNG'
 const SET_LOCATION= 'SET_LOCATION'
 
@@ -180,6 +182,14 @@ export function SETSEARCH(sales) {
     }
 }
 
+export function LOGINOUT(boo) {
+    return {
+        type: LOG_IN_OUT,
+        payload: boo
+    }
+}
+
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case ADD_SALE_IMAGE:
@@ -221,6 +231,8 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { sales: action.payload })
         case SET_SEARCH:
             return Object.assign({}, state, { sales: action.payload })
+        case LOG_IN_OUT:
+            return Object.assign({}, state, {loggedin: action.payload})            
         case CLEAR_SALE:
             return Object.assign({}, state, {
                 newSale: {
@@ -229,7 +241,7 @@ export default function reducer(state = initialState, action) {
                     end_time: '',
                     start_date: '',
                     end_date: '',
-                    sale_img: '',
+                    sale_img: null,
                     sale_name: '',
                     sale_desc: ''
                 }

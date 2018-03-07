@@ -102,9 +102,6 @@ class MapView extends Component {
       width: '100%',
       margin: '72px 0 50px 0'
     }
-    const modal = {
-      'z-index': '20'
-    }
     const markerStyle = {
       width: '10px',
       height: '10px'
@@ -196,6 +193,7 @@ class MapView extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     sales: state.sales,
     url: state.url,
     distance: state.distance,

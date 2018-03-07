@@ -43,13 +43,13 @@ where
             sin(radians($1)) *
             sin(radians(latitude))
         )
-    ) < 25
+    ) < $3
     and
     sale.sale_user != $4
     and
-    (UPPER(inv_name) like $5
+    (UPPER(sale_name) like ('%' || $5 || '%')
         or
-    UPPER(inv_desc) like $5)
+    UPPER(sale_desc) like ('%' || $5 || '%'))
 
 ORDER BY
     distance

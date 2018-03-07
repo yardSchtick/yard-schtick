@@ -2,7 +2,6 @@ const axios = require('axios')
 module.exports = {
 
     // GETS
-
     getUser: (req, res) => {
         res.send(req.user)
     },
@@ -35,8 +34,6 @@ module.exports = {
         const db = req.app.get('db');
         const { longitude, latitude, distance } = req.query
         const id = req.user ? req.user.id : 0;
-
-        console.log(longitude, latitude, distance);
         
         db.sale.get_sale_by_distance([latitude, longitude, distance, id]).then(response => {
             res.status(200).send(response);
@@ -53,6 +50,7 @@ module.exports = {
             console.log(error)
         })
     },
+
      // POSTS
 
     newSale: (req, res) => {
@@ -77,7 +75,7 @@ module.exports = {
 
         const { longitude, latitude, distance, search } = req.query
         const id = req.user ? req.user.id : 0;
-        const searchTerm = '%' + search.toUpperCase() + '%'
+        const searchTerm = search.toUpperCase()
         
         db.inventory.search_inventory(latitude, longitude, distance, id, searchTerm).then(result => {
             var tempArr = []
@@ -92,11 +90,12 @@ module.exports = {
     },
 
     // PUT
+
     updateSale: (req, res) => {
         const db = req.app.get('db')
 
         const { start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img } = req.body
-
+     
         db.sale.update_sale(start_time, end_time, sale_desc, id, sale_name, start_date, end_date, sale_img).then(result => res.send(result))
     },
 
@@ -117,6 +116,7 @@ module.exports = {
     },
 
     //DELETE
+    
     deleteSale: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params;
