@@ -99,3 +99,40 @@ describe('Formating Time', () => {
         expect(typeof fns.formatTime('12:00:00', '1:00:00')).toBe('string')
     })
 })
+
+describe('testing address to geo', ()=>{
+
+    test('test for correct geo address return format', ()=>{
+        var promise = fns.getAddress("515e ut");
+        promise.then(result =>{
+            expect(typeof result).toBe('array')
+        })
+    })
+    test('test for geo address no input', ()=>{
+        var promise = fns.getAddress("");
+        promise.then(result =>{
+            expect(typeof result).toBeUndefined()
+        })
+
+    })
+    test('test for correct geo address vage qurry length', ()=>{
+        var promise = fns.getAddress("515e ut");
+        promise.then(result =>{
+            expect(result.length).toBeGreaterThan(1)
+        })
+    })
+    test('test for correct type', ()=>{
+        var promise = fns.getAddress2("515 e,slc,ut");
+        promise.then(result =>{
+            expect(typeof result).toBe("object")
+        })
+    })
+
+    test('test for correct lat', ()=>{
+        var promise = fns.getAddress3("515 e,slc,ut");
+        promise.then(result =>{
+            expect(result).toBe(40.781287)
+        })
+    })
+    
+})
