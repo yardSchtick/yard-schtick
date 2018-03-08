@@ -28,9 +28,7 @@ class InventoryList extends Component {
 
     // ===========================================
     getInv() {
-        axios.get(`/api/getInventory/
-        110`)
-        // ${this.props.newSale ? this.props.newSale.id : null}
+        axios.get(`/api/getInventory/${this.props.newSale ? this.props.newSale.id : null}`)
         .then(r => {
                 this.setState({ inventory: r.data.sort((a,b) => a.inv_name.toUpperCase() > b.inv_name.toUpperCase()) })
             })

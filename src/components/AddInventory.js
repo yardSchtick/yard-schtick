@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GETURL, clearInventory, LOGINOUT } from '../Duck/redux';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Dropzone from 'react-dropzone'
 
@@ -12,6 +12,7 @@ class AddInventory extends Component {
     this.state = {
       inv_name: null,
       inv_desc: null,
+      inv_picture: null,
       inv_price: '0.00',
       count: 300
     }
@@ -23,7 +24,8 @@ class AddInventory extends Component {
       this.setState({
         inv_name: this.props.inventory.inv_name,
         inv_desc: this.props.inventory.inv_desc,
-        inv_price: this.props.inventory.inv_price
+        inv_price: this.props.inventory.inv_price,
+        inv_picture: this.props.inventory.inv_picture
       })
     }
     this.props.GETURL(this.props.match.url)
@@ -57,16 +59,16 @@ class AddInventory extends Component {
       })
     } else if (this.state.inv_name) {
       axios.post('/api/newInventory', {
-          inv_name: this.state.inv_name,
-          inv_picture: this.state.inv_picture,
-          inv_desc: this.state.inv_desc,
-          inv_price: this.state.inv_price,
-          sale_id: this.props.newSale.id
-        })
-        .then(response => {
-        this.props.clearInventory()
-        this.props.history.push('/InventoryList')
+        inv_name: this.state.inv_name,
+        inv_picture: this.state.inv_picture,
+        inv_desc: this.state.inv_desc,
+        inv_price: this.state.inv_price,
+        sale_id: this.props.newSale.id
       })
+        .then(response => {
+          this.props.clearInventory()
+          this.props.history.push('/InventoryList')
+        })
     } else {
       alert('You\'ll need to fill out at least the item name to create a new item')
     }
@@ -79,37 +81,37 @@ class AddInventory extends Component {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", `yardschtick`);
-      formData.append("upload_preset", "xaytd9ya"); 
+      formData.append("upload_preset", "xaytd9ya");
       formData.append("api_key", "744751991133399");
       // formData.append("unique_filename", "true");
-      
-      
+
+
       return axios.post("https://api.cloudinary.com/v1_1/dqval3kpy/image/upload", formData)
-      .then(response => {
-        const data = response.data;
-        const fileURL = data.secure_url         // You should store this URL for future references in your app
-        this.setState({ inv_picture: fileURL })    //change sale_img to inv_picture
-        
-      })
+        .then(response => {
+          const data = response.data;
+          const fileURL = data.secure_url         // You should store this URL for future references in your app
+          this.setState({ inv_picture: fileURL })    //change sale_img to inv_picture
+
+        })
     });
-  
+
     // Once all the files are uploaded 
     axios.all(uploaders).then(() => {
-      alert('image was uploaded')
+      // this.setState({inv_picture})
     });
   }
 
   button = () => {
     if (this.props.inventory) {
       return 'Save Edits'
-    } 
-      return 'Add Item'
+    }
+    return 'Add Item'
   }
 
   render() {
     if (!this.props.loggedin) {
       return <Redirect to='/Login' />
-  }
+    }
 
     return (
       <div className="addItemSaleContainer">
@@ -121,11 +123,9 @@ class AddInventory extends Component {
           onChange={e => this.handleInput(e.target.value, 'name')} />
         <p className="addItemSale">Picture:</p>
         <div >
-            <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
-                        <div className="glyphicon glyphicon-upload">
-                            <p className="uploaderText">Click to Upload</p>
-                        </div>
-            </Dropzone></div>
+          <Dropzone className="itemPic" onDrop={this.handleDrop} multiple accept="image/*">
+            <div className={!this.state.inv_picture ? 'glyphicon glyphicon-upload' : 'uploadedPic'} style={{ backgroundImage: `url('${!this.state.inv_picture ? '' : this.state.inv_picture}')` }}></div>
+          </Dropzone></div>
         <label className="addItemSale">Item Description:</label>
         <input className="addItemSale"
           maxLength='300'

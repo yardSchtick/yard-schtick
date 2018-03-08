@@ -32,9 +32,9 @@ class SaleDesc extends Component {
     }
 
     render() {
-        // if (!this.props.loggedin) {
-        //     return <Redirect to='/Login' />
-        // }
+        if (!this.props.loggedin) {
+            return <Redirect to='/Login' />
+        }
 
         return (
             <div>

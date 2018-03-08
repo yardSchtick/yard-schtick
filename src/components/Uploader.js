@@ -41,14 +41,12 @@ class Uploader extends Component {
         });
       }
 
+
     render(){
         return (
           <div>
             <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
-                        <div className="glyphicon glyphicon-upload">
-                            <p className="uploaderText">Click to Upload</p>
-                            <img className="uploadedPic" src={this.state.sale_img}/>  
-                        </div>
+                <div className={!this.state.sale_img ? 'glyphicon glyphicon-upload' : 'uploadedPic'} style={{ backgroundImage: `url('${!this.state.sale_img ? '' : this.state.sale_img}')` }}></div>            
             </Dropzone>
               
           </div>
