@@ -11,6 +11,9 @@ const ctrl = require('./controller.js')
 const userMiddleware = require('./userMiddleware');
 
 const app = new express()
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+ });
 app.use(bodyParser.json())
 app.use(cors())
 app.use( express.static( __dirname + `/../build` ) );
@@ -147,6 +150,6 @@ massive(process.env.CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance);
     
     app.listen(SERVER_PORT, _ => {
-        console.log(`The soul of man is the fire of his heart ${SERVER_PORT}`)
+        console.log(`The soul of man is the fire in his heart ${SERVER_PORT}`)
     })
 });

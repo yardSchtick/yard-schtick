@@ -37,9 +37,9 @@ class InventoryList extends Component {
     }
 
     render() {
-        // if (!this.props.loggedin) {
-        //     return <Redirect to='/Login' />
-        // }
+        if (!this.props.loggedin) {
+            return <Redirect to='/Login' />
+        }
 
         if (this.state.inventory) {
             var InventoryCard = this.state.inventory.map((val, index, arr) => (
