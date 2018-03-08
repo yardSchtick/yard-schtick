@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GETURL, ADDNEWSALE, LOGINOUT } from '../Duck/redux';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import AddNewSaleButton from './AddNewSaleButton'
 
 class AddNewSale extends Component {
@@ -67,7 +67,7 @@ class AddNewSale extends Component {
   render() {
     if (!this.props.loggedin) {
       return <Redirect to='/Login' />
-  }
+    }
 
     return (
       <div >

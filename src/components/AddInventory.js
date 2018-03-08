@@ -41,29 +41,35 @@ class AddInventory extends Component {
     var num = 300 - e.split('').length
     this.setState({ inv_desc: e, count: num })
   }
+
   addItem() {
-    if (this.props.inventory.id) {
-      axios({
-        url: `/api/deleteOneInv/${this.props.inventory.id}`,
-        method: 'delete',
-      }).then((response) => {
-      })
-    }
-    axios({
-      url: '/api/newInventory',
-      method: 'post',
-      data: {
+    if (this.props.inventory) {
+      axios.put("/api/updateInventory", {
         inv_name: this.state.inv_name,
         inv_picture: this.state.inv_picture,
         inv_desc: this.state.inv_desc,
         inv_price: this.state.inv_price,
-        sale_id: this.props.newSale.id
-      }
-    }).then((response) => {
-      this.props.clearInventory()
-      this.props.history.push('/InventoryList')
-    }).catch((error) => {
-    })
+        id: this.props.inventory.id,
+        sale_id: this.props.inventory.sale_id
+      }).then(response => {
+        this.props.clearInventory()
+        this.props.history.push('/InventoryList')
+      })
+    } else if (this.state.inv_name) {
+      axios.post('/api/newInventory', {
+          inv_name: this.state.inv_name,
+          inv_picture: this.state.inv_picture,
+          inv_desc: this.state.inv_desc,
+          inv_price: this.state.inv_price,
+          sale_id: this.props.newSale.id
+        })
+        .then(response => {
+        this.props.clearInventory()
+        this.props.history.push('/InventoryList')
+      })
+    } else {
+      alert('You\'ll need to fill out at least the item name to create a new item')
+    }
   }
 
   handleDrop = files => {
@@ -93,7 +99,12 @@ class AddInventory extends Component {
     });
   }
 
-
+  button = () => {
+    if (this.props.inventory) {
+      return 'Save Edits'
+    } 
+      return 'Add Item'
+  }
 
   render() {
     if (!this.props.loggedin) {
@@ -106,8 +117,8 @@ class AddInventory extends Component {
         <label className="addItemSale">Item Name:</label>
         <input className="addItemSale"
           maxLength='25'
-          placeholder={this.props.inventory ? this.state.inv_name : ''}
-          onBlur={e => this.handleInput(e.target.value, 'name')} />
+          value={this.state.inv_name}
+          onChange={e => this.handleInput(e.target.value, 'name')} />
         <p className="addItemSale">Picture:</p>
         <div >
             <Dropzone className="itemPic" onDrop={ this.handleDrop } multiple accept="image/*">
@@ -118,17 +129,17 @@ class AddInventory extends Component {
         <label className="addItemSale">Item Description:</label>
         <input className="addItemSale"
           maxLength='300'
-          placeholder={this.props.inventory ? this.state.inv_desc : ''}
+          value={this.state.inv_desc}
           onChange={e => this.handleDec(e.target.value)} />
         <p className="addItemSale characters">Character's Left: {this.state.count}</p>
         <br /><br />
         <label className="addItemSale">Price:</label>
         <input className="addItemSale" type="number" min="0.00" max="2500"
           maxLength='6'
-          placeholder={this.state.inv_price}
-          onBlur={e => this.handleInput(e.target.value, 'price')} />
+          value={this.state.inv_price}
+          onChange={e => this.handleInput(e.target.value, 'price')} />
         <div className="addItemButtonContainer">
-          <button className="addItemsButton" onClick={this.addItem}>Add Item</button>
+          <button className="addItemsButton" onClick={this.addItem}>{this.button()}</button>
         </div>
       </div>
     );

@@ -32,15 +32,16 @@ class SaleDesc extends Component {
     }
 
     render() {
-        if (!this.props.loggedin) {
-            return <Redirect to='/Login' />
-        }
+        // if (!this.props.loggedin) {
+        //     return <Redirect to='/Login' />
+        // }
+
         return (
             <div>
                 <h1 className="saleDescH1">Sale Description</h1>
                 <p className="subtitle">(this part is optional)</p>
 
-            
+
                 <div className="inputContainer">
                     <div className="inputIndividualContainer">
                         <p>Sale Title:</p>
@@ -50,26 +51,29 @@ class SaleDesc extends Component {
                             value={this.state.sale_name ? this.state.sale_name : ''}
                             onChange={e => this.handleName(e.target.value)} />
                     </div>
-                
-            </div >
-                    <div className="inputIndividualContainer descriptionContainer inputContainer">
-                        <p>Description:</p>
-                        <textarea
-                            id="descriptionInput"
-                            maxLength='300'
-                            placeholder="This should be a general overview of what you're selling"
-                            value={this.state.sale_desc ? this.state.sale_desc : ''}
-                            onChange={e => this.handleDec(e.target.value)} />
-                        <p className="characters">Characters Left: {this.state.count}</p>
-                    </div>
 
-                    <Uploader />
-
-                    <div className="submitButtonContainer">
-                    <Link to='/SaleReview'><button id="submitSaleBtn" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name})}>Submit</button></Link>
-                    </div>
+                </div >
+                <div className="inputIndividualContainer descriptionContainer inputContainer">
+                    <p>Description:</p>
+                    <textarea
+                        id="descriptionInput"
+                        maxLength='300'
+                        placeholder="This should be a general overview of what you're selling"
+                        value={this.state.sale_desc ? this.state.sale_desc : ''}
+                        onChange={e => this.handleDec(e.target.value)} />
+                    <p className="characters">Characters Left: {this.state.count}</p>
                 </div>
-            
+
+                <div className="inputIndividualContainer inputContainer">
+                    <p>Picture:</p>
+                    <Uploader />
+                </div>
+
+                <div className="submitButtonContainer">
+                    <Link to='/SaleReview'><button id="submitSaleBtn" onClick={_ => this.props.ADDDESCRIPT({ sale_desc: this.state.sale_desc, sale_name: this.state.sale_name })}>Submit</button></Link>
+                </div>
+            </div>
+
         )
     }
 }
