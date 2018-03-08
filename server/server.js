@@ -5,15 +5,14 @@ const express = require('express')
     , massive = require('massive')
     , session = require('express-session')
     , passport = require('passport')
-    , Auth0Strategy = require('passport-auth0');
+    , Auth0Strategy = require('passport-auth0')
+    , path = require('path');
 
 const ctrl = require('./controller.js')
 const userMiddleware = require('./userMiddleware');
 
 const app = new express()
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
- });
+
 app.use(bodyParser.json())
 app.use(cors())
 app.use( express.static( __dirname + `/../build` ) );
@@ -142,6 +141,10 @@ app.put('/api/updateInventory', ctrl.updateInventory)
 
 app.delete('/api/deleteSale/:id', ctrl.deleteSale)
 app.delete('/api/deleteOneInv/:id', ctrl.deleteOneInv)
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+ });
 //=====================================\\
 
 const SERVER_PORT = process.env.SERVER_PORT
