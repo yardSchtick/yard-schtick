@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { GoogleMap, Marker, Circle, withGoogleMap, MyMapComponent, withScriptjs } from 'react-google-maps';
+import { GoogleMap, Marker, Circle, withGoogleMap, withScriptjs } from 'react-google-maps';
 import { GETURL, getSales, setLatLng, changeDistance, setUserLocation } from '../../Duck/redux';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import './MapView.css';
 import bluePin from '../../images/pushpin-blue.png'
-import greenPin from '../../images/pushpin-green.png'
 import SearchBar from '../Search/SearchBar';
 
 class MapView extends Component {
@@ -175,7 +174,7 @@ class MapView extends Component {
 
 
         <MyMapComponent isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API}&v=3.exp&libraries=geometry,drawing,places`}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={style} />}
           mapElement={<div style={{ height: `100%` }} />}

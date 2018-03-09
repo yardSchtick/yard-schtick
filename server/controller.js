@@ -34,9 +34,10 @@ module.exports = {
         const db = req.app.get('db');
         const { longitude, latitude, distance } = req.query
         const id = req.user ? req.user.id : 0;
-        
         db.sale.get_sale_by_distance([latitude, longitude, distance, id]).then(response => {
             res.status(200).send(response);
+        }).catch(error => {
+            console.log(error)
         })
     },
     getGeo: (req, res)=>{
