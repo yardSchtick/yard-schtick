@@ -18,8 +18,14 @@ const initialState = {
     distance: 20,
     inventory: null,
     userSales: [],
-    latLng: {},
-    location: {},
+    latLng: {
+        lat: 0,
+        lng: 0
+    },
+    location: {
+        lat: 0,
+        lng: 0
+    },
     loggedin: false
 }
 
