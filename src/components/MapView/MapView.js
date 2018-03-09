@@ -97,7 +97,7 @@ class MapView extends Component {
   render() {
     const { open } = this.state;
     const style = {
-      height: '532px',
+      height: '100vh',
       width: '100%',
       margin: '72px 0 50px 0'
     }
